@@ -1,7 +1,8 @@
-import React from 'react'
-import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
+import React from 'react';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-function Navigation(props) {
+function Navigation() {
     return (
         <Navbar bg="light" expand="lg">
             <Navbar.Brand href="/home">Trailblaze</Navbar.Brand>
@@ -20,4 +21,12 @@ function Navigation(props) {
     )
 }
 
-export default Navigation
+function msp(state) {
+    const { user } = state.user
+
+    return {
+        user
+    }
+}
+
+export default connect(msp, null)(Navigation)

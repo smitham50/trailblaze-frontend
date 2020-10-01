@@ -7,7 +7,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
-const rootReducer = combineReducers({})
+// Reducers
+import userReducer from './Reducers/userreducer';
+
+const rootReducer = combineReducers({ userReducer })
 const store = createStore(rootReducer);
 
 ReactDOM.render(
