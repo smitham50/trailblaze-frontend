@@ -12,8 +12,11 @@ class App extends Component {
       <div className="App">
         <Navigation></Navigation>
         <header className="App-header">
-          Header
-      </header>
+          <Switch>
+            <Route path='/home'></Route>
+            <Route path='/login'></Route>
+          </Switch>
+        </header>
       </div>
     )
   }
