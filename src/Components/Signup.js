@@ -4,26 +4,75 @@ import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Signup = (props) => {
+
+    const handleSignup = (event) => {
+        event.preventDefault()
+
+        fetch('http://localhost:3000/api/v1/signup', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                "user": {
+                    username: props.username,
+                    password: props.password,
+                    password_confirmation: props.password_confirmation,
+                    email: props.email
+                }
+            })
+        })
+            .then(resp => resp.json())
+            .then(response => {
+                if (response.errors) {
+                    alert(response.errors)
+                } else {
+                    props.setUser(response)
+                }
+            })
+    }
+
     return (
-        <Form>
+        <Form onSubmit={handleSignup}>
             <Form.Group controlId="username">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="username" placeholder="Enter username" />
+                <Form.Control 
+                    type="text" 
+                    placeholder="Enter username"
+                    onChange={props.handleChange}
+                    name="username"
+                />
             </Form.Group>
             <Form.Group controlId="formGroupEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Control 
+                    type="text" 
+                    placeholder="Enter email" 
+                    onChange={props.handleChange}
+                    name="email"
+                />
             </Form.Group>
             <Form.Group controlId="formGroupPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control 
+                    type="password" 
+                    placeholder="Password" 
+                    onChange={props.handleChange}
+                    name="password"
+                />
             </Form.Group>
             <Form.Group controlId="formGroupPasswordConfirmation">
                 <Form.Label>Password Confirmation</Form.Label>
-                <Form.Control type="password_confirmation" placeholder="Password Confirmation" />
+                <Form.Control 
+                    type="password" 
+                    placeholder="Password Confirmation"
+                    onChange={props.handleChange}
+                    name="password_confirmation" 
+                />
             </Form.Group>
             <Form.Group controlId="formGroupSubmit"> 
-                <Button>Submit</Button>
+                <Button type="submit">Submit</Button>
             </Form.Group>
             Already have an account?  <Link to="/login">Login</Link>
         </Form>
@@ -32,19 +81,36 @@ const Signup = (props) => {
 
 
 function msp(state) {
-    const {user} = state.user;
+    const { 
+        username,
+        password,
+        password_confirmation,
+        email
+    } = state.user;
 
     return {
-        user
+        username,
+        password,
+        password_confirmation,
+        email
     }
 }
 
 function mdp(dispatch) {
     return {
-        userSignup: (user) => {
-            dispatch({ type: "USER_SIGNUP", payload: user })
+        handleChange: (e) => {
+            dispatch({
+                type: "HANDLE_CHANGE",
+                payload: {[e.target.name]: e.target.value}
+            })
+        },
+        setUser: (user) => {
+            dispatch({
+                type: "SET_USER",
+                payload: user
+            })
         }
     }
 }
 
-export default connect(msp, mdp)(Signup)
+export default connect(msp, mdp)(Signup);
