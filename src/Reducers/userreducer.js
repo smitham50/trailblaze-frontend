@@ -19,6 +19,11 @@ function userReducer(prevState = defaultState, action) {
                 ...prevState,
                 currentUserData: action.payload
             }
+        case "CLEAR_USER":
+            return {
+                ...prevState,
+                currentUserData: {}
+            }
         default:
             return prevState;
     }

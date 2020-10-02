@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Signup = (props) => {
 
     const handleSignup = (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
         fetch('http://localhost:3000/api/v1/signup', {
             method: "POST",
@@ -26,12 +26,12 @@ const Signup = (props) => {
             .then(resp => resp.json())
             .then(response => {
                 if (response.errors) {
-                    alert(response.errors)
+                    alert(response.errors);
                 } else {
-                    props.setUser(response)
+                    props.setUser(response);
                 }
             })
-    }
+    };
 
     return (
         <Form onSubmit={handleSignup}>
@@ -93,8 +93,8 @@ function msp(state) {
         password,
         password_confirmation,
         email
-    }
-}
+    };
+};
 
 function mdp(dispatch) {
     return {
@@ -110,7 +110,7 @@ function mdp(dispatch) {
                 payload: user
             })
         }
-    }
-}
+    };
+};
 
 export default connect(msp, mdp)(Signup);
