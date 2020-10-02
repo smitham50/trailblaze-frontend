@@ -10,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 // Reducers
 import userReducer from './Reducers/userreducer';
 
-const rootReducer = combineReducers({ userReducer })
+const rootReducer = combineReducers({ user: userReducer });
 const store = createStore(rootReducer);
 
 ReactDOM.render(

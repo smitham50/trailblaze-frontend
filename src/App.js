@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+
+// Styles
 import './App.css';
-import Navigation from './Components/Navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Stylesheets/Signup.css';
+
+// Components
+import Signup from './Components/Signup';
+import Navigation from './Components/Navigation';
 
 
 class App extends Component {
@@ -14,7 +20,9 @@ class App extends Component {
         <header className="App-header">
           <Switch>
             <Route path='/home'></Route>
-            <Route path='/login'></Route>
+            <Route path='/signup'>
+              <Signup></Signup>
+            </Route>
           </Switch>
         </header>
       </div>
