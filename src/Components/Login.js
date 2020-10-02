@@ -4,18 +4,55 @@ import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Login = (props) => {
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+
+        fetch('http://localhost:3000/api/v1/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                "user": {
+                    username: props.username,
+                    password: props.password
+                }
+            })
+        })
+            .then(resp => resp.json())
+            .then(response => {
+                if (response.errors) {
+                    alert(response.errors);
+                } else {
+                    props.setUser(response);
+                }
+            })
+    };
+
     return (
-        <Form>
-            <Form.Group controlId="username">
+        <Form onSubmit={handleLogin}>
+            <Form.Group controlId="username" >
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="username" placeholder="Enter username" />
+                <Form.Control 
+                    type="text" 
+                    placeholder="Enter username" 
+                    onChange={props.handleChange}
+                    name="username"
+                />
             </Form.Group>
             <Form.Group controlId="formGroupPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control 
+                    type="password" 
+                    placeholder="Password"
+                    onChange={props.handleChange}
+                    name="password"
+                />
             </Form.Group>
             <Form.Group controlId="formGroupSubmit">
-                <Button>Submit</Button>
+                <Button type="submit">Submit</Button>
             </Form.Group>
             Don't have an account?  <Link to="/signup">Signup</Link>
         </Form>
@@ -24,19 +61,32 @@ const Login = (props) => {
 
 
 function msp(state) {
-    const { user } = state.user;
+    const { 
+        username,
+        password 
+    } = state.user;
 
     return {
-        user
-    }
-}
+        username,
+        password
+    };
+};
 
 function mdp(dispatch) {
     return {
-        userSignup: (user) => {
-            dispatch({ type: "USER_SIGNUP", payload: user })
+        handleChange: (e) => {
+            dispatch({
+                type: "HANDLE_CHANGE",
+                payload: { [e.target.name]: e.target.value }
+            })
+        },
+        setUser: (user) => {
+            dispatch({ 
+                type: "SET_USER", 
+                payload: user 
+            })
         }
-    }
-}
+    };
+};
 
 export default connect(msp, mdp)(Login)

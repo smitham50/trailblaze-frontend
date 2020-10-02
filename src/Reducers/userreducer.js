@@ -22,6 +22,10 @@ function userReducer(prevState = defaultState, action) {
         case "CLEAR_USER":
             return {
                 ...prevState,
+                username: null,
+                password: null,
+                password_confirmation: null,
+                email: null,
                 currentUserData: {}
             }
         default:

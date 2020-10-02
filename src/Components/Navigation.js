@@ -32,7 +32,7 @@ const Navigation = (props) => {
                     {
                         props.currentUserData.logged_in 
                         ?
-                        <Nav.Link href="/home">Logout {props.currentUserData.user.username} onClick={handleLogout}</Nav.Link>
+                        <Nav.Link href="/home" onClick={handleLogout}>Logout {props.currentUserData.user.username}</Nav.Link>
                         :
                         <Nav.Link href="/signup">Login/Signup</Nav.Link>
                     }
