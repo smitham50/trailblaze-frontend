@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React from "react";
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import getCoordinates from '../Scripts/getCoordinates';
 
 const Signup = (props) => {
 
@@ -29,6 +30,7 @@ const Signup = (props) => {
                     alert(response.errors);
                 } else {
                     props.setUser(response);
+                    getCoordinates(props.setLocation);
                 }
             })
     };
@@ -108,6 +110,12 @@ function mdp(dispatch) {
             dispatch({
                 type: "SET_USER",
                 payload: user
+            })
+        },
+        setLocation: (coords) => {
+            dispatch({
+                type: "SET_LOCATION",
+                payload: coords
             })
         }
     };

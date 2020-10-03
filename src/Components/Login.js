@@ -3,6 +3,8 @@ import React from "react";
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import getCoordinates from '../Scripts/getCoordinates'
+
 const Login = (props) => {
 
     const handleLogin = (event) => {
@@ -27,6 +29,7 @@ const Login = (props) => {
                     alert(response.errors);
                 } else {
                     props.setUser(response);
+                    getCoordinates(props.setLocation);
                 }
             })
     };
@@ -40,6 +43,7 @@ const Login = (props) => {
                     placeholder="Enter username" 
                     onChange={props.handleChange}
                     name="username"
+                    value={props.username}
                 />
             </Form.Group>
             <Form.Group controlId="formGroupPassword">
@@ -49,6 +53,7 @@ const Login = (props) => {
                     placeholder="Password"
                     onChange={props.handleChange}
                     name="password"
+                    value={props.password}
                 />
             </Form.Group>
             <Form.Group controlId="formGroupSubmit">
@@ -84,6 +89,12 @@ function mdp(dispatch) {
             dispatch({ 
                 type: "SET_USER", 
                 payload: user 
+            })
+        },
+        setLocation: (coords) => {
+            dispatch({
+                type: "SET_LOCATION",
+                payload: coords
             })
         }
     };
