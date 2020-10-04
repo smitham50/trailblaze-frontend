@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React from "react";
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
 import getCoordinates from '../Scripts/getCoordinates';
 
 const Signup = (props) => {
