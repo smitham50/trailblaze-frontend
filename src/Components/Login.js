@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React from "react";
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import getCoordinates from '../Scripts/getCoordinates'
 
@@ -10,28 +11,24 @@ const Login = (props) => {
     const handleLogin = (event) => {
         event.preventDefault();
 
-        fetch('http://localhost:3000/api/v1/login', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                "user": {
-                    username: props.username,
-                    password: props.password
-                }
-            })
-        })
-            .then(resp => resp.json())
-            .then(response => {
-                if (response.errors) {
-                    alert(response.errors);
-                } else {
-                    props.setUser(response);
-                    getCoordinates(props.setLocation);
-                }
-            })
+        const userParams = {
+            "user": {
+                username: props.username,
+                password: props.password
+            }
+        };
+
+        const options = {
+            method: 'post',
+            url: 'http://localhost:3000/api/v1/signup',
+            data: userParams
+        };
+
+        axios(options)
+            .then(resp => {
+                props.setUser(resp);
+                getCoordinates(props.setLocation);
+            });
     };
 
     return (

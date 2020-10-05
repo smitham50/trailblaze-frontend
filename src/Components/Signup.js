@@ -3,36 +3,33 @@ import React from "react";
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import getCoordinates from '../Scripts/getCoordinates';
+import axios from 'axios';
 
 const Signup = (props) => {
 
     const handleSignup = (event) => {
         event.preventDefault();
 
-        fetch('http://localhost:3000/api/v1/signup', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                "user": {
-                    username: props.username,
-                    password: props.password,
-                    password_confirmation: props.password_confirmation,
-                    email: props.email
-                }
-            })
-        })
-            .then(resp => resp.json())
-            .then(response => {
-                if (response.errors) {
-                    alert(response.errors);
-                } else {
-                    props.setUser(response);
-                    getCoordinates(props.setLocation);
-                }
-            })
+        const userParams = {
+            "user": {
+                username: props.username,
+                password: props.password,
+                password_confirmation: props.password_confirmation,
+                email: props.email
+            }
+        };
+
+        const options = {
+            method: 'post',
+            url: 'http://localhost:3000/api/v1/signup',
+            data: userParams
+        };
+
+        axios(options)
+            .then(resp => {
+                props.setUser(resp);
+                getCoordinates(props.setLocation);
+            });
     };
 
     return (

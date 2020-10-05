@@ -6,12 +6,18 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import axios from 'axios';
 
 // Reducers
 import userReducer from './Reducers/userreducer';
 
 const rootReducer = combineReducers({ user: userReducer });
 const store = createStore(rootReducer);
+
+// Axios defaults
+axios.defaults.xsrfCookieName = "CSRF-TOKEN";
+axios.defaults.xsrfHeaderName = "X-CSRF-Token";
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(
   <React.StrictMode>
