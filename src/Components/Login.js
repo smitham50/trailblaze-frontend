@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import React from "react";
 import { Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-import getCoordinates from '../Scripts/getCoordinates'
+import getCoordinates from '../Scripts/getCoordinates';
 
 const Login = (props) => {
 
@@ -32,32 +32,41 @@ const Login = (props) => {
     };
 
     return (
-        <Form onSubmit={handleLogin}>
-            <Form.Group controlId="username" >
-                <Form.Label>Username</Form.Label>
-                <Form.Control 
-                    type="text" 
-                    placeholder="Enter username" 
-                    onChange={props.handleChange}
-                    name="username"
-                    value={props.username}
-                />
-            </Form.Group>
-            <Form.Group controlId="formGroupPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control 
-                    type="password" 
-                    placeholder="Password"
-                    onChange={props.handleChange}
-                    name="password"
-                    value={props.password}
-                />
-            </Form.Group>
-            <Form.Group controlId="formGroupSubmit">
-                <Button type="submit">Submit</Button>
-            </Form.Group>
-            Don't have an account?  <Link to="/signup">Signup</Link>
-        </Form>
+        <div>
+            <Form onSubmit={handleLogin}>
+                <Form.Group controlId="username" >
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        placeholder="Enter username" 
+                        onChange={props.handleChange}
+                        name="username"
+                        value={props.username}
+                    />
+                </Form.Group>
+                <Form.Group controlId="formGroupPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control 
+                        type="password" 
+                        placeholder="Password"
+                        onChange={props.handleChange}
+                        name="password"
+                        value={props.password}
+                    />
+                </Form.Group>
+                <Form.Group controlId="formGroupSubmit">
+                    <Button type="submit">Submit</Button>
+                </Form.Group>
+                Don't have an account?  <Link to="/signup">Signup</Link>
+            </Form>
+            {
+                props.currentUserData && props.currentUserData.logged_in
+                    ?
+                        <Redirect to='/trails' />
+                    :
+                        null
+            }
+        </div>
     );
 };
 
@@ -65,12 +74,14 @@ const Login = (props) => {
 function msp(state) {
     const { 
         username,
-        password 
+        password,
+        currentUserData
     } = state.user;
 
     return {
         username,
-        password
+        password,
+        currentUserData
     };
 };
 

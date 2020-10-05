@@ -1,8 +1,8 @@
 const defaultState = {
-    username: null,
-    password: null,
-    password_confirmation: null,
-    email: null,
+    username: "",
+    password: "",
+    password_confirmation: "",
+    email: "",
     currentUserData: {},
     latitude: null,
     longitude: null

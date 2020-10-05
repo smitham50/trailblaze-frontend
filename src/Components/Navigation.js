@@ -58,7 +58,7 @@ class Navigation extends Component {
                 </Navbar.Collapse>
             </Navbar>
         );
-    }
+    };
 };
 
 function msp(state) {

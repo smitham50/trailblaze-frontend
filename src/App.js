@@ -10,6 +10,7 @@ import './Stylesheets/Signup.css';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
 import Navigation from './Components/Navigation';
+import Trails from './Containers/Trails';
 
 
 class App extends Component {
@@ -26,6 +27,9 @@ class App extends Component {
             </Route>
             <Route path='/login'>
               <Login></Login>
+            </Route>
+            <Route path='/trails'>
+              <Trails></Trails>
             </Route>
           </Switch>
         </header>
