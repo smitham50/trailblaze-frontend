@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import React, { Component, Fragment } from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class Navigation extends Component {
@@ -41,7 +41,10 @@ class Navigation extends Component {
                                 ?
                                 <Nav.Link href="/home" onClick={this.handleLogout}>Logout {this.props.currentUserData.user.username}</Nav.Link>
                                 :
-                                <Nav.Link href="/signup">Login/Signup</Nav.Link>
+                                <Fragment>
+                                    <Nav.Link href="/signup">Signup</Nav.Link>
+                                    <Nav.Link href="/login">Login</Nav.Link>
+                                </Fragment>
                         }
                         {
                             this.props.latitude
@@ -51,10 +54,6 @@ class Navigation extends Component {
                                 null
                         }
                     </Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search Trails" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
                 </Navbar.Collapse>
             </Navbar>
         );

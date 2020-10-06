@@ -28,7 +28,7 @@ const Signup = (props) => {
 
         axios(options)
             .then(resp => {
-                props.setUser(resp);
+                props.setUser(resp.data);
                 getCoordinates(props.setLocation);
             });
     };

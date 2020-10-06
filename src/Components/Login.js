@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React from "react";
+import React, { Fragment } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -20,19 +20,19 @@ const Login = (props) => {
 
         const options = {
             method: 'post',
-            url: 'http://localhost:3000/api/v1/signup',
+            url: 'http://localhost:3000/api/v1/login',
             data: userParams
         };
 
         axios(options)
             .then(resp => {
-                props.setUser(resp);
+                props.setUser(resp.data);
                 getCoordinates(props.setLocation);
             });
     };
 
     return (
-        <div>
+        <Fragment>
             <Form onSubmit={handleLogin}>
                 <Form.Group controlId="username" >
                     <Form.Label>Username</Form.Label>
@@ -66,7 +66,7 @@ const Login = (props) => {
                     :
                         null
             }
-        </div>
+        </Fragment>
     );
 };
 
