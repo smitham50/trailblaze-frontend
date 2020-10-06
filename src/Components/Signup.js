@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Fragment } from "react";
 import { Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import getCoordinates from '../Scripts/getCoordinates';
 import axios from 'axios';

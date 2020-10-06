@@ -10,31 +10,36 @@ const TrailSearch = (props) => {
         e.preventDefault();
         // Make proxy request to Hiking Project API through server to avoid CORS issue. 
         // Returns trails in specified distance from user's location.
-        const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${props.latitude}&lon=${props.longitude}&maxDistance=100&maxResults=500&key=200492212-d7400571b0620563169df18724f8dc46`;
+        const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${props.latitude}&lon=${props.longitude}&maxDistance=${props.distance}&maxResults=200&key=200492212-d7400571b0620563169df18724f8dc46`;
 
         const options = {
             method: 'post',
             url: 'http://localhost:3000/api/v1/trails',
             data: {
-                url: queryURL
+                url: queryURL,
+                distance: props.distance,
+                mileage: props.mileage,
+                latitude: props.latitude,
+                longitude: props.longitude
             }
         };
 
         axios(options)
             .then(resp => {
-                debugger
+                props.setTrails(resp.data.trails);
             });
     }
 
     return (
         <Fragment>
             <Form onSubmit={handleSearch} onChange={props.handleChange}>
-                <Form.Label>How far are you willing to travel from your current location?</Form.Label>
+                <Form.Label>How many miles are you willing to travel from your current location?</Form.Label>
                 <Form.Group controlId="distance">
                     <Form.Control as="select" name="distance">
-                        <option>50 miles</option>
-                        <option>100 miles</option>
-                        <option>200 miles</option>
+                        <option>20</option>
+                        <option>60</option>
+                        <option>100</option>
+                        <option>150</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Label>How many miles do you want to hike?</Form.Label>
@@ -43,14 +48,6 @@ const TrailSearch = (props) => {
                         <option>Less than 3</option>
                         <option>3 to 5</option>
                         <option>6 to 9</option>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Label>What difficulty are you looking for?</Form.Label>
-                <Form.Group controlId="difficulty">
-                    <Form.Control as="select" name="difficulty">
-                        <option>Easy</option>
-                        <option>Medium</option>
-                        <option>Challenging</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formGroupSubmit">
@@ -70,8 +67,7 @@ function msp(state) {
 
     const {
         distance,
-        mileage,
-        difficulty
+        mileage
     } = state.trailSearch;
 
     return {
@@ -79,8 +75,7 @@ function msp(state) {
         latitude,
         longitude,
         distance,
-        mileage,
-        difficulty
+        mileage
     };
 };
 
@@ -90,6 +85,12 @@ function mdp(dispatch) {
             dispatch({
                 type: "HANDLE_CHANGE",
                 payload: {[e.target.name]: e.target.value}
+            })
+        },
+        setTrails: (trails) => {
+            dispatch({
+                type: "SET_TRAILS",
+                payload: trails
             })
         }
     };

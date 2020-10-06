@@ -1,7 +1,8 @@
 const defaultState = {
     distance: "",
     mileage: "",
-    difficulty: ""
+    difficulty: "",
+    trails: []
 }
 
 function trailSearchReducer(prevState = defaultState, action) {
@@ -11,6 +12,12 @@ function trailSearchReducer(prevState = defaultState, action) {
             return {
                 ...prevState,
                 [fieldKey]: action.payload[fieldKey]
+            }
+        case "SET_TRAILS":
+            debugger
+            return {
+                ...prevState,
+                trails: action.payload
             }
         default:
             return prevState;

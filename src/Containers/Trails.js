@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+// import axios from 'axios';
+// import Trail from '../Components/Trail'
 
 class Trails extends Component {
 
@@ -20,9 +21,14 @@ function msp(state) {
         longitude
     } = state.user;
 
+    const {
+        trails
+    } = state.trailSearch;
+
     return {
         latitude,
-        longitude
+        longitude,
+        trails
     };
 };
 
