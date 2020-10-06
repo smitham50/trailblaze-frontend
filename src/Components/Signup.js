@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React from "react";
+import React, { Fragment } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -34,48 +34,57 @@ const Signup = (props) => {
     };
 
     return (
-        <Form onSubmit={handleSignup}>
-            <Form.Group controlId="username">
-                <Form.Label>Username</Form.Label>
-                <Form.Control 
-                    type="text" 
-                    placeholder="Enter username"
-                    onChange={props.handleChange}
-                    name="username"
-                />
-            </Form.Group>
-            <Form.Group controlId="formGroupEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control 
-                    type="text" 
-                    placeholder="Enter email" 
-                    onChange={props.handleChange}
-                    name="email"
-                />
-            </Form.Group>
-            <Form.Group controlId="formGroupPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control 
-                    type="password" 
-                    placeholder="Password" 
-                    onChange={props.handleChange}
-                    name="password"
-                />
-            </Form.Group>
-            <Form.Group controlId="formGroupPasswordConfirmation">
-                <Form.Label>Password Confirmation</Form.Label>
-                <Form.Control 
-                    type="password" 
-                    placeholder="Password Confirmation"
-                    onChange={props.handleChange}
-                    name="password_confirmation" 
-                />
-            </Form.Group>
-            <Form.Group controlId="formGroupSubmit"> 
-                <Button type="submit">Submit</Button>
-            </Form.Group>
-            Already have an account?  <Link to="/login">Login</Link>
-        </Form>
+        <Fragment>
+            <Form onSubmit={handleSignup}>
+                <Form.Group controlId="username">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        placeholder="Enter username"
+                        onChange={props.handleChange}
+                        name="username"
+                    />
+                </Form.Group>
+                <Form.Group controlId="formGroupEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        placeholder="Enter email" 
+                        onChange={props.handleChange}
+                        name="email"
+                    />
+                </Form.Group>
+                <Form.Group controlId="formGroupPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control 
+                        type="password" 
+                        placeholder="Password" 
+                        onChange={props.handleChange}
+                        name="password"
+                    />
+                </Form.Group>
+                <Form.Group controlId="formGroupPasswordConfirmation">
+                    <Form.Label>Password Confirmation</Form.Label>
+                    <Form.Control 
+                        type="password" 
+                        placeholder="Password Confirmation"
+                        onChange={props.handleChange}
+                        name="password_confirmation" 
+                    />
+                </Form.Group>
+                <Form.Group controlId="formGroupSubmit"> 
+                    <Button type="submit">Submit</Button>
+                </Form.Group>
+                Already have an account?  <Link to="/login">Login</Link>
+            </Form>
+            {
+                props.currentUserData && props.currentUserData.logged_in
+                    ?
+                    <Redirect to='/trailsearch' />
+                    :
+                    null
+            }
+        </Fragment>
     );
 };
 
