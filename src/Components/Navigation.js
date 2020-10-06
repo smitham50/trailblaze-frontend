@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class Navigation extends Component {
 
@@ -11,21 +12,14 @@ class Navigation extends Component {
     } 
 
     handleLogout = () => {
-        fetch('http://localhost:3000/api/v1/logout', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        })
-            .then(resp => resp.json())
-            .then(response => {
-                if (response.errors) {
-                    alert(response.errors)
+        axios.post('http://localhost:3000/api/v1/logout')
+            .then(resp => {
+                if (resp.errors) {
+                    alert(resp.errors);
                 } else {
-                    this.props.clearUser()
+                    this.props.clearUser();
                 }
-            })
+            });
     };
 
     render() {

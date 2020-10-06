@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React, { Fragment } from "react";
+import React, { Fragment } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -62,7 +62,7 @@ const Login = (props) => {
             {
                 props.currentUserData && props.currentUserData.logged_in
                     ?
-                        <Redirect to='/trails' />
+                        <Redirect to='/trailsearch' />
                     :
                         null
             }

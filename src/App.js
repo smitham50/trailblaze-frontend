@@ -11,6 +11,7 @@ import Signup from './Components/Signup';
 import Login from './Components/Login';
 import Navigation from './Components/Navigation';
 import Trails from './Containers/Trails';
+import TrailSearch from './Components/TrailSearch';
 
 
 class App extends Component {
@@ -27,6 +28,9 @@ class App extends Component {
             </Route>
             <Route path='/login'>
               <Login></Login>
+            </Route>
+            <Route path='/trailsearch'>
+              <TrailSearch></TrailSearch>
             </Route>
             <Route path='/trails'>
               <Trails></Trails>

@@ -10,8 +10,9 @@ import axios from 'axios';
 
 // Reducers
 import userReducer from './Reducers/userreducer';
+import trailSearchReducer from './Reducers/trailSearchReducer';
 
-const rootReducer = combineReducers({ user: userReducer });
+const rootReducer = combineReducers({ user: userReducer, trailSearch: trailSearchReducer });
 const store = createStore(rootReducer);
 
 // Axios defaults

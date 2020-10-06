@@ -20,21 +20,17 @@ function userReducer(prevState = defaultState, action) {
         case "SET_USER":
             return {
                 ...prevState,
-                currentUserData: action.payload,
-                username: null,
-                password: null,
-                password_confirmation: null,
-                email: null
+                currentUserData: action.payload
             }
         case "CLEAR_USER":
             return {
                 ...prevState,
-                username: null,
-                password: null,
-                password_confirmation: null,
-                email: null,
-                latitude: null,
-                longitude: null,
+                username: "",
+                password: "",
+                password_confirmation: "",
+                email: "",
+                latitude: "",
+                longitude: "",
                 currentUserData: {}
             }
         case "SET_LOCATION":
