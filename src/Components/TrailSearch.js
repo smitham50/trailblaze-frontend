@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
-// import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 const TrailSearch = (props) => {
@@ -53,7 +53,15 @@ const TrailSearch = (props) => {
                 <Form.Group controlId="formGroupSubmit">
                     <Button type="submit">Find Trails</Button>
                 </Form.Group>
+                {
+                    props.trails.length > 0
+                        ?
+                            <Redirect to='/trails' />
+                        :
+                            null
+                }
             </Form>
+
         </Fragment>
     );
 };
@@ -67,7 +75,8 @@ function msp(state) {
 
     const {
         distance,
-        mileage
+        mileage,
+        trails
     } = state.trailSearch;
 
     return {
@@ -75,7 +84,8 @@ function msp(state) {
         latitude,
         longitude,
         distance,
-        mileage
+        mileage,
+        trails
     };
 };
 

@@ -14,7 +14,6 @@ function trailSearchReducer(prevState = defaultState, action) {
                 [fieldKey]: action.payload[fieldKey]
             }
         case "SET_TRAILS":
-            debugger
             return {
                 ...prevState,
                 trails: action.payload

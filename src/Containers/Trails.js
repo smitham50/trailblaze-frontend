@@ -1,15 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 // import axios from 'axios';
-// import Trail from '../Components/Trail'
+import Trail from '../Components/Trail'
 
 class Trails extends Component {
 
-    
+    renderTrails = () => {
+        return this.props.trails.map(trail => {
+            return <Trail 
+                        key = { trail.id }
+                        trailName = { trail.name }
+                        image = { trail.imgMedium }
+                        description = { trail.description }
+                        length = { trail.length }
+                        difficulty = { trail.difficulty }
+                        location = { trail.location }
+                    />;
+        });
+    };
 
     render () {
         return (
-            <div></div>
+            <Fragment>
+                { this.renderTrails() }
+            </Fragment>
         );
     };
 };
