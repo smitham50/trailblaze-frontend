@@ -35,8 +35,7 @@ const TrailSearch = (props) => {
             <Form onSubmit={handleSearch} onChange={props.handleChange}>
                 <Form.Label>How many miles are you willing to travel from your current location?</Form.Label>
                 <Form.Group controlId="distance">
-                    <Form.Control as="select" name="distance">
-                        <option>20</option>
+                    <Form.Control as="select" name="distance" value={ props.distance }>
                         <option>60</option>
                         <option>100</option>
                         <option>150</option>
@@ -44,7 +43,7 @@ const TrailSearch = (props) => {
                 </Form.Group>
                 <Form.Label>How many miles do you want to hike?</Form.Label>
                 <Form.Group controlId="mileage">
-                    <Form.Control as="select" name="mileage">
+                    <Form.Control as="select" name="mileage" value={ props.mileage }>
                         <option>Less than 3</option>
                         <option>3 to 5</option>
                         <option>6 to 9</option>

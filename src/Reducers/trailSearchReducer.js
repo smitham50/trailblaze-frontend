@@ -1,11 +1,12 @@
 const defaultState = {
-    distance: "",
-    mileage: "",
+    distance: 60,
+    mileage: "Less than 3",
     difficulty: "",
     trails: []
 }
 
 function trailSearchReducer(prevState = defaultState, action) {
+    console.log(prevState)
     switch (action.type) {
         case "HANDLE_CHANGE":
             let fieldKey = Object.keys(action.payload)[0];
