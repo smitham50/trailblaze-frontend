@@ -28,20 +28,21 @@ const Login = (props) => {
             .then(resp => {
                 props.setUser(resp.data);
                 getCoordinates(props.setLocation);
+                localStorage.userId = resp.data.user.id;
             });
     };
 
     return (
         <Fragment>
-            <Form onSubmit={handleLogin}>
+            <Form onSubmit={ handleLogin }>
                 <Form.Group controlId="username" >
                     <Form.Label>Username</Form.Label>
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username" 
-                        onChange={props.handleChange}
+                        onChange={ props.handleChange }
                         name="username"
-                        value={props.username}
+                        value={ props.username }
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
@@ -49,9 +50,9 @@ const Login = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password"
-                        onChange={props.handleChange}
+                        onChange={ props.handleChange }
                         name="password"
-                        value={props.password}
+                        value={ props.password }
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupSubmit">

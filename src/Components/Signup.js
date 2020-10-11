@@ -30,6 +30,7 @@ const Signup = (props) => {
             .then(resp => {
                 props.setUser(resp.data);
                 getCoordinates(props.setLocation);
+                localStorage.userId = resp.data.user.id;
             });
     };
 
@@ -94,14 +95,16 @@ function msp(state) {
         username,
         password,
         password_confirmation,
-        email
+        email,
+        currentUserData
     } = state.user;
 
     return {
         username,
         password,
         password_confirmation,
-        email
+        email,
+        currentUserData
     };
 };
 

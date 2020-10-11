@@ -6,7 +6,6 @@ const defaultState = {
 }
 
 function trailSearchReducer(prevState = defaultState, action) {
-    console.log(prevState)
     switch (action.type) {
         case "HANDLE_CHANGE":
             let fieldKey = Object.keys(action.payload)[0];

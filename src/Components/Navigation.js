@@ -18,6 +18,7 @@ class Navigation extends Component {
                     alert(resp.errors);
                 } else {
                     this.props.clearUser();
+                    localStorage.clear();
                 }
             });
     };
@@ -33,7 +34,10 @@ class Navigation extends Component {
                         {
                             this.props.currentUserData.logged_in
                                 ?
-                                <Nav.Link href="/home" onClick={this.handleLogout}>Logout {this.props.currentUserData.user.username}</Nav.Link>
+                                <Fragment>
+                                    <Nav.Link href="/trailsearch">Find a trail</Nav.Link>
+                                    <Nav.Link href="/home" onClick={this.handleLogout}>Logout {this.props.currentUserData.user.username}</Nav.Link>
+                                </Fragment>
                                 :
                                 <Fragment>
                                     <Nav.Link href="/signup">Signup</Nav.Link>
