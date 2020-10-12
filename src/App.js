@@ -7,6 +7,7 @@ import axios from 'axios';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Stylesheets/Signup.css';
+import './Stylesheets/Carousel.css';
 
 // Components
 import Signup from './Components/Signup';

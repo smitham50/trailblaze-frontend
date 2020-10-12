@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Carousel } from 'react-bootstrap';
-// import Trail from '../Components/Trail'
 
 class Trails extends Component {
 
@@ -28,9 +27,21 @@ class Trails extends Component {
 
     render () {
         return (
-            <Carousel>
-                { this.renderTrails() }
-            </Carousel>
+            <div>
+                <div className='container-fluid' >
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <h3>Where would you like to go?</h3>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12"></div>
+                        <Carousel>
+                            { this.renderTrails() }
+                        </Carousel>
+                    </div>
+                </div>
+            </div>
         );
     };
 };
