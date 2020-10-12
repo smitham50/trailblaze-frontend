@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
@@ -32,54 +32,53 @@ const TrailSearch = (props) => {
 
     return (
         <Fragment>
-            <Form onSubmit={ handleSearch } >
-                <Form.Label>How many miles are you willing to travel from your current location?</Form.Label>
-                <Form.Group controlId="distance">
-                    <Form.Control 
-                        as="select" 
-                        name="distance" 
-                        value={ props.distance }
-                        onChange={ props.handleChange }
-                    >
-                        <option>60</option>
-                        <option>100</option>
-                        <option>150</option>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Label>How many miles do you want to hike?</Form.Label>
-                <Form.Group controlId="mileage">
-                    <Form.Control 
-                        as="select" 
-                        name="mileage" 
-                        value={ props.mileage }
-                        onChange={ props.handleChange }    
-                    >
-                        <option>Less than 3</option>
-                        <option>3 to 5</option>
-                        <option>6 to 9</option>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Group controlId="formGroupSubmit">
-                    {
-                        props.latitude && props.longitude
-                            ?
-                                
+            {
+                props.latitude && props.longitude
+                    ?
+                        <Form onSubmit={handleSearch} >
+                            <Form.Label>How many miles are you willing to travel from your current location?</Form.Label>
+                            <Form.Group controlId="distance">
+                                <Form.Control
+                                    as="select"
+                                    name="distance"
+                                    value={props.distance}
+                                    onChange={props.handleChange}
+                                >
+                                    <option>60</option>
+                                    <option>100</option>
+                                    <option>150</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Label>How many miles do you want to hike?</Form.Label>
+                            <Form.Group controlId="mileage">
+                                <Form.Control
+                                    as="select"
+                                    name="mileage"
+                                    value={props.mileage}
+                                    onChange={props.handleChange}
+                                >
+                                    <option>Less than 3</option>
+                                    <option>3 to 5</option>
+                                    <option>6 to 9</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId="formGroupSubmit">
                                 <Button type="submit">Find Trails</Button>
-                                
-                            :
-                                null
-                    }
-                </Form.Group>
-                {
-                    props.trails.length > 0
-                        ?
-                            <Redirect to='/trails' />
-                        :
-                            null
-                }
-            </Form>
-
-        </Fragment>
+                            </Form.Group>
+                            {
+                                props.trails.length > 0
+                                    ?
+                                    <Redirect to='/trails' />
+                                    :
+                                    null
+                            }
+                        </Form>
+                    :
+                        <Spinner animation="border" role="status">
+                            <span className="sr-only">Getting location...</span>
+                        </Spinner>    
+            }
+            </Fragment>
     );
 };
 
