@@ -17,8 +17,8 @@ class Navigation extends Component {
                 if (resp.errors) {
                     alert(resp.errors);
                 } else {
-                    this.props.clearUser();
                     localStorage.clear();
+                    this.props.clearUser();
                 }
             });
     };
@@ -43,13 +43,6 @@ class Navigation extends Component {
                                     <Nav.Link href="/signup">Signup</Nav.Link>
                                     <Nav.Link href="/login">Login</Nav.Link>
                                 </Fragment>
-                        }
-                        {
-                            this.props.latitude
-                                ?
-                                <Nav.Link href="#">Your position: {this.props.latitude}, {this.props.longitude}</Nav.Link>
-                                :
-                                null
                         }
                     </Nav>
                 </Navbar.Collapse>

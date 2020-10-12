@@ -60,7 +60,15 @@ const TrailSearch = (props) => {
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formGroupSubmit">
-                    <Button type="submit">Find Trails</Button>
+                    {
+                        props.latitude && props.longitude
+                            ?
+                                
+                                <Button type="submit">Find Trails</Button>
+                                
+                            :
+                                null
+                    }
                 </Form.Group>
                 {
                     props.trails.length > 0
