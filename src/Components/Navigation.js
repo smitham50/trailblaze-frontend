@@ -34,15 +34,15 @@ class Navigation extends Component {
                         {
                             this.props.currentUserData.logged_in
                                 ?
-                                <Fragment>
-                                    <Nav.Link href="/trailsearch">Find a trail</Nav.Link>
-                                    <Nav.Link href="/home" onClick={this.handleLogout}>Logout {this.props.currentUserData.user.username}</Nav.Link>
-                                </Fragment>
+                                    <Fragment>
+                                        <Nav.Link href="/trailsearch">Find a trail</Nav.Link>
+                                        <Nav.Link href="/home" onClick={this.handleLogout}>Logout {this.props.currentUserData.user.username}</Nav.Link>
+                                    </Fragment>
                                 :
-                                <Fragment>
-                                    <Nav.Link href="/signup">Signup</Nav.Link>
-                                    <Nav.Link href="/login">Login</Nav.Link>
-                                </Fragment>
+                                    <Fragment>
+                                        <Nav.Link href="/signup">Signup</Nav.Link>
+                                        <Nav.Link href="/login">Login</Nav.Link>
+                                    </Fragment>
                         }
                     </Nav>
                 </Navbar.Collapse>

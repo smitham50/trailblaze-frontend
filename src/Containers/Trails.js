@@ -1,29 +1,36 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import axios from 'axios';
-import Trail from '../Components/Trail'
+import { Carousel } from 'react-bootstrap';
+// import Trail from '../Components/Trail'
 
 class Trails extends Component {
 
     renderTrails = () => {
         return this.props.trails.map(trail => {
-            return <Trail 
-                        key = { trail.id }
-                        trailName = { trail.name }
-                        image = { trail.imgMedium }
-                        description = { trail.description }
-                        length = { trail.length }
-                        difficulty = { trail.difficulty }
-                        location = { trail.location }
-                    />;
+            return  (
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src={ trail.imgMedium }
+                            alt="Trail slide"
+                        />
+                        <Carousel.Caption>
+                            <h3>{ trail.name }</h3>
+                            <p>{ trail.location }</p>
+                            <p>Description: { trail.description }</p>
+                            <p>Length: { trail.length } miles</p>
+                            <p>Difficulty: { trail.difficulty }</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+            );
         });
     };
 
     render () {
         return (
-            <Fragment>
+            <Carousel>
                 { this.renderTrails() }
-            </Fragment>
+            </Carousel>
         );
     };
 };
