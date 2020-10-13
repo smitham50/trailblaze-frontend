@@ -1,3 +1,21 @@
-/* img {
-    object-fit: cover;
-} */
+.image-wrap{
+  width:100%;
+  position:relative;
+  overflow:hidden;
+  height:240px;/* set arbitrary height*/
+}
+#carousel .image-wrap img.facilitiesImage {
+  width: auto;
+  height:240px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@supports (object-fit: cover){
+#carousel .image-wrap img.facilitiesImage {
+width: 60%;
+height:240px;
+margin-left: auto;
+margin-right: auto;
+object-fit:cover;
+}
+}

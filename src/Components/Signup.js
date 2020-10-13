@@ -36,13 +36,13 @@ const Signup = (props) => {
 
     return (
         <Fragment>
-            <Form onSubmit={handleSignup}>
+            <Form onSubmit={ handleSignup }>
                 <Form.Group controlId="username">
                     <Form.Label>Username</Form.Label>
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username"
-                        onChange={props.handleChange}
+                        onChange={ props.handleChange }
                         name="username"
                     />
                 </Form.Group>
@@ -51,7 +51,7 @@ const Signup = (props) => {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter email" 
-                        onChange={props.handleChange}
+                        onChange={ props.handleChange }
                         name="email"
                     />
                 </Form.Group>
@@ -60,7 +60,7 @@ const Signup = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password" 
-                        onChange={props.handleChange}
+                        onChange={ props.handleChange }
                         name="password"
                     />
                 </Form.Group>
@@ -69,7 +69,7 @@ const Signup = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password Confirmation"
-                        onChange={props.handleChange}
+                        onChange={ props.handleChange }
                         name="password_confirmation" 
                     />
                 </Form.Group>
