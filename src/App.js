@@ -6,8 +6,8 @@ import axios from 'axios';
 // Styles
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Jumbotron, Button } from 'react-bootstrap';
 import './Stylesheets/Signup.css';
-import './Stylesheets/Carousel.css';
 
 // Components
 import Signup from './Components/Signup';
@@ -26,8 +26,8 @@ class App extends Component {
     if (localStorage.userId) {
       axios.get('http://localhost:3000/api/v1/logged_in', {withCredentials: true})
         .then(resp => {
-          this.props.setUser(resp.data);
           getCoordinates(this.props.setLocation);
+          this.props.setUser(resp.data);
         });
     }
   };
@@ -38,7 +38,19 @@ class App extends Component {
         <Navigation></Navigation>
         <header className="App-header">
           <Switch>
-            <Route path='/home'></Route>
+            <Route path='/home'>
+              <Jumbotron>
+                <h1>Welcome to Trailblaze!</h1>
+                <p>
+                  If you've ever spent hours researching hikes in range of you because there were too many options to choose from, this app is for you.
+                  Once you've made an account, tell us how far you're willing to travel and how many miles you want to hike and we'll give you ten options
+                  to choose from. Pick the one you like, get directions, and add the trail to your hiked trails so it doesn't show up the next time you search.
+                </p>
+                <p>
+                  Happy hiking!
+                </p>
+              </Jumbotron>
+            </Route>
             <Route path='/signup'>
               <Signup></Signup>
             </Route>
