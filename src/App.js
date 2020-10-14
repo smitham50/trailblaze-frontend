@@ -17,9 +17,6 @@ import Trails from './Containers/Trails';
 import TrailShow from './Containers/TrailShow';
 import TrailSearch from './Components/TrailSearch';
 
-// Scripts
-import getCoordinates from './Scripts/getCoordinates';
-
 
 class App extends Component {
 
@@ -27,7 +24,12 @@ class App extends Component {
     if (localStorage.userId) {
       axios.get('http://localhost:3000/api/v1/logged_in', {withCredentials: true})
         .then(resp => {
-          getCoordinates(this.props.setLocation);
+          this.props.setLocation({
+            coords: {
+              latitude: localStorage.getItem('latitude'),
+              longitude: localStorage.getItem('longitude')
+            }
+          });
           this.props.setUser(resp.data);
         });
     }

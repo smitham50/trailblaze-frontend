@@ -34,6 +34,10 @@ function userReducer(prevState = defaultState, action) {
             }
         case "SET_LOCATION":
             const coordinates = action.payload.coords;
+            if (!localStorage.latitude) {
+                localStorage.latitude = coordinates.latitude;
+                localStorage.longitude = coordinates.longitude;
+            }
             return {
                 ...prevState,
                 latitude: coordinates.latitude,
