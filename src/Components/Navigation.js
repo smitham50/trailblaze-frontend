@@ -6,6 +6,7 @@ import axios from 'axios';
 const Navigation = (props) => {
 
     const handleLogout = () => {
+        localStorage.removeItem('userId');
         axios.post('http://localhost:3000/api/v1/logout')
             .then(resp => {
                 if (resp.errors) {
