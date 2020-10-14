@@ -11,7 +11,6 @@ const Navigation = (props) => {
                 if (resp.errors) {
                     alert(resp.errors);
                 } else {
-                    localStorage.clear();
                     props.clearUser();
                 }
             });
@@ -23,7 +22,6 @@ const Navigation = (props) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/home">Home</Nav.Link>
                     {
                         props.currentUserData.logged_in
                             ?

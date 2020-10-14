@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import Trail from '../Components/Trail'
+import Trail from '../Components/Trail';
 
 class Trails extends Component {
 

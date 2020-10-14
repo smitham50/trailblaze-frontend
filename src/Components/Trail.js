@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import slugify from '../Scripts/slugify';
 
-const Trail = (props) => {
+const Trail = (props) => { 
     return (
         <Fragment>
             <br></br>
@@ -19,7 +20,7 @@ const Trail = (props) => {
                     <ListGroupItem>Difficulty: {props.difficulty}</ListGroupItem>
                 </ListGroup>
                 <Card.Body>
-                    <Card.Link href="#">Take me here!</Card.Link>
+                    <Card.Link href={ `/trails/${slugify(props.trailName)}` }>Take me here!</Card.Link>
                 </Card.Body>
             </Card>
         </Fragment>

@@ -6,7 +6,7 @@ import axios from 'axios';
 // Styles
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Jumbotron, Button } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 import './Stylesheets/Signup.css';
 
 // Components
@@ -14,6 +14,7 @@ import Signup from './Components/Signup';
 import Login from './Components/Login';
 import Navigation from './Components/Navigation';
 import Trails from './Containers/Trails';
+import TrailShow from './Containers/TrailShow';
 import TrailSearch from './Components/TrailSearch';
 
 // Scripts
@@ -60,6 +61,10 @@ class App extends Component {
             <Route path='/trailsearch'>
               <TrailSearch></TrailSearch>
             </Route>
+            <Route 
+              path='/trails/:slug'
+              component={TrailShow}
+            />  
             <Route path='/trails'>
               <Trails></Trails>
             </Route>

@@ -22,6 +22,7 @@ function userReducer(prevState = defaultState, action) {
                 currentUserData: action.payload
             }
         case "CLEAR_USER":
+            localStorage.clear();
             return {
                 ...prevState,
                 username: "",
