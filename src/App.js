@@ -48,6 +48,7 @@ class App extends Component {
                   If you've ever spent hours researching hikes in range of you because there were too many options to choose from, this app is for you.
                   Once you've made an account, tell us how far you're willing to travel and how many miles you want to hike and we'll give you ten options
                   to choose from. Pick the one you like, get directions, and add the trail to your hiked trails so it doesn't show up the next time you search.
+                  Spend the time you would have spent on your computer in the woods.
                 </p>
                 <p>
                   Happy hiking!

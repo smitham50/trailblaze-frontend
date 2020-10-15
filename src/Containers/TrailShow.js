@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import Map from '../Components/Map';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -16,9 +17,9 @@ class TrailShow extends Component {
         const { trail } = this.props;
         return (
             trail ?
-                <Fragment>
+                <div className="d-flex container-fluid">
                     <br></br>
-                    <Card style={{ width: '50rem' }}>
+                    <Card style={{ width: '25rem' }}>
                         <Card.Img variant="top" src={ trail.imgMedium } />
                         <Card.Body>
                             <Card.Title>{ trail.name }</Card.Title>
@@ -32,7 +33,8 @@ class TrailShow extends Component {
                             <ListGroupItem>Difficulty: { trail.difficulty }</ListGroupItem>
                         </ListGroup>
                     </Card>
-                </Fragment>
+                    <Map></Map>
+                </div>
             :
                 null
         );
