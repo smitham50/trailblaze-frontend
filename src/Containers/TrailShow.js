@@ -16,23 +16,23 @@ class TrailShow extends Component {
         const { trail } = this.props;
         return (
             trail ?
-            <Fragment>
-                <br></br>
-                <Card style={{ width: '50rem' }}>
-                    <Card.Img variant="top" src={trail.imgMedium} />
-                    <Card.Body>
-                        <Card.Title>{trail.name}</Card.Title>
-                        <Card.Text>
-                            {trail.description}
-                        </Card.Text>
-                    </Card.Body>
-                    <ListGroup className="list-group-flush">
-                        <ListGroupItem>Location: {trail.location}</ListGroupItem>
-                        <ListGroupItem>Length: {trail.length} miles</ListGroupItem>
-                        <ListGroupItem>Difficulty: {trail.difficulty}</ListGroupItem>
-                    </ListGroup>
-                </Card>
-            </Fragment>
+                <Fragment>
+                    <br></br>
+                    <Card style={{ width: '50rem' }}>
+                        <Card.Img variant="top" src={ trail.imgMedium } />
+                        <Card.Body>
+                            <Card.Title>{ trail.name }</Card.Title>
+                            <Card.Text>
+                                { trail.description }
+                            </Card.Text>
+                        </Card.Body>
+                        <ListGroup className="list-group-flush">
+                            <ListGroupItem>Location: { trail.location }</ListGroupItem>
+                            <ListGroupItem>Length: { trail.length } miles</ListGroupItem>
+                            <ListGroupItem>Difficulty: { trail.difficulty }</ListGroupItem>
+                        </ListGroup>
+                    </Card>
+                </Fragment>
             :
                 null
         );

@@ -28,8 +28,8 @@ const Signup = (props) => {
 
         axios(options)
             .then(resp => {
-                props.setUser(resp.data);
-                getCoordinates(props.setLocation);
+                props.setUser( resp.data );
+                getCoordinates( props.setLocation );
                 localStorage.userId = resp.data.user.id;
             });
     };
