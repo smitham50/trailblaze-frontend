@@ -14,33 +14,35 @@ class Map extends Component {
         directions: null
     };
 
-    // componentDidMount() {
-    //     const directionsService = new google.maps.DirectionsService();
+    handleDirections = (google) => {
+        const origin = { lat: parseFloat(localStorage.latitude), lng: parseFloat(localStorage.longitude) };
+        const destination = { lat: this.state.center.lat, lng: this.state.center.lng };
 
-    //     const origin = { lat: parseFloat(localStorage.latitude), lng: parseFloat(localStorage.longitude) };
-    //     const destination = { lat: this.state.center.lat, lng: this.state.center.lng };
+        let directionsService = new google.maps.DirectionsService()
+        let directionsDisplay = new google.maps.DirectionsRenderer()
+        directionsDisplay.setMap(google.map)
 
-    //     directionsService.route(
-    //         {
-    //             origin: origin,
-    //             destination: destination,
-    //             travelMode: google.maps.TravelMode.DRIVING
-    //         },
-    //         (result, status) => {
-    //             if (status === google.maps.DirectionsStatus.OK) {
-    //                 this.setState({
-    //                     directions: result
-    //                 });
-    //             } else {
-    //                 console.error(`error fetching directions ${result}`);
-    //             }
-    //         }
-    //     );
-    // }
+        directionsService.route(
+            {
+                travelMode: 'DRIVING',
+                origin: origin,
+                destination: destination
+            },
+            (DirectionsResult, DirectionsStatus) => {
+                console.log('DirectionsResult', DirectionsResult)
+                console.log('DirectionsStatus', DirectionsStatus)
+                if (DirectionsStatus == 'OK') {
+                    directionsDisplay.setDirections(DirectionsResult);
+                }
+            }
+        )
+    }
+        
 
     
 
     render() {
+        console.log(this.state.directions)
         return (
             // Important! Always set the container height explicitly
             <div style={{ height: '100vh', width: '75%' }}>
@@ -48,6 +50,8 @@ class Map extends Component {
                     bootstrapURLKeys={{ key: this.state.key }}
                     center={ this.state.center }
                     defaultZoom={ this.state.zoom }
+                    onGoogleApiLoaded={this.handleDirections}
+                    yesIWantToUseGoogleMapApiInternals
                 >
                 </GoogleMapReact>
             </div>
