@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Map from '../Components/Map';
 import { connect } from 'react-redux';
