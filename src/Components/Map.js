@@ -44,7 +44,6 @@ class Map extends Component {
     render() {
         console.log(this.state.directions)
         return (
-            // Important! Always set the container height explicitly
             <div style={{ height: '100vh', width: '75%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: this.state.key }}

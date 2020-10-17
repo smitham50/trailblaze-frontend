@@ -14,6 +14,10 @@ function trailSearchReducer(prevState = defaultState, action) {
                 [fieldKey]: action.payload[fieldKey]
             }
         case "SET_TRAILS":
+            localStorage.removeItem('trails');
+            localStorage.trails = action.payload.map(trail => {
+                return trail.id;
+            });
             return {
                 ...prevState,
                 trails: action.payload

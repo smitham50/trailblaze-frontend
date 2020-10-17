@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import Map from '../Components/Map';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -18,7 +18,7 @@ class TrailShow extends Component {
         return (
             trail ?
                 <div className="d-flex container-fluid">
-                    <br></br>
+                    <Button variant="link" href="/trails">Back to search</Button>
                     <Card style={{ width: '25rem' }}>
                         <Card.Img variant="top" src={ trail.imgMedium } />
                         <Card.Body>
