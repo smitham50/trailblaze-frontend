@@ -17,7 +17,7 @@ class Trails extends Component {
                 .then(resp => {
                     const trails = resp.data.trails;
                     this.props.setTrails(trails);
-                    this.renderTrails(trails);
+                    this.renderTrails();
                 });
         }
     }
@@ -39,9 +39,9 @@ class Trails extends Component {
 
     render () {
         return (
-            <Fragment>
+            <div className="container-fluid d-flex trails-container">
                 { this.renderTrails() }
-            </Fragment>
+            </div>
         );
     };
 };

@@ -8,6 +8,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Jumbotron } from 'react-bootstrap';
 import './Stylesheets/Signup.css';
+import './Stylesheets/TrailsContainer.css';
 
 // Components
 import Signup from './Components/Signup';

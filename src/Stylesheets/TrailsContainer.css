@@ -1,0 +1,7 @@
+.trails-container {
+    flex-wrap: wrap;
+}
+
+.trails-container .trail {
+    margin: 2%;
+}

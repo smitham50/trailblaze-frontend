@@ -3,9 +3,8 @@ import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 const Trail = (props) => { 
     return (
-        <Fragment>
-            <br></br>
-            <Card style={{ width: '60rem' }}>
+        <div className="trail">
+            <Card style={{ width: '40rem' }}>
                 <Card.Img variant="top" src={ props.image } />
                 <Card.Body>
                     <Card.Title>{ props.trailName }</Card.Title>
@@ -22,7 +21,7 @@ const Trail = (props) => {
                     <Card.Link href={ `/trails/${encodeURIComponent(props.trailName)}` }>Take me here!</Card.Link>
                 </Card.Body>
             </Card>
-        </Fragment>
+        </div>
     );
 };
 
