@@ -31,7 +31,7 @@ class Map extends Component {
             (DirectionsResult, DirectionsStatus) => {
                 console.log('DirectionsResult', DirectionsResult)
                 console.log('DirectionsStatus', DirectionsStatus)
-                if (DirectionsStatus == 'OK') {
+                if (DirectionsStatus === 'OK') {
                     directionsDisplay.setDirections(DirectionsResult);
                 }
             }
