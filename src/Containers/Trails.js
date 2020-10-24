@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Trail from '../Components/Trail';
 import axios from 'axios';
@@ -17,7 +17,6 @@ class Trails extends Component {
                 .then(resp => {
                     const trails = resp.data.trails;
                     this.props.setTrails(trails);
-                    this.renderTrails();
                 });
         }
     }

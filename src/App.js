@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Jumbotron } from 'react-bootstrap';
 import './Stylesheets/Signup.css';
 import './Stylesheets/TrailsContainer.css';
+import './Stylesheets/TrailShow.css';
 
 // Components
 import Signup from './Components/Signup';
@@ -17,6 +18,7 @@ import Navigation from './Components/Navigation';
 import Trails from './Containers/Trails';
 import TrailShow from './Containers/TrailShow';
 import TrailSearch from './Components/TrailSearch';
+import MyHikes from './Containers/MyHikes';
 
 
 class App extends Component {
@@ -67,10 +69,13 @@ class App extends Component {
             </Route>
             <Route 
               path='/trails/:slug'
-              component={TrailShow}
+              component={ TrailShow }
             />  
             <Route path='/trails'>
               <Trails></Trails>
+            </Route>
+            <Route path='/myhikes'>
+              <MyHikes></MyHikes>
             </Route>
           </Switch>
         </header>
