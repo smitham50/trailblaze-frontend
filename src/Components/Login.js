@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -7,14 +7,16 @@ import axios from 'axios';
 import getCoordinates from '../Scripts/getCoordinates';
 
 const Login = (props) => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleLogin = (event) => {
         event.preventDefault();
 
         const userParams = {
             "user": {
-                username: props.username,
-                password: props.password
+                username: username,
+                password: password
             }
         };
 
@@ -40,9 +42,9 @@ const Login = (props) => {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username" 
-                        onChange={ props.handleChange }
+                        onChange={ (e) => setUsername(e.target.value) }
                         name="username"
-                        value={ props.username }
+                        value={ username }
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
@@ -50,9 +52,9 @@ const Login = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password"
-                        onChange={ props.handleChange }
+                        onChange={ (e) => setPassword(e.target.value) }
                         name="password"
-                        value={ props.password }
+                        value={ password }
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupSubmit">
@@ -74,26 +76,16 @@ const Login = (props) => {
 
 function msp(state) {
     const { 
-        username,
-        password,
         currentUserData
     } = state.user;
 
     return {
-        username,
-        password,
         currentUserData
     };
 };
 
 function mdp(dispatch) {
     return {
-        handleChange: (e) => {
-            dispatch({
-                type: "HANDLE_CHANGE",
-                payload: { [e.target.name]: e.target.value }
-            })
-        },
         setUser: (user) => {
             dispatch({ 
                 type: "SET_USER", 

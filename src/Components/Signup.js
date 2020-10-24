@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -8,15 +8,21 @@ import axios from 'axios';
 
 const Signup = (props) => {
 
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [email, setEmail] = useState("");
+
+
     const handleSignup = (event) => {
         event.preventDefault();
 
         const userParams = {
             "user": {
-                username: props.username,
-                password: props.password,
-                password_confirmation: props.password_confirmation,
-                email: props.email
+                username: username,
+                password: password,
+                password_confirmation: passwordConfirmation,
+                email: email
             }
         };
 
@@ -42,7 +48,7 @@ const Signup = (props) => {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username"
-                        onChange={ props.handleChange }
+                        onChange={ (e) => setUsername(e.target.value) }
                         name="username"
                     />
                 </Form.Group>
@@ -51,7 +57,7 @@ const Signup = (props) => {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter email" 
-                        onChange={ props.handleChange }
+                        onChange={ (e) => setEmail(e.target.value) }
                         name="email"
                     />
                 </Form.Group>
@@ -60,7 +66,7 @@ const Signup = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password" 
-                        onChange={ props.handleChange }
+                        onChange={(e) => setPassword(e.target.value) }
                         name="password"
                     />
                 </Form.Group>
@@ -69,7 +75,7 @@ const Signup = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password Confirmation"
-                        onChange={ props.handleChange }
+                        onChange={(e) => setPasswordConfirmation(e.target.value) }
                         name="password_confirmation" 
                     />
                 </Form.Group>
@@ -92,30 +98,16 @@ const Signup = (props) => {
 
 function msp(state) {
     const { 
-        username,
-        password,
-        password_confirmation,
-        email,
         currentUserData
     } = state.user;
 
     return {
-        username,
-        password,
-        password_confirmation,
-        email,
         currentUserData
     };
 };
 
 function mdp(dispatch) {
     return {
-        handleChange: (e) => {
-            dispatch({
-                type: "HANDLE_CHANGE",
-                payload: {[e.target.name]: e.target.value}
-            })
-        },
         setUser: (user) => {
             dispatch({
                 type: "SET_USER",

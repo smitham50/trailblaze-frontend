@@ -1,8 +1,4 @@
 const defaultState = {
-    username: "",
-    password: "",
-    password_confirmation: "",
-    email: "",
     currentUserData: {},
     latitude: null,
     longitude: null
@@ -10,12 +6,6 @@ const defaultState = {
 
 function userReducer(prevState = defaultState, action) {
     switch(action.type) {
-        case "HANDLE_CHANGE":
-            let fieldKey = Object.keys(action.payload)[0];
-            return {
-                ...prevState,
-                [fieldKey]: action.payload[fieldKey]
-            }
         case "SET_USER":
             return {
                 ...prevState,
@@ -24,10 +14,6 @@ function userReducer(prevState = defaultState, action) {
         case "CLEAR_USER":
             return {
                 ...prevState,
-                username: "",
-                password: "",
-                password_confirmation: "",
-                email: "",
                 latitude: "",
                 longitude: "",
                 currentUserData: {}
