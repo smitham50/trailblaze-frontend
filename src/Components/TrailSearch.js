@@ -32,6 +32,7 @@ class TrailSearch extends Component {
 
         axios(options)
             .then(resp => {
+                console.log("search results", resp.data.trails)
                 this.props.setTrails(resp.data.trails);
             });
     }

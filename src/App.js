@@ -71,11 +71,11 @@ class App extends Component {
               path='/trails/:slug'
               component={ TrailShow }
             />  
-            <Route path='/trails'>
-              <Trails></Trails>
-            </Route>
             <Route path='/myhikes'>
               <MyHikes></MyHikes>
+            </Route>
+            <Route path='/trails'>
+              <Trails></Trails>
             </Route>
           </Switch>
         </header>

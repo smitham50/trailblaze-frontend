@@ -37,6 +37,7 @@ class Trails extends Component {
     };
 
     render () {
+        console.log("rendered", this.props.trails)
         return (
             <div className="container-fluid d-flex trails-container">
                 { this.renderTrails() }
