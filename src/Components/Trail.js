@@ -4,22 +4,22 @@ import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 const Trail = (props) => { 
     return (
         <div className="trail">
-            <Card style={{ width: '40rem' }}>
+            <Card style={{ width: '25rem' }}>
                 <Card.Img variant="top" src={ props.image } />
                 <Card.Body>
                     <Card.Title>{ props.trailName }</Card.Title>
-                    <Card.Text>
+                    <Card.Text className="text-muted small">
                         { props.description }
                     </Card.Text>
                 </Card.Body>
-                <ListGroup className="list-group-flush">
-                    <ListGroupItem>Location: { props.location }</ListGroupItem>
-                    <ListGroupItem>Length: { props.length } miles</ListGroupItem>
-                    <ListGroupItem>Difficulty: { props.difficulty }</ListGroupItem>
+                <ListGroup className="list-group-flush small">
+                    <ListGroupItem className="text-muted small">Location: { props.location }</ListGroupItem>
+                    <ListGroupItem className="text-muted small">Length: { props.length } miles</ListGroupItem>
+                    <ListGroupItem className="text-muted small">Difficulty: { props.difficulty }</ListGroupItem>
                 </ListGroup>
-                <Card.Body>
-                    <Card.Link href={ `/trails/${encodeURIComponent(props.trailName)}` }>Take me here!</Card.Link>
-                </Card.Body>
+                <Card.Footer>
+                    <Card.Link className="small" href={ `/trails/${encodeURIComponent(props.trailName)}` }>Take me here!</Card.Link>
+                </Card.Footer>
             </Card>
         </div>
     );
