@@ -9,7 +9,8 @@ import Map from '../Components/Map';
 
 class TrailShow extends Component {
     state = {
-        trailAdded: false
+        flashMessage: false,
+        message: ""
     }
 
     componentDidMount() {
@@ -27,19 +28,26 @@ class TrailShow extends Component {
             trail_name: params.slug
         })
             .then(resp => {
-                // Flash message that trail was added to hikes.
-                // Should probably do this with a timeout and then set back to false
-                // so message is briefly rendered.
-                console.log(resp.data)
                 if (resp.data.status === 'success') {
                     this.setState({
-                        trailAdded: true
+                        flashMessage: true,
+                        message: `${resp.data.trail} added to hikes`
                     });
                 } else {
-                    console.log(resp.data.error);
+                    this.setState({
+                        flashMessage: true,
+                        message: `${resp.data.error}`
+                    })
                 }
                     
             });
+    };
+
+    unmountFlashMessage = () => {
+        this.setState({
+            flashMessage: false,
+            message: ""
+        });
     };
 
     render() {
@@ -50,6 +58,17 @@ class TrailShow extends Component {
                     <div className="container-fluid button-container">
                         <Button variant="link" href="/trails">Back to search</Button>
                         <Button onClick={ this.addTrailToHikes }>Add to my hikes</Button>
+                        {
+                            this.state.flashMessage
+                                ?
+                                    <FlashMessage 
+                                        unmount = { this.unmountFlashMessage }
+                                        message  = { this.state.message }
+                                    />
+                                :
+                                    <span/>
+                        }
+                        <FlashMessage delay={ 5000 } unmount={ this.unmountFlashMessage }>This is an alert</FlashMessage>
                     </div>
                     <Card style={{ width: '25rem' }}>
                         <Card.Img variant="top" src={ trail.imgMedium } />

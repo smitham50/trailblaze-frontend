@@ -7,7 +7,7 @@ const Trail = (props) => {
             <Card style={{ width: '25rem' }}>
                 <Card.Img variant="top" src={ props.image } />
                 <Card.Body>
-                    <Card.Title>{ props.trailName }</Card.Title>
+                    <Card.Title className="small">{ props.trailName }</Card.Title>
                     <Card.Text className="text-muted small">
                         { props.description }
                     </Card.Text>
