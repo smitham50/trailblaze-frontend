@@ -19,8 +19,8 @@ const Navigation = (props) => {
     };
 
     return (
-        <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/home">Trailblaze</Navbar.Brand>
+        <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar.Brand href="/home"><img src="Trail-blaze-intersection.jpg" width="30px" /> Trailblaze</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">

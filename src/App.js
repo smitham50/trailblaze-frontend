@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 // Styles
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Jumbotron } from 'react-bootstrap';
+import './App.css';
 import './Stylesheets/Signup.css';
 import './Stylesheets/TrailsContainer.css';
 import './Stylesheets/TrailShow.css';
@@ -45,7 +45,7 @@ class App extends Component {
         <header className="App-header">
           <Switch>
             <Route path='/home'>
-              <Jumbotron>
+              <Jumbotron className="jumbotron-mod">
                 <h1>Welcome to Trailblaze!</h1>
                 <p>
                   If you've ever spent hours researching hikes in range of you because there were too many options to choose from, this app is for you.

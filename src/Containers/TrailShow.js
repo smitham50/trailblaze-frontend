@@ -68,20 +68,19 @@ class TrailShow extends Component {
                                 :
                                     <span/>
                         }
-                        <FlashMessage delay={ 5000 } unmount={ this.unmountFlashMessage }>This is an alert</FlashMessage>
                     </div>
                     <Card style={{ width: '25rem' }}>
                         <Card.Img variant="top" src={ trail.imgMedium } />
                         <Card.Body>
-                            <Card.Title>{ trail.name }</Card.Title>
-                            <Card.Text>
+                            <Card.Title className="small">{ trail.name }</Card.Title>
+                            <Card.Text className="text-muted small">
                                 { trail.description }
                             </Card.Text>
                         </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroupItem>Location: { trail.location }</ListGroupItem>
-                            <ListGroupItem>Length: { trail.length } miles</ListGroupItem>
-                            <ListGroupItem>Difficulty: { trail.difficulty }</ListGroupItem>
+                        <ListGroup className="list-group-flush small">
+                            <ListGroupItem className="text-muted small">Location: { trail.location }</ListGroupItem>
+                            <ListGroupItem className="text-muted small">Length: { trail.length } miles</ListGroupItem>
+                            <ListGroupItem className="text-muted small">Difficulty: { trail.difficulty }</ListGroupItem>
                         </ListGroup>
                     </Card>
                     <Map></Map>
