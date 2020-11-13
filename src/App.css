@@ -4,7 +4,8 @@
 
 .App-header {
   background-color: #ffffff21;
-  min-height: 95vh;
+  margin-top: 4%;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,5 +17,9 @@
 .jumbotron-mod {
   background-color: #758ea9;
   color: white;
+}
+
+p {
+  font-size: .7em;
 }
 

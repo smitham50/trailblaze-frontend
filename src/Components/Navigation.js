@@ -19,7 +19,7 @@ const Navigation = (props) => {
     };
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
             <Navbar.Brand href="/home"><img src="Trail-blaze-intersection.jpg" width="30px" /> Trailblaze</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

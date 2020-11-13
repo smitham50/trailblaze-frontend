@@ -5,7 +5,7 @@ import axios from 'axios';
 
 // Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Jumbotron } from 'react-bootstrap';
+import { Jumbotron, Nav } from 'react-bootstrap';
 import './App.css';
 import './Stylesheets/Signup.css';
 import './Stylesheets/TrailsContainer.css';
@@ -46,12 +46,12 @@ class App extends Component {
           <Switch>
             <Route path='/home'>
               <Jumbotron className="jumbotron-mod">
-                <h1>Welcome to Trailblaze!</h1>
+                <h2>Welcome to Trailblaze!</h2>
                 <p>
-                  If you've ever spent hours researching hikes in range of you because there were too many options to choose from, this app is for you.
-                  Once you've made an account, tell us how far you're willing to travel and how many miles you want to hike and we'll give you ten options
-                  to choose from. Pick the one you like, get directions, and add the trail to your hiked trails so it doesn't show up the next time you search.
-                  Spend the time you would have spent on your computer in the woods.
+                  If you've ever spent hours researching hikes in range of you because there were too many choices, this app is for you.
+                  Tell us how far you're willing to travel and how many miles you want to hike and we'll give you ten options
+                  to choose from. Pick the one you like, get directions, and add it to your hiked trails.
+                  Get to the forest without a fuss.
                 </p>
                 <p>
                   Happy hiking!
@@ -79,6 +79,13 @@ class App extends Component {
             </Route>
           </Switch>
         </header>
+        <footer>
+          <p><strong>Copyright 2020 Trailblaze. All rights reserved.</strong></p>
+          <Nav className="justify-content-center" bg="dark" variant="dark">
+            <Nav.Link href="#">About</Nav.Link>
+            <Nav.Link href="#">Contact</Nav.Link>
+          </Nav>
+        </footer>
       </div>
     )
   }
