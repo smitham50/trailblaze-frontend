@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Trail from '../Components/Trail';
+import { connect } from 'react-redux';
 
 class MyHikes extends Component {
-    state = {
-        hikes: []
-    };
 
     componentDidMount() {
         axios.get('http://localhost:3000/api/v1/my_hikes')
             .then(resp => {
-                this.setState({
-                    hikes: resp.data.hikes
-                });
+                this.props.setHikes(resp.data.hikes);
             });
     };
 
     renderHikes = () => {
-        return this.state.hikes.map(hike => {
+        return this.props.hikes?.map(hike => {
             return <Trail
                         key={hike.id}
                         trailName={hike.name}
@@ -39,4 +35,25 @@ class MyHikes extends Component {
     };
 };
 
-export default MyHikes;
+function msp(state) {
+    const {
+        hikes
+    } = state.myHikes
+
+    return {
+        hikes
+    };
+};
+
+function mdp(dispatch) {
+    return {
+        setHikes: (hikes) => {
+            dispatch({
+                type: "SET_HIKES",
+                payload: hikes
+            })
+        }
+    }
+}
+
+export default connect(msp, mdp)(MyHikes);

@@ -5,3 +5,7 @@
 .trails-container .trail {
     margin: 2%;
 }
+
+.trails-container img {
+    max-height: 300px;
+}

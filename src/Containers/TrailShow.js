@@ -11,16 +11,32 @@ class TrailShow extends Component {
     state = {
         flashMessage: false,
         message: "",
-        alert: ""
+        alert: "",
+        inHikes: false
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        await axios.get('http://localhost:3000/api/v1/my_hikes')
+            .then(resp => {
+                this.props.setHikes(resp.data.hikes);
+            });
+
         const { match: { params } } = this.props;
+
         axios.get(`http://localhost:3000/api/v1/trails/${params.slug}`)
             .then(resp => {
-                this.props.setTrail(resp.data.trail);
+                const trail = resp.data.trail;
+                this.props.setTrail(trail);
+
+                if (this.props.hikes.find(hike => hike.id === trail.id)) {
+                    this.setState({
+                        inHikes: true
+                    });
+                }
             });
-    }
+
+        
+    };
 
     addTrailToHikes = () => {
         const { match: { params } } = this.props;
@@ -33,7 +49,8 @@ class TrailShow extends Component {
                     this.setState({
                         flashMessage: true,
                         message: `${resp.data.trail} added to hikes`,
-                        alert: "alert-success"
+                        alert: "alert-success",
+                        inHikes: true
                     });
                 } else {
                     this.setState({
@@ -43,6 +60,27 @@ class TrailShow extends Component {
                     })
                 }
                     
+            });
+    };
+
+    removeTrailFromHikes = () => {
+        axios.delete(`http://localhost:3000/api/v1/my_hikes/delete_hike/${this.props.trail.id}`)
+            .then(resp => {
+                if (!resp.data.error) {
+                    this.setState({
+                        inHikes: false,
+                        flashMessage: true,
+                        message: `${this.props.trail.name} removed from your hikes`,
+                        alert: "alert-success"
+                    })
+                } else {
+                    this.setState({
+                        flashMessage: true,
+                        message: `${resp.data.error}`,
+                        alert: "alert-danger"
+                    })
+                }
+                
             });
     };
 
@@ -61,6 +99,13 @@ class TrailShow extends Component {
                     <div className="container-fluid button-container">
                         <Button variant="link" href="/trails">Back to search</Button>
                         <Button onClick={ this.addTrailToHikes }>Add to my hikes</Button>
+                        {
+                            this.state.inHikes
+                                ?
+                                    <Button onClick={ this.removeTrailFromHikes }>Remove from hikes</Button>
+                                :
+                                    <span/>
+                        }
                         {
                             this.state.flashMessage
                                 ?
@@ -98,15 +143,20 @@ class TrailShow extends Component {
 function msp(state) {
     const {
         currentUserData
-    } = state.user
+    } = state.user;
 
     const {
         trail
     } = state.trailShow;
 
+    const {
+        hikes
+    } = state.myHikes;
+
     return {
         currentUserData,
-        trail
+        trail,
+        hikes
     };
 };
 
@@ -116,6 +166,12 @@ function mdp(dispatch) {
             dispatch({
                 type: "SET_TRAIL",
                 payload: trail
+            })
+        },
+        setHikes: (hikes) => {
+            dispatch({
+                type: "SET_HIKES",
+                payload: hikes
             })
         }
     };
