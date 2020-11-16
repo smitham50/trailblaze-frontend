@@ -10,7 +10,8 @@ import Map from '../Components/Map';
 class TrailShow extends Component {
     state = {
         flashMessage: false,
-        message: ""
+        message: "",
+        alert: ""
     }
 
     componentDidMount() {
@@ -31,12 +32,14 @@ class TrailShow extends Component {
                 if (resp.data.status === 'success') {
                     this.setState({
                         flashMessage: true,
-                        message: `${resp.data.trail} added to hikes`
+                        message: `${resp.data.trail} added to hikes`,
+                        alert: "alert-success"
                     });
                 } else {
                     this.setState({
                         flashMessage: true,
-                        message: `${resp.data.error}`
+                        message: `${resp.data.error}`,
+                        alert: "alert-danger"
                     })
                 }
                     
@@ -54,7 +57,7 @@ class TrailShow extends Component {
         const { trail } = this.props;
         return (
             trail ?
-                <div className="d-flex container-fluid">
+                <div className="d-flex container-fluid show-container">
                     <div className="container-fluid button-container">
                         <Button variant="link" href="/trails">Back to search</Button>
                         <Button onClick={ this.addTrailToHikes }>Add to my hikes</Button>
@@ -64,12 +67,13 @@ class TrailShow extends Component {
                                     <FlashMessage 
                                         unmount = { this.unmountFlashMessage }
                                         message  = { this.state.message }
+                                        alert = { this.state.alert }
                                     />
                                 :
                                     <span/>
                         }
                     </div>
-                    <Card style={{ width: '25rem' }}>
+                    <Card style={{ width: '25%' }}>
                         <Card.Img variant="top" src={ trail.imgMedium } />
                         <Card.Body>
                             <Card.Title className="small">{ trail.name }</Card.Title>

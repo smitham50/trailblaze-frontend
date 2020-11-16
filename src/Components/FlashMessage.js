@@ -23,7 +23,7 @@ class FlashMessage extends Component {
 
     render () {
         return (
-            <div className="container-fluid flash-message">
+            <div className={"container-fluid flash-message" && this.props.alert} >
                 <p className="small">{this.props.message}</p>
             </div>
         );
