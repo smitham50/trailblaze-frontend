@@ -43,34 +43,36 @@ class TrailSearch extends Component {
                 {
                     this.props.latitude && this.props.longitude
                         ?
-                        <Form onSubmit={ this.handleSearch } className="small">
-                            <Form.Label>How many miles are you willing to travel from your current location?</Form.Label>
+                        <Form onSubmit={ this.handleSearch }>
+                            <Form.Label className="headline">How many miles are you willing to travel from your current location?</Form.Label>
                             <Form.Group controlId="distance">
                                 <Form.Control
                                     as="select"
                                     name="distance"
                                     value={ this.props.distance }
                                     onChange={ this.props.handleChange }
+                                    className="subtext"
                                 >
                                     <option>60</option>
                                     <option>100</option>
                                     <option>150</option>
                                 </Form.Control>
                             </Form.Group>
-                            <Form.Label>How many miles do you want to hike?</Form.Label>
+                            <Form.Label className="headline">How many miles do you want to hike?</Form.Label>
                             <Form.Group controlId="mileage">
                                 <Form.Control
                                     as="select"
                                     name="mileage"
                                     value={ this.props.mileage }
                                     onChange={ this.props.handleChange }
+                                    className="subtext"
                                 >
                                     <option>Less than 3</option>
                                     <option>3 to 5</option>
                                     <option>6 to 9</option>
                                 </Form.Control>
                             </Form.Group>
-                            <Form.Group controlId="formGroupSubmit">
+                            <Form.Group controlId="formGroupSubmit" className="headline">
                                 <Button type="submit">Find Trails</Button>
                             </Form.Group>
                             {

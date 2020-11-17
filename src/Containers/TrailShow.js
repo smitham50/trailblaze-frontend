@@ -97,12 +97,12 @@ class TrailShow extends Component {
             trail ?
                 <div className="d-flex container-fluid show-container">
                     <div className="container-fluid button-container">
-                        <Button variant="link" href="/trails">Back to search</Button>
-                        <Button onClick={ this.addTrailToHikes }>Add to my hikes</Button>
+                        <Button variant="link" href="/trails" className="headline">Back to search</Button>
+                        <Button onClick={ this.addTrailToHikes } className="headline">Add to my hikes</Button>
                         {
                             this.state.inHikes
                                 ?
-                                    <Button onClick={ this.removeTrailFromHikes }>Remove from hikes</Button>
+                                    <Button onClick={ this.removeTrailFromHikes } className="headline">Remove from hikes</Button>
                                 :
                                     <span/>
                         }
@@ -113,6 +113,7 @@ class TrailShow extends Component {
                                         unmount = { this.unmountFlashMessage }
                                         message  = { this.state.message }
                                         alert = { this.state.alert }
+                                        className="subtext"
                                     />
                                 :
                                     <span/>
@@ -121,15 +122,15 @@ class TrailShow extends Component {
                     <Card style={{ width: '25%' }}>
                         <Card.Img variant="top" src={ trail.imgMedium } />
                         <Card.Body>
-                            <Card.Title className="small">{ trail.name }</Card.Title>
-                            <Card.Text className="text-muted small">
+                            <Card.Title className="headline">{ trail.name }</Card.Title>
+                            <Card.Text className="text-muted subtext">
                                 { trail.description }
                             </Card.Text>
                         </Card.Body>
-                        <ListGroup className="list-group-flush small">
-                            <ListGroupItem className="text-muted small">Location: { trail.location }</ListGroupItem>
-                            <ListGroupItem className="text-muted small">Length: { trail.length } miles</ListGroupItem>
-                            <ListGroupItem className="text-muted small">Difficulty: { trail.difficulty }</ListGroupItem>
+                        <ListGroup className="list-group-flush">
+                            <ListGroupItem className="text-muted subtext small">Location: { trail.location }</ListGroupItem>
+                            <ListGroupItem className="text-muted subtext small">Length: { trail.length } miles</ListGroupItem>
+                            <ListGroupItem className="text-muted subtext small">Difficulty: { trail.difficulty }</ListGroupItem>
                         </ListGroup>
                     </Card>
                     <Map></Map>
