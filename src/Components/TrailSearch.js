@@ -43,7 +43,7 @@ class TrailSearch extends Component {
                 {
                     this.props.latitude && this.props.longitude
                         ?
-                        <Form onSubmit={ this.handleSearch } >
+                        <Form onSubmit={ this.handleSearch } className="small">
                             <Form.Label>How many miles are you willing to travel from your current location?</Form.Label>
                             <Form.Group controlId="distance">
                                 <Form.Control

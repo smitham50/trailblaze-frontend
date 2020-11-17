@@ -42,47 +42,53 @@ const Signup = (props) => {
 
     return (
         <Fragment>
-            <Form onSubmit={ handleSignup }>
+            <Form onSubmit={ handleSignup } >
                 <Form.Group controlId="username">
-                    <Form.Label>Username</Form.Label>
+                    <Form.Label className="headline">Username</Form.Label>
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username"
                         onChange={ (e) => setUsername(e.target.value) }
                         name="username"
+                        className="subtext"
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label className="headline">Email address</Form.Label>
                     <Form.Control 
                         type="text" 
                         placeholder="Enter email" 
                         onChange={ (e) => setEmail(e.target.value) }
                         name="email"
+                        className="subtext"
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className="headline">Password</Form.Label>
                     <Form.Control 
                         type="password" 
                         placeholder="Password" 
                         onChange={(e) => setPassword(e.target.value) }
                         name="password"
+                        className="subtext"
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupPasswordConfirmation">
-                    <Form.Label>Password Confirmation</Form.Label>
+                    <Form.Label className="headline">Password Confirmation</Form.Label>
                     <Form.Control 
                         type="password" 
                         placeholder="Password Confirmation"
                         onChange={(e) => setPasswordConfirmation(e.target.value) }
                         name="password_confirmation" 
+                        className="subtext"
                     />
                 </Form.Group>
-                <Form.Group controlId="formGroupSubmit"> 
+                <Form.Group controlId="formGroupSubmit" className="small headline"> 
                     <Button type="submit">Submit</Button>
                 </Form.Group>
-                Already have an account?  <Link to="/login">Login</Link>
+                <Form.Group className="small subtext">
+                    Already have an account?  <Link to="/login">Login</Link>
+                </Form.Group>
             </Form>
             {
                 props.currentUserData && props.currentUserData.logged_in

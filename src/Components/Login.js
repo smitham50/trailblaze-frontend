@@ -37,30 +37,34 @@ const Login = (props) => {
     return (
         <Fragment>
             <Form onSubmit={ handleLogin }>
-                <Form.Group controlId="username" >
-                    <Form.Label>Username</Form.Label>
+                <Form.Group controlId="username">
+                    <Form.Label className="headline">Username</Form.Label>
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username" 
                         onChange={ (e) => setUsername(e.target.value) }
                         name="username"
                         value={ username }
+                        className="subtext"
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className="headline">Password</Form.Label>
                     <Form.Control 
                         type="password" 
                         placeholder="Password"
                         onChange={ (e) => setPassword(e.target.value) }
                         name="password"
                         value={ password }
+                        className="subtext"
                     />
                 </Form.Group>
-                <Form.Group controlId="formGroupSubmit">
+                <Form.Group controlId="formGroupSubmit" className="small headline">
                     <Button type="submit">Submit</Button>
                 </Form.Group>
-                Don't have an account?  <Link to="/signup">Signup</Link>
+                <Form.Group className="small subtext">
+                    Don't have an account?  <Link to="/signup">Signup</Link>
+                </Form.Group>
             </Form>
             {
                 props.currentUserData && props.currentUserData.logged_in
