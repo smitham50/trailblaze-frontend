@@ -28,7 +28,7 @@ class TrailShow extends Component {
                 const trail = resp.data.trail;
                 this.props.setTrail(trail);
 
-                if (this.props.hikes.find(hike => hike.id === trail.id)) {
+                if (!!this.props.hikes.find(hike => hike.id === trail.id)) {
                     this.setState({
                         inHikes: true
                     });
