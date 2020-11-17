@@ -20,7 +20,15 @@
 }
 
 .subtext {
-    font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.marginal {
+  margin: 2%;
+}
+
+.button-sized {
+  font-size: 1.2em;
 }
 
 .footer-copyright {

@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Jumbotron, Nav } from 'react-bootstrap';
 import './App.css';
 import './Stylesheets/Navbar.css';
+import './Stylesheets/ManageAccount.css';
 import './Stylesheets/Landing.css';
 import './Stylesheets/Signup.css';
 import './Stylesheets/TrailsContainer.css';
@@ -16,6 +17,9 @@ import './Stylesheets/TrailShow.css';
 // Components
 import Signup from './Components/Signup';
 import Login from './Components/Login';
+import UpdateAccount from './Components/UpdateAccount';
+import CancelAccount from './Components/CancelAccount';
+import ManageAccount from './Components/ManageAccount';
 import Navigation from './Components/Navigation';
 import Trails from './Containers/Trails';
 import TrailShow from './Containers/TrailShow';
@@ -65,6 +69,15 @@ class App extends Component {
             </Route>
             <Route path='/login'>
               <Login></Login>
+            </Route>
+            <Route path='/account'>
+              <ManageAccount></ManageAccount>
+            </Route>
+            <Route path='/update-account'>
+              <UpdateAccount></UpdateAccount>
+            </Route>
+            <Route path='/cancel-account'>
+              <CancelAccount></CancelAccount>
             </Route>
             <Route path='/trailsearch'>
               <TrailSearch></TrailSearch>

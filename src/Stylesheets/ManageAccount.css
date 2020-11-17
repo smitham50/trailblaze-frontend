@@ -1,0 +1,16 @@
+.link-icon {
+    display: block;
+}
+
+.manage-account {
+    justify-content: center;
+    align-items: center;
+}
+
+.manage-account a:link, a:visited {
+    color:  #1c1b1be1;
+}
+
+.manage-account a:hover {
+    color:  #7d7a7ae1;
+}
