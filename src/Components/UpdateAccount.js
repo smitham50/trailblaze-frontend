@@ -2,68 +2,92 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import FlashMessage from './FlashMessage';
 
 function UpdateAccount(props) {
+    const { user } = props.currentUserData;
     const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const [flashMessage, setFlashMessage] = useState(false);
+    const [alert, setAlert] = useState("");
+    const [message, setMessage] = useState("");
 
     const handleUpdate = (event) => {
         event.preventDefault();
 
         const userParams = {
             "user": {
-                username: username,
-                password: password,
-                email: email
+                username: username || user.username,
+                email: email || user.email
             }
         };
 
         const options = {
             method: 'patch',
-            url: 'http://localhost:3000/api/v1/update-account',
+            url: 'http://localhost:3000/api/v1/update_account',
             data: userParams
         };
 
         axios(options)
             .then(resp => {
-                console.log(resp);
+                if (!resp.data.error) {
+                    setFlashMessage(true);
+                    setMessage(resp.data.message);
+                    setAlert("alert-success");
+                } else {
+                    setFlashMessage(true);
+                    setMessage(resp.data.message);
+                    setAlert("alert-danger");
+                }
             });
     };
 
+    const handleOnChange = (e) => {
+        const targetName = e.target.name;
+        eval(`set${targetName}`)(e.target.value);
+    };
+
+    const unmountFlashMessage = () => {
+        setFlashMessage(false);
+        setMessage("");
+    };
+
     return (
-        <Form onSubmit={handleUpdate} >
+        <Form onSubmit={ handleUpdate } >
+            <Form.Group>
+                {
+                    flashMessage
+                        ?
+                        <FlashMessage
+                            unmount={unmountFlashMessage}
+                            message={message}
+                            alert={alert}
+                            className="subtext"
+                        />
+                        :
+                        <span />
+                }
+            </Form.Group>
             <Form.Group controlId="username">
-                <Form.Label className="headline">Username</Form.Label>
+                <Form.Label className="headline">Update username</Form.Label>
                 <Form.Control
                     type="text"
-                    placeholder="Enter username"
-                    onChange={ (e) => setUsername(e.target.value) }
-                    name="username"
+                    placeholder={ `${user?.username}` }
+                    onChange={ handleOnChange }
+                    name="Username"
                     className="subtext"
-                    value={username ? username : props.currentUserData?.name}
+                    value={ username }
                 />
             </Form.Group>
             <Form.Group controlId="formGroupEmail">
-                <Form.Label className="headline">Email address</Form.Label>
+                <Form.Label className="headline">Update email address</Form.Label>
                 <Form.Control
                     type="text"
-                    placeholder="Enter email"
-                    onChange={ (e) => setEmail(e.target.value) }
-                    name="email"
+                    placeholder={ `${user?.email}` }
+                    onChange={ handleOnChange }
+                    name="Email"
                     className="subtext"
-                    value={ email ? email : props.currentUserData?.email }
-                />
-            </Form.Group>
-            <Form.Group controlId="formGroupPassword">
-                <Form.Label className="headline">Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    onChange={ (e) => setPassword(e.target.value) }
-                    name="password"
-                    className="subtext"
-                    value={ password ? password : props.currentUserData?.password }
+                    value={ email }
                 />
             </Form.Group>
             <Form.Group controlId="formGroupSubmit" className="small headline">
@@ -74,9 +98,7 @@ function UpdateAccount(props) {
 };
 
 function msp(state) {
-    const {
-        currentUserData
-    } = state.user;
+    const { currentUserData } = state.user;
 
     return {
         currentUserData
