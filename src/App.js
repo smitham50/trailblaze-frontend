@@ -32,16 +32,14 @@ const App = (props) => {
 
   useEffect(async () => {
     if (localStorage.userId) {
-      await axios.get('http://localhost:3000/api/v1/logged_in', {withCredentials: true})
-        .then(resp => {
-          props.setLocation({
-            coords: {
-              latitude: localStorage.getItem('latitude'),
-              longitude: localStorage.getItem('longitude')
-            }
-          });
-          props.setUser(resp.data);
+      const resp = await axios.get('http://localhost:3000/api/v1/logged_in', {withCredentials: true});
+        props.setLocation({
+          coords: {
+            latitude: localStorage.getItem('latitude'),
+            longitude: localStorage.getItem('longitude')
+          }
         });
+        props.setUser(resp.data);
     }
     setCheckedLogin(true);
   }, []);
