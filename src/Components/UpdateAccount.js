@@ -12,6 +12,9 @@ function UpdateAccount(props) {
     const [alert, setAlert] = useState("");
     const [message, setMessage] = useState("");
 
+    window.setUsername = setUsername;
+    window.setEmail = setEmail;
+
     const handleUpdate = (event) => {
         event.preventDefault();
 
@@ -44,7 +47,9 @@ function UpdateAccount(props) {
 
     const handleOnChange = (e) => {
         const targetName = e.target.name;
-        eval(`set${targetName}`)(e.target.value);
+        const setFormState = window[`set${targetName}`];
+
+        setFormState(e.target.value);
     };
 
     const unmountFlashMessage = () => {

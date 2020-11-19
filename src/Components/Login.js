@@ -9,6 +9,9 @@ import getCoordinates from '../Scripts/getCoordinates';
 const Login = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    
+    window.setUsername = setUsername;
+    window.setPassword = setPassword;
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -34,6 +37,13 @@ const Login = (props) => {
             });
     };
 
+    const handleOnChange = (e) => {
+        const targetName = e.target.name;
+        const setFormState = window[`set${targetName}`];
+
+        setFormState(e.target.value);
+    };
+
     return (
         <Fragment>
             <Form onSubmit={ handleLogin }>
@@ -42,8 +52,8 @@ const Login = (props) => {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username" 
-                        onChange={ (e) => setUsername(e.target.value) }
-                        name="username"
+                        onChange={ handleOnChange }
+                        name="Username"
                         value={ username }
                         className="subtext"
                     />
@@ -53,8 +63,8 @@ const Login = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password"
-                        onChange={ (e) => setPassword(e.target.value) }
-                        name="password"
+                        onChange={ handleOnChange }
+                        name="Password"
                         value={ password }
                         className="subtext"
                     />

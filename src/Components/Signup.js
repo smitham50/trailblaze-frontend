@@ -13,6 +13,11 @@ const Signup = (props) => {
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [email, setEmail] = useState("");
 
+    window.setUsername = setUsername;
+    window.setPassword = setPassword;
+    window.setPasswordConfirmation = setPasswordConfirmation;
+    window.setEmail = setEmail;
+
 
     const handleSignup = (event) => {
         event.preventDefault();
@@ -40,6 +45,13 @@ const Signup = (props) => {
             });
     };
 
+    const handleOnChange = (e) => {
+        const targetName = e.target.name;
+        const setFormState = window[`set${targetName}`];
+
+        setFormState(e.target.value);
+    };
+
     return (
         <Fragment>
             <Form onSubmit={ handleSignup } >
@@ -48,8 +60,8 @@ const Signup = (props) => {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username"
-                        onChange={ (e) => setUsername(e.target.value) }
-                        name="username"
+                        onChange={ handleOnChange }
+                        name="Username"
                         className="subtext"
                     />
                 </Form.Group>
@@ -58,8 +70,8 @@ const Signup = (props) => {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter email" 
-                        onChange={ (e) => setEmail(e.target.value) }
-                        name="email"
+                        onChange={ handleOnChange }
+                        name="Email"
                         className="subtext"
                     />
                 </Form.Group>
@@ -68,8 +80,8 @@ const Signup = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password" 
-                        onChange={(e) => setPassword(e.target.value) }
-                        name="password"
+                        onChange={ handleOnChange }
+                        name="Password"
                         className="subtext"
                     />
                 </Form.Group>
@@ -78,8 +90,8 @@ const Signup = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password Confirmation"
-                        onChange={(e) => setPasswordConfirmation(e.target.value) }
-                        name="password_confirmation" 
+                        onChange={ handleOnChange }
+                        name="PasswordConfirmation" 
                         className="subtext"
                     />
                 </Form.Group>
@@ -93,9 +105,9 @@ const Signup = (props) => {
             {
                 props.currentUserData && props.currentUserData.logged_in
                     ?
-                    <Redirect to='/trailsearch' />
+                        <Redirect to='/trailsearch' />
                     :
-                    null
+                        null
             }
         </Fragment>
     );
