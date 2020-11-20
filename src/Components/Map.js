@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 
-class Map extends Component {
+class Map extends PureComponent {
 
     state = {
         center: {

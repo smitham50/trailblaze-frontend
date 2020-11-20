@@ -1,26 +1,31 @@
-import React from 'react';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Trail = (props) => { 
+    const [spans, setSpans] = useState(0);
+
+    const imageRef = useRef(null);
+
+    useEffect(() => {
+        imageRef.current.addEventListener("load", setRowSpans);
+    }, []);
+
+    const setRowSpans = () => {
+        const height = imageRef.current.clientHeight;
+        const rowSpan = Math.ceil(height / 10);
+        setSpans(rowSpan);
+    }
+
     return (
-        <div className="trail">
-            <Card style={{ width: '25rem' }}>
-                <Card.Img variant="top" src={ props.image } />
-                <Card.Body>
-                    <Card.Title className="small headline">{ props.trailName }</Card.Title>
-                    <Card.Text className="text-muted small subtext">
-                        { props.description }
-                    </Card.Text>
-                </Card.Body>
-                <ListGroup className="list-group-flush small">
-                    <ListGroupItem className="text-muted small subtext">Location: { props.location }</ListGroupItem>
-                    <ListGroupItem className="text-muted small subtext">Length: { props.length } miles</ListGroupItem>
-                    <ListGroupItem className="text-muted small subtext">Difficulty: { props.difficulty }</ListGroupItem>
-                </ListGroup>
-                <Card.Footer>
-                    <Card.Link className="small headline" href={ `/trails/${encodeURIComponent(props.trailName)}` }>Take me here!</Card.Link>
-                </Card.Footer>
-            </Card>
+        <div className="trail" style={{ gridRowEnd: `span ${spans}` }}>
+            <a href={`/trails/${encodeURIComponent(props.trailName)}`}>
+                <img src={ props.image } ref={ imageRef } />
+                <div className="trail-info">
+                    <p className="small headline">{ props.trailName }</p>
+                    <p className="small subtext">Location: { props.location }</p>
+                    <p className="small subtext">Length: { props.length } miles</p>
+                    <p className="small subtext">Difficulty: { props.difficulty }</p>
+                </div>
+            </a>  
         </div>
     );
 };

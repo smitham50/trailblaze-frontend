@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 
 class MyHikes extends Component {
 
-    componentDidMount() {
-        axios.get('http://localhost:3000/api/v1/my_hikes')
-            .then(resp => {
-                this.props.setHikes(resp.data.hikes);
-            });
+    async componentDidMount() {
+        const resp = await axios.get('http://localhost:3000/api/v1/my_hikes');
+        
+        this.props.setHikes(resp.data.hikes);
     };
 
     renderHikes = () => {

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Trail from '../Components/Trail';
 import axios from 'axios';
 
-class Trails extends Component {
+class Trails extends PureComponent {
 
     async componentDidMount() {
         if (!this.props.trails.length) {
@@ -20,14 +20,12 @@ class Trails extends Component {
         }
     };
 
-
     renderTrails = () => {
         return this.props.trails.map(trail => {
             return <Trail 
                         key = { trail.id }
                         trailName = { trail.name }
                         image = { trail.imgMedium }
-                        description = { trail.description }
                         length = { trail.length }
                         difficulty = { trail.difficulty }
                         location = { trail.location }
@@ -35,10 +33,9 @@ class Trails extends Component {
         });
     };
 
-    render () {
-        console.log("rendered", this.props.trails)
+    render() {
         return (
-            <div className="container-fluid d-flex trails-container">
+            <div className="trails-container">
                 { this.renderTrails() }
             </div>
         );

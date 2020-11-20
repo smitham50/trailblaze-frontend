@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -7,7 +7,7 @@ import FlashMessage from '../Components/FlashMessage';
 import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import Map from '../Components/Map';
 
-class TrailShow extends Component {
+class TrailShow extends PureComponent {
     state = {
         flashMessage: false,
         message: "",
