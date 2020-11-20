@@ -20,7 +20,7 @@ const Trail = (props) => {
             <a href={`/trails/${encodeURIComponent(props.trailName)}`}>
                 <img src={ props.image } ref={ imageRef } />
                 <div className="trail-info">
-                    <p className="small headline">{ props.trailName }</p>
+                    <p className="small headline"><strong>{props.trailName}</strong></p>
                     <p className="small subtext">Location: { props.location }</p>
                     <p className="small subtext">Length: { props.length } miles</p>
                     <p className="small subtext">Difficulty: { props.difficulty }</p>
