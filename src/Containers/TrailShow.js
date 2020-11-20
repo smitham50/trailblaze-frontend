@@ -34,54 +34,50 @@ class TrailShow extends Component {
                     });
                 }
             });
-
-        
     };
 
-    addTrailToHikes = () => {
+    addTrailToHikes = async () => {
         const { match: { params } } = this.props;
-        axios.post('http://localhost:3000/api/v1/my_hikes/add_hike', {
+        
+        const resp = await axios.post('http://localhost:3000/api/v1/my_hikes/add_hike', {
             user_id: this.props.currentUserData.user.id,
             trail_name: params.slug
-        })
-            .then(resp => {
-                if (resp.data.status === 'success') {
-                    this.setState({
-                        flashMessage: true,
-                        message: `${resp.data.trail} added to hikes`,
-                        alert: "alert-success",
-                        inHikes: true
-                    });
-                } else {
-                    this.setState({
-                        flashMessage: true,
-                        message: `${resp.data.error}`,
-                        alert: "alert-danger"
-                    })
-                }
-                    
+        });
+        
+        if (resp.data.status === 'success') {
+            this.setState({
+                flashMessage: true,
+                message: `${resp.data.trail} added to hikes`,
+                alert: "alert-success",
+                inHikes: true
             });
+        } else {
+            this.setState({
+                flashMessage: true,
+                message: `${resp.data.error}`,
+                alert: "alert-danger"
+            })
+        }
+            
     };
 
-    removeTrailFromHikes = () => {
-        axios.delete(`http://localhost:3000/api/v1/my_hikes/delete_hike/${this.props.trail.id}`)
-            .then(resp => {
-                if (!resp.data.error) {
-                    this.setState({
-                        inHikes: false,
-                        flashMessage: true,
-                        message: `${this.props.trail.name} removed from your hikes`,
-                        alert: "alert-success"
-                    })
-                } else {
-                    this.setState({
-                        flashMessage: true,
-                        message: `${resp.data.error}`,
-                        alert: "alert-danger"
-                    })
-                }
-                
-            });
+    removeTrailFromHikes = async () => {
+        const resp = await axios.delete(`http://localhost:3000/api/v1/my_hikes/delete_hike/${this.props.trail.id}`);
+        
+        if (!resp.data.error) {
+            this.setState({
+                inHikes: false,
+                flashMessage: true,
+                message: `${this.props.trail.name} removed from your hikes`,
+                alert: "alert-success"
+            })
+        } else {
+            this.setState({
+                flashMessage: true,
+                message: `${resp.data.error}`,
+                alert: "alert-danger"
+            })
+        }
     };
 
     unmountFlashMessage = () => {

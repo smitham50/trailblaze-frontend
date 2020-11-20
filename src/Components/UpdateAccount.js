@@ -15,7 +15,7 @@ function UpdateAccount(props) {
     window.setUsername = setUsername;
     window.setEmail = setEmail;
 
-    const handleUpdate = (event) => {
+    const handleUpdate = async (event) => {
         event.preventDefault();
 
         const userParams = {
@@ -31,18 +31,17 @@ function UpdateAccount(props) {
             data: userParams
         };
 
-        axios(options)
-            .then(resp => {
-                if (!resp.data.error) {
-                    setFlashMessage(true);
-                    setMessage(resp.data.message);
-                    setAlert("alert-success");
-                } else {
-                    setFlashMessage(true);
-                    setMessage(resp.data.message);
-                    setAlert("alert-danger");
-                }
-            });
+        const resp = await axios(options);
+
+        if (!resp.data.error) {
+            setFlashMessage(true);
+            setMessage(resp.data.message);
+            setAlert("alert-success");
+        } else {
+            setFlashMessage(true);
+            setMessage(resp.data.message);
+            setAlert("alert-danger");
+        }
     };
 
     const handleOnChange = (e) => {
@@ -63,14 +62,14 @@ function UpdateAccount(props) {
                 {
                     flashMessage
                         ?
-                        <FlashMessage
-                            unmount={unmountFlashMessage}
-                            message={message}
-                            alert={alert}
-                            className="subtext"
-                        />
+                            <FlashMessage
+                                unmount={unmountFlashMessage}
+                                message={message}
+                                alert={alert}
+                                className="subtext"
+                            />
                         :
-                        <span />
+                            <span />
                 }
             </Form.Group>
             <Form.Group controlId="username">

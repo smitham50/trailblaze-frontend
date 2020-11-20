@@ -5,17 +5,16 @@ import axios from 'axios';
 
 const Navigation = (props) => {
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         localStorage.clear();
 
-        axios.post('http://localhost:3000/api/v1/logout')
-            .then(resp => {
-                if (resp.errors) {
-                    alert(resp.errors);
-                } else {
-                    props.clearUser();
-                }
-            });
+        const resp = await axios.post('http://localhost:3000/api/v1/logout');
+
+        if (resp.errors) {
+            alert(resp.errors)
+        } else {
+            props.clearUser();
+        }
     };
 
     return (

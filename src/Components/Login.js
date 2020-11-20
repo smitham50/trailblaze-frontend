@@ -13,7 +13,7 @@ const Login = (props) => {
     window.setUsername = setUsername;
     window.setPassword = setPassword;
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
 
         const userParams = {
@@ -29,12 +29,15 @@ const Login = (props) => {
             data: userParams
         };
 
-        axios(options)
-            .then(resp => {
-                props.setUser(resp.data);
-                getCoordinates(props.setLocation);
-                localStorage.userId = resp.data.user.id;
-            });
+        const resp = await axios(options);
+
+        if (!resp.error) {
+            props.setUser(resp.data);
+            getCoordinates(props.setLocation);
+            localStorage.userId = resp.data.user.id;
+        } else {
+            //handle error
+        }
     };
 
     const handleOnChange = (e) => {

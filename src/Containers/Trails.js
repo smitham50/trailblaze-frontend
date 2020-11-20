@@ -5,7 +5,7 @@ import axios from 'axios';
 
 class Trails extends Component {
 
-    componentDidMount() {
+    async componentDidMount() {
         if (!this.props.trails.length) {
             const options = {
                 method: 'post',
@@ -13,13 +13,12 @@ class Trails extends Component {
                 data: { trail_ids: localStorage.trails.split(',').map(id => id) }
             };
 
-            axios(options)
-                .then(resp => {
-                    const trails = resp.data.trails;
-                    this.props.setTrails(trails);
-                });
+            const resp = await axios(options);
+            const trails = resp.data.trails;
+
+            this.props.setTrails(trails);
         }
-    }
+    };
 
 
     renderTrails = () => {
