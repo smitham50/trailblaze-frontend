@@ -14,20 +14,19 @@ class MyHikes extends Component {
     renderHikes = () => {
         return this.props.hikes?.map(hike => {
             return <Trail
-                        key={hike.id}
-                        trailName={hike.name}
-                        image={hike.imgMedium}
-                        description={hike.description}
-                        length={hike.length}
-                        difficulty={hike.difficulty}
-                        location={hike.location}
+                        key={ hike.id }
+                        trailName={ hike.name }
+                        image={ hike.imgMedium }
+                        length={ hike.length }
+                        difficulty={ hike.difficulty }
+                        location={ hike.location }
                     />;
         });
     };
 
     render() {
         return (
-            <div className="container-fluid d-flex trails-container">
+            <div className="trails-container">
                 { this.renderHikes() }
             </div>
         );
