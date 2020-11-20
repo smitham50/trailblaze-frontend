@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import React, { Fragment, useState } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
-
 import getCoordinates from '../Scripts/getCoordinates';
 import axios from 'axios';
 
@@ -19,7 +18,7 @@ const Signup = (props) => {
     window.setEmail = setEmail;
 
 
-    const handleSignup = async(event) => {
+    const handleSignup = async (event) => {
         event.preventDefault();
 
         const userParams = {

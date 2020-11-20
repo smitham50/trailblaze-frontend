@@ -3,7 +3,6 @@ import React, { Fragment, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-
 import getCoordinates from '../Scripts/getCoordinates';
 
 const Login = (props) => {

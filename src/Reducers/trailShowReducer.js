@@ -1,5 +1,5 @@
 const defaultState = {
-   trail: null
+    trail: null
 }
 
 function trailSearchReducer(prevState = defaultState, action) {

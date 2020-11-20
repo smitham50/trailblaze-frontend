@@ -1,47 +1,66 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button, Spinner } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-class TrailSearch extends Component {
+class TrailSearch extends PureComponent {
 
     componentDidUpdate(prevProps) {
-        if (this.props.latitude !== prevProps.latitude) {
+        const { latitude } = this.props;
+
+        if (latitude !== prevProps.latitude) {
             this.forceUpdate();
         }
     };
 
-    handleSearch = (e) => {
+    handleSearch = async (e) => {
         e.preventDefault();
+
+        const {
+            distance,
+            mileage,
+            latitude,
+            longitude,
+            setTrails
+        } = this.props;
+
         // Make proxy request to Hiking Project API through server to avoid CORS issue. 
         // Returns trails in specified distance from user's location.
-        const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${this.props.latitude}&lon=${this.props.longitude}&maxDistance=${this.props.distance}&maxResults=200&key=200492212-d7400571b0620563169df18724f8dc46`;
+        const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=${distance}&maxResults=200&key=200492212-d7400571b0620563169df18724f8dc46`;
 
         const options = {
             method: 'post',
             url: 'http://localhost:3000/api/v1/trails',
             data: {
                 url: queryURL,
-                distance: this.props.distance,
-                mileage: this.props.mileage,
-                latitude: this.props.latitude,
-                longitude: this.props.longitude
+                distance: distance,
+                mileage: mileage,
+                latitude: latitude,
+                longitude: longitude
             }
         };
 
-        axios(options)
-            .then(resp => {
-                console.log("search results", resp.data.trails)
-                this.props.setTrails(resp.data.trails);
-            });
-    }
+        const resp = await axios(options);
+        
+        setTrails(resp.data.trails);
+    };
 
     render() {
+
+        const {
+            latitude,
+            longitude,
+            distance,
+            handleChange,
+            mileage,
+            trails
+        } = this.props;
+
         return (
             <Fragment>
                 {
-                    this.props.latitude && this.props.longitude
+                    latitude && longitude
                         ?
                         <Form onSubmit={ this.handleSearch }>
                             <Form.Label className="headline">How many miles are you willing to travel from your current location?</Form.Label>
@@ -49,8 +68,8 @@ class TrailSearch extends Component {
                                 <Form.Control
                                     as="select"
                                     name="distance"
-                                    value={ this.props.distance }
-                                    onChange={ this.props.handleChange }
+                                    value={ distance }
+                                    onChange={ handleChange }
                                     className="subtext"
                                 >
                                     <option>60</option>
@@ -63,8 +82,8 @@ class TrailSearch extends Component {
                                 <Form.Control
                                     as="select"
                                     name="mileage"
-                                    value={ this.props.mileage }
-                                    onChange={ this.props.handleChange }
+                                    value={ mileage }
+                                    onChange={ handleChange }
                                     className="subtext"
                                 >
                                     <option>Less than 3</option>
@@ -76,7 +95,7 @@ class TrailSearch extends Component {
                                 <Button type="submit">Find Trails</Button>
                             </Form.Group>
                             {
-                                this.props.trails.length > 0
+                                trails.length > 0
                                     ?
                                     <Redirect to='/trails' />
                                     :
