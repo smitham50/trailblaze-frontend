@@ -1,5 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
 import Trail from '../Components/Trail';
 import axios from 'axios';
 
@@ -10,7 +11,7 @@ class Trails extends PureComponent {
             const options = {
                 method: 'post',
                 url: 'http://localhost:3000/api/v1/search_reload',
-                data: { trail_ids: localStorage.trails.split(',').map(id => id) }
+                data: { trail_ids: localStorage.trails?.split(',').map(id => id) }
             };
 
             const resp = await axios(options);
@@ -35,9 +36,19 @@ class Trails extends PureComponent {
 
     render() {
         return (
-            <div className="trails-container">
-                { this.renderTrails() }
-            </div>
+            <Fragment>
+                {
+                    this.props.trails.length > 0
+                        ?
+                            <div className="trails-container">
+                                { this.renderTrails() }
+                            </div>
+                        :
+                            <Spinner animation="border" role="status">
+                                <span className="sr-only">Searching for trails</span>
+                            </Spinner>
+                }
+            </Fragment>
         );
     };
 };

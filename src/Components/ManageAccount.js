@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Nav } from 'react-bootstrap';
+import CancelAccount from './CancelAccount';
 
 export default function ManageAccount(props) {
     return (

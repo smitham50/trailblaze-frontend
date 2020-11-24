@@ -6,23 +6,25 @@ import axios from 'axios';
 
 class TrailSearch extends PureComponent {
 
+    state = {
+        loaded: false,
+        loading: false
+    };
+
     componentDidUpdate(prevProps) {
         const { latitude } = this.props;
 
         if (latitude !== prevProps.latitude) {
+            this.associateUserTrails();
             this.forceUpdate();
         }
     };
 
-    handleSearch = async (e) => {
-        e.preventDefault();
-
+    associateUserTrails = async () => {
         const {
             distance,
-            mileage,
             latitude,
             longitude,
-            setTrails
         } = this.props;
 
         // Make proxy request to Hiking Project API through server to avoid CORS issue. 
@@ -31,9 +33,38 @@ class TrailSearch extends PureComponent {
 
         const options = {
             method: 'post',
-            url: 'http://localhost:3000/api/v1/trails',
+            url: 'http://localhost:3000/api/v1/trails/associate_trails',
             data: {
                 url: queryURL,
+            }
+        };
+
+        this.setState({ loading: true })
+
+        const resp = await axios(options);
+
+        if (resp.data.status === "Success") {
+            this.setState({ loading: false })
+        } else {
+            //handle error
+        }
+    };
+
+    handleSearch = async (e) => {
+        e.preventDefault();
+
+        const {
+            distance,
+            latitude,
+            longitude,
+            mileage,
+            setTrails
+        } = this.props;
+
+        const options = {
+            method: 'post',
+            url: 'http://localhost:3000/api/v1/trails/search',
+            data: {
                 distance: distance,
                 mileage: mileage,
                 latitude: latitude,
@@ -42,8 +73,10 @@ class TrailSearch extends PureComponent {
         };
 
         const resp = await axios(options);
-        
+
         setTrails(resp.data.trails);
+
+        this.setState({ loaded: true });
     };
 
     render() {
@@ -60,7 +93,7 @@ class TrailSearch extends PureComponent {
         return (
             <Fragment>
                 {
-                    latitude && longitude
+                    latitude && longitude && !this.state.loading
                         ?
                         <Form onSubmit={ this.handleSearch }>
                             <Form.Label className="headline">How many miles are you willing to travel from your current location?</Form.Label>
@@ -95,17 +128,19 @@ class TrailSearch extends PureComponent {
                                 <Button type="submit">Find Trails</Button>
                             </Form.Group>
                             {
-                                trails.length > 0
+                                this.state.loaded
                                     ?
-                                    <Redirect to='/trails' />
+                                        <Redirect to='/trails' />
                                     :
-                                    null
+                                        null
                             }
                         </Form>
                         :
-                        <Spinner animation="border" role="status">
-                            <span className="sr-only">Getting location...</span>
-                        </Spinner>
+                        <Fragment>
+                            <Spinner animation="border" role="status"></Spinner>
+                            <p className="headline">Processing location. This may take a minute...</p>
+                        </Fragment>
+                        
                 }
             </Fragment>
         );

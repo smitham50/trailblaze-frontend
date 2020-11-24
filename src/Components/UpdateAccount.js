@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import FlashMessage from './FlashMessage';
 
-function UpdateAccount(props) {
+const UpdateAccount = (props) => {
     const { user } = props.currentUserData;
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
