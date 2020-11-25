@@ -38,10 +38,12 @@ const Signup = (props) => {
 
         const resp = await axios(options);
 
-        if (!resp.error) {
-            props.setUser(resp.data);
+        const { error, data } = resp;
+
+        if (!error) {
+            props.setUser(data);
             getCoordinates(props.setLocation);
-            localStorage.userId = resp.data.user.id;
+            localStorage.userId = data.user.id;
         } else {
             //handle error
         }
@@ -63,6 +65,7 @@ const Signup = (props) => {
                         type="text" 
                         placeholder="Enter username"
                         onChange={ handleOnChange }
+                        value={ username }
                         name="Username"
                         className="subtext"
                     />
@@ -73,6 +76,7 @@ const Signup = (props) => {
                         type="text" 
                         placeholder="Enter email" 
                         onChange={ handleOnChange }
+                        value={ email }
                         name="Email"
                         className="subtext"
                     />
@@ -83,6 +87,7 @@ const Signup = (props) => {
                         type="password" 
                         placeholder="Password" 
                         onChange={ handleOnChange }
+                        value={ password }
                         name="Password"
                         className="subtext"
                     />
@@ -93,6 +98,7 @@ const Signup = (props) => {
                         type="password" 
                         placeholder="Password Confirmation"
                         onChange={ handleOnChange }
+                        value={ passwordConfirmation }
                         name="PasswordConfirmation" 
                         className="subtext"
                     />

@@ -43,7 +43,7 @@ const Login = (props) => {
         } else {
             setFlashMessage(true);
             setAlert("alert-danger");
-            setMessage(error)
+            setMessage(error);
         }
     };
 
@@ -68,10 +68,10 @@ const Login = (props) => {
                             unmount={ unmountFlashMessage }
                             message={ message }
                             alert={ alert }
-                            className = "subtext"
+                            className="subtext"
                         />
                     :
-                        <span/>    
+                        <span />
             }
             <Form onSubmit={ handleLogin }>
                 <Form.Group controlId="username">
