@@ -10,7 +10,6 @@ const Login = (props) => {
     const [flashMessage, setFlashMessage] = useState(false);
     const [alert, setAlert] = useState("");
     const [message, setMessage] = useState("")
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     
@@ -72,8 +71,7 @@ const Login = (props) => {
                             className = "subtext"
                         />
                     :
-                        <span/>
-                        
+                        <span/>    
             }
             <Form onSubmit={ handleLogin }>
                 <Form.Group controlId="username">

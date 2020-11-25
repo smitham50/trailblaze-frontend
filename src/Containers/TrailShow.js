@@ -21,14 +21,14 @@ class TrailShow extends PureComponent {
                 this.props.setHikes(resp.data.hikes);
             });
 
-        const { match: { params } } = this.props;
+        const { match: { params }, setTrail, hikes } = this.props;
 
         axios.get(`http://localhost:3000/api/v1/trails/${params.slug}`)
             .then(resp => {
                 const trail = resp.data.trail;
-                this.props.setTrail(trail);
+                setTrail(trail);
 
-                if (!!this.props.hikes.find(hike => hike.id === trail.id)) {
+                if (!!hikes.find(hike => hike.id === trail.id)) {
                     this.setState({
                         inHikes: true
                     });
@@ -37,24 +37,26 @@ class TrailShow extends PureComponent {
     };
 
     addTrailToHikes = async () => {
-        const { match: { params } } = this.props;
+        const { match: { params }, currentUserData } = this.props;
         
         const resp = await axios.post('http://localhost:3000/api/v1/my_hikes/add_hike', {
-            user_id: this.props.currentUserData.user.id,
+            user_id: currentUserData.user.id,
             trail_name: params.slug
         });
+
+        const { trail, error, status } = resp.data;
         
-        if (resp.data.status === 'success') {
+        if (status === 'success') {
             this.setState({
                 flashMessage: true,
-                message: `${resp.data.trail} added to hikes`,
+                message: `${trail} added to hikes`,
                 alert: "alert-success",
                 inHikes: true
             });
         } else {
             this.setState({
                 flashMessage: true,
-                message: `${resp.data.error}`,
+                message: `${error}`,
                 alert: "alert-danger"
             })
         }
@@ -63,18 +65,21 @@ class TrailShow extends PureComponent {
 
     removeTrailFromHikes = async () => {
         const resp = await axios.delete(`http://localhost:3000/api/v1/my_hikes/delete_hike/${this.props.trail.id}`);
+
+        const { error } = resp.data;
+        const { trail } = this.props;
         
-        if (!resp.data.error) {
+        if (!error) {
             this.setState({
                 inHikes: false,
                 flashMessage: true,
-                message: `${this.props.trail.name} removed from your hikes`,
+                message: `${trail.name} removed from your hikes`,
                 alert: "alert-success"
             })
         } else {
             this.setState({
                 flashMessage: true,
-                message: `${resp.data.error}`,
+                message: `${error}`,
                 alert: "alert-danger"
             })
         }
@@ -88,27 +93,31 @@ class TrailShow extends PureComponent {
     };
 
     render() {
+
         const { trail } = this.props;
+        const { message, alert, inHikes, flashMessage } = this.state;
+        const { addTrailToHikes, removeTrailFromHikes, unmountFlashMessage } = this;
+
         return (
             trail ?
                 <div className="d-flex container-fluid show-container">
                     <div className="container-fluid button-container">
                         <Button variant="link" href="/trails" className="headline">Back to search</Button>
-                        <Button onClick={ this.addTrailToHikes } className="headline">Add to my hikes</Button>
+                        <Button onClick={ addTrailToHikes } className="headline">Add to my hikes</Button>
                         {
-                            this.state.inHikes
+                            inHikes
                                 ?
-                                    <Button onClick={ this.removeTrailFromHikes } className="headline">Remove from hikes</Button>
+                                    <Button onClick={ removeTrailFromHikes } className="headline">Remove from hikes</Button>
                                 :
                                     <span/>
                         }
                         {
-                            this.state.flashMessage
+                            flashMessage
                                 ?
                                     <FlashMessage 
-                                        unmount = { this.unmountFlashMessage }
-                                        message  = { this.state.message }
-                                        alert = { this.state.alert }
+                                        unmount = { unmountFlashMessage }
+                                        message  = { message }
+                                        alert = { alert }
                                         className = "subtext"
                                     />
                                 :
