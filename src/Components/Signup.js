@@ -5,10 +5,14 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
 import { Link, Redirect } from 'react-router-dom';
 import getCoordinates from '../Scripts/getCoordinates';
+import FlashMessage from '../Components/FlashMessage';
 import axios from 'axios';
 
 const Signup = (props) => {
     const { handleSubmit, register, errors } = useForm();
+    const [flashMessage, setFlashMessage] = useState(false);
+    const [alert, setAlert] = useState("");
+    const [messages, setMessages] = useState([]);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -38,14 +42,17 @@ const Signup = (props) => {
 
         const resp = await axios(options);
 
-        const { error, data } = resp;
+        const { errors, user } = resp.data;
+        const { data } = resp;
 
-        if (!error) {
+        if (!errors) {
             props.setUser(data);
             getCoordinates(props.setLocation);
-            localStorage.userId = data.user.id;
+            localStorage.userId = user.id;
         } else {
-            //handle error
+            setMessages(errors);
+            setFlashMessage(true);
+            setAlert("alert-danger");
         }
     };
 
@@ -56,8 +63,31 @@ const Signup = (props) => {
         setFormState(e.target.value);
     };
 
+    const renderFlashMessages = () => {
+        return messages.map((message) => {
+            return <FlashMessage
+                unmount={unmountFlashMessage}
+                message={message}
+                alert={alert}
+                className="subtext"
+            />
+        })
+    }
+
+    const unmountFlashMessage = () => {
+        setFlashMessage(false);
+        setMessages([]);
+    };
+
     return (
         <Fragment>
+            {
+                flashMessage
+                    ?
+                        renderFlashMessages()
+                    :
+                        <span />
+            }
             <Form onSubmit={ handleSubmit(handleSignup) } >
                 <Form.Group controlId="username">
                     <Form.Label className="headline">Username</Form.Label>

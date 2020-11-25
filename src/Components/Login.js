@@ -12,7 +12,7 @@ const Login = (props) => {
     const { handleSubmit, register, errors } = useForm();
     const [flashMessage, setFlashMessage] = useState(false);
     const [alert, setAlert] = useState("");
-    const [message, setMessage] = useState("")
+    const [message, setMessage] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     
