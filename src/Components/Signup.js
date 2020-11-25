@@ -69,7 +69,7 @@ const Signup = (props) => {
                 unmount={unmountFlashMessage}
                 message={message}
                 alert={alert}
-                className="subtext"
+                className="subtext form-flash"
             />
         })
     }
@@ -81,14 +81,16 @@ const Signup = (props) => {
 
     return (
         <Fragment>
-            {
-                flashMessage
-                    ?
+            <div className="flash-container">
+                {
+                    flashMessage
+                        ?
                         renderFlashMessages()
-                    :
-                        <span />
-            }
-            <Form onSubmit={ handleSubmit(handleSignup) } >
+                        :
+                        <div className="form-flash"></div>
+                }
+            </div>
+            <Form onSubmit={ handleSubmit(handleSignup) }>
                 <Form.Group controlId="username">
                     <Form.Label className="headline">Username</Form.Label>
                     <Form.Control 

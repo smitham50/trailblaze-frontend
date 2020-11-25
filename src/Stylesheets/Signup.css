@@ -1,3 +1,11 @@
 form {
     width: 25%;
 }
+
+.flash-container {
+    position: relative;
+}
+
+.form-flash {
+    position: absolute;
+}

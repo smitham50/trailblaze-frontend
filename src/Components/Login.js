@@ -62,18 +62,20 @@ const Login = (props) => {
 
     return (
         <Fragment>
-            {
-                flashMessage
-                    ?
-                        <FlashMessage
-                            unmount={ unmountFlashMessage }
-                            message={ message }
-                            alert={ alert }
-                            className="subtext"
-                        />
-                    :
-                        <span />
-            }
+            <div className="flash-container">
+                {
+                    flashMessage
+                        ?
+                            <FlashMessage
+                                unmount={unmountFlashMessage}
+                                message={message}
+                                alert={alert}
+                                className="subtext form-flash"
+                            />
+                        :
+                            <div className="form-flash"></div>
+                }
+            </div>
             <Form onSubmit={ handleSubmit(handleLogin) }>
                 <Form.Group controlId="username">
                     <Form.Label className="headline">Username</Form.Label>
@@ -89,9 +91,9 @@ const Login = (props) => {
                         })}
                     />
                     <ErrorMessage
-                        errors={errors}
+                        errors={ errors }
                         name="Username"
-                        render={({ message }) => <p className="alert-danger flash-message subtext">{message}</p>}
+                        render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
@@ -108,9 +110,9 @@ const Login = (props) => {
                         })}
                     />
                     <ErrorMessage
-                        errors={errors}
+                        errors={ errors }
                         name="Password"
-                        render={({ message }) => <p className="alert-danger flash-message subtext">{message}</p>}
+                        render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupSubmit" className="small headline">
