@@ -109,7 +109,7 @@ class TrailShow extends PureComponent {
                                         unmount = { this.unmountFlashMessage }
                                         message  = { this.state.message }
                                         alert = { this.state.alert }
-                                        className="subtext"
+                                        className = "subtext"
                                     />
                                 :
                                     <span/>

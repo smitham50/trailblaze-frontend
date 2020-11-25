@@ -4,8 +4,13 @@ import { Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import getCoordinates from '../Scripts/getCoordinates';
+import FlashMessage from '../Components/FlashMessage';
 
 const Login = (props) => {
+    const [flashMessage, setFlashMessage] = useState(false);
+    const [alert, setAlert] = useState("");
+    const [message, setMessage] = useState("")
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     
@@ -30,12 +35,16 @@ const Login = (props) => {
 
         const resp = await axios(options);
 
-        if (!resp.error) {
+        const { error, user } = resp.data; 
+
+        if (!error) {
             props.setUser(resp.data);
             getCoordinates(props.setLocation);
-            localStorage.userId = resp.data.user.id;
+            localStorage.userId = user.id;
         } else {
-            //handle error
+            setFlashMessage(true);
+            setAlert("alert-danger");
+            setMessage(error)
         }
     };
 
@@ -46,8 +55,26 @@ const Login = (props) => {
         setFormState(e.target.value);
     };
 
+    const unmountFlashMessage = () => {
+        setFlashMessage(false);
+        setMessage("");
+    };
+
     return (
         <Fragment>
+            {
+                flashMessage
+                    ?
+                        <FlashMessage
+                            unmount={ unmountFlashMessage }
+                            message={ message }
+                            alert={ alert }
+                            className = "subtext"
+                        />
+                    :
+                        <span/>
+                        
+            }
             <Form onSubmit={ handleLogin }>
                 <Form.Group controlId="username">
                     <Form.Label className="headline">Username</Form.Label>
