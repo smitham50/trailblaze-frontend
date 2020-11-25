@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
 import React, { Fragment, useState } from "react";
 import { Form, Button } from 'react-bootstrap';
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from '@hookform/error-message';
 import { Link, Redirect } from 'react-router-dom';
 import getCoordinates from '../Scripts/getCoordinates';
 import axios from 'axios';
 
 const Signup = (props) => {
-
+    const { handleSubmit, register, errors } = useForm();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -18,9 +20,7 @@ const Signup = (props) => {
     window.setEmail = setEmail;
 
 
-    const handleSignup = async (event) => {
-        event.preventDefault();
-
+    const handleSignup = async () => {
         const userParams = {
             "user": {
                 username: username,
@@ -58,17 +58,25 @@ const Signup = (props) => {
 
     return (
         <Fragment>
-            <Form onSubmit={ handleSignup } >
+            <Form onSubmit={ handleSubmit(handleSignup) } >
                 <Form.Group controlId="username">
                     <Form.Label className="headline">Username</Form.Label>
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username"
                         onChange={ handleOnChange }
-                        value={ username }
+                        defaultValue={ username }
                         name="Username"
                         className="subtext"
+                        ref={register({
+                            required: "Username cannot be blank"
+                        })}
                     />
+                    <ErrorMessage
+                        errors={ errors }
+                        name="Username"
+                        render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
+                    /> 
                 </Form.Group>
                 <Form.Group controlId="formGroupEmail">
                     <Form.Label className="headline">Email address</Form.Label>
@@ -76,10 +84,22 @@ const Signup = (props) => {
                         type="text" 
                         placeholder="Enter email" 
                         onChange={ handleOnChange }
-                        value={ email }
+                        defaultValue={ email }
                         name="Email"
                         className="subtext"
+                        ref={register({
+                            required: "Email cannot be blank",
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Invalid email address"
+                            }
+                        })}
                     />
+                    <ErrorMessage
+                        errors={ errors }
+                        name="Email"
+                        render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
+                    /> 
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
                     <Form.Label className="headline">Password</Form.Label>
@@ -87,10 +107,22 @@ const Signup = (props) => {
                         type="password" 
                         placeholder="Password" 
                         onChange={ handleOnChange }
-                        value={ password }
+                        defaultValue={ password }
                         name="Password"
                         className="subtext"
+                        ref={register({
+                            required: "Password cannot be blank",
+                            pattern: {
+                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/,
+                                message: "Password must have at least 6 characters and contain at least one numeric digit, one uppercase and one lowercase letter"
+                            }
+                        })}
                     />
+                    <ErrorMessage
+                        errors={ errors }
+                        name="Password"
+                        render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
+                    /> 
                 </Form.Group>
                 <Form.Group controlId="formGroupPasswordConfirmation">
                     <Form.Label className="headline">Password Confirmation</Form.Label>
@@ -98,10 +130,19 @@ const Signup = (props) => {
                         type="password" 
                         placeholder="Password Confirmation"
                         onChange={ handleOnChange }
-                        value={ passwordConfirmation }
+                        defaultValue={ passwordConfirmation }
                         name="PasswordConfirmation" 
                         className="subtext"
+                        ref={register({
+                            required: "Password confirmation cannot be blank",
+                            validate: (value) => value === password || "Passwords must match"
+                        })}
                     />
+                    <ErrorMessage
+                        errors={ errors }
+                        name="PasswordConfirmation"
+                        render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
+                    /> 
                 </Form.Group>
                 <Form.Group controlId="formGroupSubmit" className="small headline"> 
                     <Button type="submit">Submit</Button>

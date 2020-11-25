@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import React, { Fragment, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from '@hookform/error-message';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import getCoordinates from '../Scripts/getCoordinates';
 import FlashMessage from '../Components/FlashMessage';
 
 const Login = (props) => {
+    const { handleSubmit, register, errors } = useForm();
     const [flashMessage, setFlashMessage] = useState(false);
     const [alert, setAlert] = useState("");
     const [message, setMessage] = useState("")
@@ -16,9 +19,7 @@ const Login = (props) => {
     window.setUsername = setUsername;
     window.setPassword = setPassword;
 
-    const handleLogin = async (event) => {
-        event.preventDefault();
-
+    const handleLogin = async () => {
         const userParams = {
             "user": {
                 username: username,
@@ -73,7 +74,7 @@ const Login = (props) => {
                     :
                         <span />
             }
-            <Form onSubmit={ handleLogin }>
+            <Form onSubmit={ handleSubmit(handleLogin) }>
                 <Form.Group controlId="username">
                     <Form.Label className="headline">Username</Form.Label>
                     <Form.Control 
@@ -81,8 +82,16 @@ const Login = (props) => {
                         placeholder="Enter username" 
                         onChange={ handleOnChange }
                         name="Username"
-                        value={ username }
+                        defaultValue={ username }
                         className="subtext"
+                        ref={register({
+                            required: "Username cannot be blank"
+                        })}
+                    />
+                    <ErrorMessage
+                        errors={errors}
+                        name="Username"
+                        render={({ message }) => <p className="alert-danger flash-message subtext">{message}</p>}
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
@@ -92,8 +101,16 @@ const Login = (props) => {
                         placeholder="Password"
                         onChange={ handleOnChange }
                         name="Password"
-                        value={ password }
+                        defaultValue={ password }
                         className="subtext"
+                        ref={register({
+                            required: "Password cannot be blank"
+                        })}
+                    />
+                    <ErrorMessage
+                        errors={errors}
+                        name="Password"
+                        render={({ message }) => <p className="alert-danger flash-message subtext">{message}</p>}
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupSubmit" className="small headline">
