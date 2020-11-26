@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
@@ -9,20 +9,23 @@ import FlashMessage from '../Components/FlashMessage';
 import axios from 'axios';
 
 const Signup = (props) => {
+    const {
+        currentUserData,
+        username,
+        password,
+        passwordConfirmation,
+        email,
+        messages,
+        alert,
+        flashMessage,
+        setUser,
+        setLocation,
+        setFlashMessage,
+        unmountFlashMessage,
+        handleChange
+    } = props;
+
     const { handleSubmit, register, errors } = useForm();
-    const [flashMessage, setFlashMessage] = useState(false);
-    const [alert, setAlert] = useState("");
-    const [messages, setMessages] = useState([]);
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const [email, setEmail] = useState("");
-
-    window.setUsername = setUsername;
-    window.setPassword = setPassword;
-    window.setPasswordConfirmation = setPasswordConfirmation;
-    window.setEmail = setEmail;
-
 
     const handleSignup = async () => {
         const userParams = {
@@ -46,38 +49,25 @@ const Signup = (props) => {
         const { data } = resp;
 
         if (!errors) {
-            props.setUser(data);
-            getCoordinates(props.setLocation);
+            setUser(data);
+            getCoordinates(setLocation);
             localStorage.userId = user.id;
         } else {
-            setMessages(errors);
-            setFlashMessage(true);
-            setAlert("alert-danger");
+            setFlashMessage(errors);
         }
-    };
-
-    const handleOnChange = (e) => {
-        const targetName = e.target.name;
-        const setFormState = window[`set${targetName}`];
-
-        setFormState(e.target.value);
     };
 
     const renderFlashMessages = () => {
         return messages.map((message) => {
             return <FlashMessage
-                unmount={unmountFlashMessage}
-                message={message}
-                alert={alert}
-                className="subtext form-flash"
-            />
+                        key={message[0]}
+                        unmount={unmountFlashMessage}
+                        message={message}
+                        alert={alert}
+                        className="subtext form-flash"
+                    />
         })
     }
-
-    const unmountFlashMessage = () => {
-        setFlashMessage(false);
-        setMessages([]);
-    };
 
     return (
         <Fragment>
@@ -85,9 +75,9 @@ const Signup = (props) => {
                 {
                     flashMessage
                         ?
-                        renderFlashMessages()
+                            renderFlashMessages()
                         :
-                        <div className="form-flash"></div>
+                            <div className="form-flash"></div>
                 }
             </div>
             <Form onSubmit={ handleSubmit(handleSignup) }>
@@ -96,9 +86,9 @@ const Signup = (props) => {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username"
-                        onChange={ handleOnChange }
+                        onChange={ handleChange }
                         defaultValue={ username }
-                        name="Username"
+                        name="username"
                         className="subtext"
                         ref={register({
                             required: "Username cannot be blank"
@@ -106,7 +96,7 @@ const Signup = (props) => {
                     />
                     <ErrorMessage
                         errors={ errors }
-                        name="Username"
+                        name="username"
                         render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
                     /> 
                 </Form.Group>
@@ -115,9 +105,9 @@ const Signup = (props) => {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter email" 
-                        onChange={ handleOnChange }
+                        onChange={ handleChange }
                         defaultValue={ email }
-                        name="Email"
+                        name="email"
                         className="subtext"
                         ref={register({
                             required: "Email cannot be blank",
@@ -129,7 +119,7 @@ const Signup = (props) => {
                     />
                     <ErrorMessage
                         errors={ errors }
-                        name="Email"
+                        name="email"
                         render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
                     /> 
                 </Form.Group>
@@ -138,9 +128,9 @@ const Signup = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password" 
-                        onChange={ handleOnChange }
+                        onChange={ handleChange }
                         defaultValue={ password }
-                        name="Password"
+                        name="password"
                         className="subtext"
                         ref={register({
                             required: "Password cannot be blank",
@@ -152,7 +142,7 @@ const Signup = (props) => {
                     />
                     <ErrorMessage
                         errors={ errors }
-                        name="Password"
+                        name="password"
                         render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
                     /> 
                 </Form.Group>
@@ -161,9 +151,9 @@ const Signup = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password Confirmation"
-                        onChange={ handleOnChange }
+                        onChange={ handleChange }
                         defaultValue={ passwordConfirmation }
-                        name="PasswordConfirmation" 
+                        name="passwordConfirmation" 
                         className="subtext"
                         ref={register({
                             required: "Password confirmation cannot be blank",
@@ -172,7 +162,7 @@ const Signup = (props) => {
                     />
                     <ErrorMessage
                         errors={ errors }
-                        name="PasswordConfirmation"
+                        name="passwordConfirmation"
                         render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
                     /> 
                 </Form.Group>
@@ -184,7 +174,7 @@ const Signup = (props) => {
                 </Form.Group>
             </Form>
             {
-                props.currentUserData && props.currentUserData.logged_in
+                currentUserData && currentUserData.logged_in
                     ?
                         <Redirect to='/trailsearch' />
                     :
@@ -200,8 +190,25 @@ function msp(state) {
         currentUserData
     } = state.user;
 
+    const {
+        username,
+        password,
+        passwordConfirmation,
+        email,
+        messages,
+        alert,
+        flashMessage
+    } = state.form;
+
     return {
-        currentUserData
+        currentUserData,
+        username,
+        password,
+        passwordConfirmation,
+        email,
+        messages,
+        alert,
+        flashMessage
     };
 };
 
@@ -217,6 +224,26 @@ function mdp(dispatch) {
             dispatch({
                 type: "SET_LOCATION",
                 payload: coords
+            })
+        },
+        setFlashMessage: (messages) => {
+            dispatch({
+                type: "SET_FLASH_MESSAGE",
+                payload: {
+                    alert: "alert-danger",
+                    messages: messages
+                }
+            })
+        },
+        unmountFlashMessage: () => {
+            dispatch({
+                type: "UNMOUNT_FLASH_MESSAGE"
+            })
+        },
+        handleChange: (e) => {
+            dispatch({
+                type: "HANDLE_CHANGE",
+                payload: { [e.target.name]: e.target.value }
             })
         }
     };

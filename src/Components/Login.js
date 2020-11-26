@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
@@ -9,15 +9,21 @@ import getCoordinates from '../Scripts/getCoordinates';
 import FlashMessage from '../Components/FlashMessage';
 
 const Login = (props) => {
+    const {
+        currentUserData,
+        username,
+        password,
+        messages,
+        alert,
+        flashMessage,
+        setUser,
+        setLocation,
+        setFlashMessage,
+        unmountFlashMessage,
+        handleChange
+    } = props;
+
     const { handleSubmit, register, errors } = useForm();
-    const [flashMessage, setFlashMessage] = useState(false);
-    const [alert, setAlert] = useState("");
-    const [message, setMessage] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    
-    window.setUsername = setUsername;
-    window.setPassword = setPassword;
 
     const handleLogin = async () => {
         const userParams = {
@@ -35,30 +41,29 @@ const Login = (props) => {
 
         const resp = await axios(options);
 
-        const { error, user } = resp.data; 
+        const { errors, user } = resp.data; 
+        const { data } = resp;
 
-        if (!error) {
-            props.setUser(resp.data);
-            getCoordinates(props.setLocation);
+        if (!errors) {
+            setUser(data);
+            getCoordinates(setLocation);
             localStorage.userId = user.id;
         } else {
-            setFlashMessage(true);
-            setAlert("alert-danger");
-            setMessage(error);
+            setFlashMessage(errors);
         }
     };
 
-    const handleOnChange = (e) => {
-        const targetName = e.target.name;
-        const setFormState = window[`set${targetName}`];
-
-        setFormState(e.target.value);
-    };
-
-    const unmountFlashMessage = () => {
-        setFlashMessage(false);
-        setMessage("");
-    };
+    const renderFlashMessages = () => {
+        return messages.map((message) => {
+            return <FlashMessage
+                        key={message[0]}
+                        unmount={unmountFlashMessage}
+                        message={message}
+                        alert={alert}
+                        className="subtext form-flash"
+                    />
+        })
+    }
 
     return (
         <Fragment>
@@ -66,12 +71,7 @@ const Login = (props) => {
                 {
                     flashMessage
                         ?
-                            <FlashMessage
-                                unmount={unmountFlashMessage}
-                                message={message}
-                                alert={alert}
-                                className="subtext form-flash"
-                            />
+                            renderFlashMessages()
                         :
                             <div className="form-flash"></div>
                 }
@@ -82,8 +82,8 @@ const Login = (props) => {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter username" 
-                        onChange={ handleOnChange }
-                        name="Username"
+                        onChange={ handleChange }
+                        name="username"
                         defaultValue={ username }
                         className="subtext"
                         ref={register({
@@ -92,7 +92,7 @@ const Login = (props) => {
                     />
                     <ErrorMessage
                         errors={ errors }
-                        name="Username"
+                        name="username"
                         render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
                     />
                 </Form.Group>
@@ -101,8 +101,8 @@ const Login = (props) => {
                     <Form.Control 
                         type="password" 
                         placeholder="Password"
-                        onChange={ handleOnChange }
-                        name="Password"
+                        onChange={ handleChange }
+                        name="password"
                         defaultValue={ password }
                         className="subtext"
                         ref={register({
@@ -111,7 +111,7 @@ const Login = (props) => {
                     />
                     <ErrorMessage
                         errors={ errors }
-                        name="Password"
+                        name="password"
                         render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
                     />
                 </Form.Group>
@@ -123,7 +123,7 @@ const Login = (props) => {
                 </Form.Group>
             </Form>
             {
-                props.currentUserData && props.currentUserData.logged_in
+                currentUserData && currentUserData.logged_in
                     ?
                         <Redirect to='/trailsearch' />
                     :
@@ -139,8 +139,21 @@ function msp(state) {
         currentUserData
     } = state.user;
 
+    const {
+        username,
+        password,
+        messages,
+        alert,
+        flashMessage
+    } = state.form;
+
     return {
-        currentUserData
+        currentUserData,
+        username,
+        password,
+        messages,
+        alert,
+        flashMessage
     };
 };
 
@@ -156,6 +169,26 @@ function mdp(dispatch) {
             dispatch({
                 type: "SET_LOCATION",
                 payload: coords
+            })
+        },
+        setFlashMessage: (messages) => {
+            dispatch({
+                type: "SET_FLASH_MESSAGE",
+                payload: {
+                    alert: "alert-danger",
+                    messages: messages
+                }
+            })
+        },
+        unmountFlashMessage: () => {
+            dispatch({
+                type: "UNMOUNT_FLASH_MESSAGE"
+            })
+        },
+        handleChange: (e) => {
+            dispatch({
+                type: "HANDLE_CHANGE",
+                payload: { [e.target.name]: e.target.value }
             })
         }
     };

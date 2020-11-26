@@ -13,12 +13,14 @@ import userReducer from './Reducers/userreducer';
 import trailSearchReducer from './Reducers/trailSearchReducer';
 import trailShowReducer from './Reducers/trailShowReducer';
 import myHikesReducer from './Reducers/myHikesReducer';
+import formReducer from './Reducers/formReducer';
 
 const rootReducer = combineReducers({ 
   user: userReducer, 
   trailSearch: trailSearchReducer,
   trailShow: trailShowReducer,
-  myHikes: myHikesReducer
+  myHikes: myHikesReducer,
+  form: formReducer
 });
 const store = createStore(rootReducer);
 
