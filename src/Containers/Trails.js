@@ -15,14 +15,18 @@ class Trails extends PureComponent {
             };
 
             const resp = await axios(options);
-            const trails = resp.data.trails;
 
-            this.props.setTrails(trails);
+            const { trails } = resp.data;
+            const { setTrails } = this.props;
+
+            setTrails(trails);
         }
     };
 
     renderTrails = () => {
-        return this.props.trails.map(trail => {
+        const { trails } = this.props;
+        
+        return trails.map(trail => {
             return <Trail 
                         key = { trail.id }
                         trailName = { trail.name }
@@ -35,13 +39,16 @@ class Trails extends PureComponent {
     };
 
     render() {
+        const { trails } = this.props;
+        const { renderTrails } = this;
+
         return (
             <Fragment>
                 {
-                    this.props.trails.length > 0
+                    trails.length
                         ?
                             <div className="trails-container">
-                                { this.renderTrails() }
+                                { renderTrails() }
                             </div>
                         :
                             <Spinner animation="border" role="status">

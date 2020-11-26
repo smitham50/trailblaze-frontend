@@ -136,7 +136,7 @@ const Signup = (props) => {
                             required: "Password cannot be blank",
                             pattern: {
                                 value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/,
-                                message: "Password must have at least 6 characters and contain at least one numeric digit, one uppercase and one lowercase letter"
+                                message: "Password must be between 6 and 20 characters and contain at least one numeric digit, one uppercase and one lowercase letter"
                             }
                         })}
                     />

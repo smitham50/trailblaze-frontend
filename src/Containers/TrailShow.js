@@ -9,9 +9,6 @@ import Map from '../Components/Map';
 
 class TrailShow extends PureComponent {
     state = {
-        flashMessage: false,
-        message: "",
-        alert: "",
         inHikes: false
     }
 
@@ -45,58 +42,67 @@ class TrailShow extends PureComponent {
         });
 
         const { trail, error, status } = resp.data;
+        const { setFlashMessage } = this.props;
         
         if (status === 'success') {
+            const alert = "alert-success";
+            const message = `${trail} added to hikes`;
+            
+            setFlashMessage([message], alert);
+            
             this.setState({
-                flashMessage: true,
-                message: `${trail} added to hikes`,
-                alert: "alert-success",
                 inHikes: true
             });
         } else {
-            this.setState({
-                flashMessage: true,
-                message: `${error}`,
-                alert: "alert-danger"
-            })
-        }
+            const alert = "alert-danger";
+            const message = `${error}`;
             
+            setFlashMessage([message], alert);
+        }
     };
 
     removeTrailFromHikes = async () => {
         const resp = await axios.delete(`http://localhost:3000/api/v1/my_hikes/delete_hike/${this.props.trail.id}`);
 
         const { error } = resp.data;
-        const { trail } = this.props;
+        const { trail, setFlashMessage } = this.props;
         
         if (!error) {
+            const alert = "alert-success";
+            const message = `${trail.name} removed from your hikes`;
+
+            setFlashMessage([message], alert);
+
             this.setState({
-                inHikes: false,
-                flashMessage: true,
-                message: `${trail.name} removed from your hikes`,
-                alert: "alert-success"
+                inHikes: false
             })
         } else {
-            this.setState({
-                flashMessage: true,
-                message: `${error}`,
-                alert: "alert-danger"
-            })
+            const alert = "alert-danger";
+            const message = `${error}`;
+
+            setFlashMessage([message], alert);
         }
     };
 
-    unmountFlashMessage = () => {
-        this.setState({
-            flashMessage: false,
-            message: ""
-        });
-    };
+    renderFlashMessage = () => {
+        const { messages, alert, unmountFlashMessage } = this.props;
+
+        return messages.map((message) => {
+            return <FlashMessage
+                        key={message[0]}
+                        unmount={unmountFlashMessage}
+                        message={message}
+                        alert={alert}
+                        className="subtext form-flash"
+                    />
+        })
+    }
 
     render() {
 
-        const { trail } = this.props;
-        const { message, alert, inHikes, flashMessage } = this.state;
-        const { addTrailToHikes, removeTrailFromHikes, unmountFlashMessage } = this;
+        const { trail, flashMessage } = this.props;
+        const { inHikes } = this.state;
+        const { addTrailToHikes, removeTrailFromHikes, renderFlashMessage } = this;
 
         return (
             trail ?
@@ -114,12 +120,7 @@ class TrailShow extends PureComponent {
                         {
                             flashMessage
                                 ?
-                                    <FlashMessage 
-                                        unmount = { unmountFlashMessage }
-                                        message  = { message }
-                                        alert = { alert }
-                                        className = "subtext"
-                                    />
+                                    renderFlashMessage()
                                 :
                                     <span/>
                         }
@@ -159,10 +160,19 @@ function msp(state) {
         hikes
     } = state.myHikes;
 
+    const {
+        messages,
+        alert,
+        flashMessage
+    } = state.form;
+
     return {
         currentUserData,
         trail,
-        hikes
+        hikes,
+        messages,
+        alert,
+        flashMessage
     };
 };
 
@@ -178,6 +188,20 @@ function mdp(dispatch) {
             dispatch({
                 type: "SET_HIKES",
                 payload: hikes
+            })
+        },
+        setFlashMessage: (messages, alert) => {
+            dispatch({
+                type: "SET_FLASH_MESSAGE",
+                payload: {
+                    alert: alert,
+                    messages: messages
+                }
+            })
+        },
+        unmountFlashMessage: () => {
+            dispatch({
+                type: "UNMOUNT_FLASH_MESSAGE"
             })
         }
     };
