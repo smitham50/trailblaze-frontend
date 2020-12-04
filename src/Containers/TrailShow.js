@@ -1,16 +1,17 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Trail from '../Components/Trail';
 
 //  Components
 import FlashMessage from '../Components/FlashMessage';
-import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Map from '../Components/Map';
 
 class TrailShow extends PureComponent {
     state = {
         inHikes: false
-    }
+    };
 
     async componentDidMount() {
         await axios.get('http://localhost:3000/api/v1/my_hikes')
@@ -106,40 +107,35 @@ class TrailShow extends PureComponent {
 
         return (
             trail ?
-                <div className="d-flex container-fluid show-container">
-                    <div className="container-fluid button-container">
+                <div className="trail-show-container">
+                    <div className="d-flex">
                         <Button variant="link" href="/trails" className="headline">Back to search</Button>
-                        <Button onClick={ addTrailToHikes } className="headline">Add to my hikes</Button>
                         {
                             inHikes
                                 ?
-                                    <Button onClick={ removeTrailFromHikes } className="headline">Remove from hikes</Button>
+                                <Button variant="link" onClick={removeTrailFromHikes} className="headline">Remove from hikes</Button>
                                 :
-                                    <span/>
+                                <Button variant="link" onClick={addTrailToHikes} className="headline">Add to my hikes</Button>
                         }
                         {
                             flashMessage
                                 ?
-                                    renderFlashMessage()
+                                renderFlashMessage()
                                 :
-                                    <span/>
+                                <span />
                         }
                     </div>
-                    <Card style={{ width: '25%' }}>
-                        <Card.Img variant="top" src={ trail.imgMedium } />
-                        <Card.Body>
-                            <Card.Title className="headline">{ trail.name }</Card.Title>
-                            <Card.Text className="text-muted subtext">
-                                { trail.description }
-                            </Card.Text>
-                        </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroupItem className="text-muted subtext small">Location: { trail.location }</ListGroupItem>
-                            <ListGroupItem className="text-muted subtext small">Length: { trail.length } miles</ListGroupItem>
-                            <ListGroupItem className="text-muted subtext small">Difficulty: { trail.difficulty }</ListGroupItem>
-                        </ListGroup>
-                    </Card>
-                    <Map></Map>
+                    <div className="info-container"> 
+                        <Trail
+                            key={trail.id}
+                            trailName={trail.name}
+                            image={trail.imgMedium}
+                            length={trail.length}
+                            difficulty={trail.difficulty}
+                            location={trail.location}
+                        />
+                        <Map></Map>
+                    </div>
                 </div>
             :
                 null

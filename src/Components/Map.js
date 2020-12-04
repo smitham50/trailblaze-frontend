@@ -11,16 +11,16 @@ class Map extends PureComponent {
         },
         zoom: 11,
         key: "AIzaSyCv - zuuvPCrmeI3pq2ohidCLBhgnRvW3N0",
-        directions: null
+        directions: null,
     };
 
     handleDirections = (google) => {
         const origin = { lat: parseFloat(localStorage.latitude), lng: parseFloat(localStorage.longitude) };
         const destination = { lat: this.state.center.lat, lng: this.state.center.lng };
 
-        let directionsService = new google.maps.DirectionsService()
-        let directionsDisplay = new google.maps.DirectionsRenderer()
-        directionsDisplay.setMap(google.map)
+        let directionsService = new google.maps.DirectionsService();
+        let directionsDisplay = new google.maps.DirectionsRenderer();
+        directionsDisplay.setMap(google.map);
 
         directionsService.route(
             {
@@ -29,8 +29,6 @@ class Map extends PureComponent {
                 destination: destination
             },
             (DirectionsResult, DirectionsStatus) => {
-                console.log('DirectionsResult', DirectionsResult)
-                console.log('DirectionsStatus', DirectionsStatus)
                 if (DirectionsStatus === 'OK') {
                     directionsDisplay.setDirections(DirectionsResult);
                 }
@@ -42,9 +40,8 @@ class Map extends PureComponent {
     
 
     render() {
-        console.log(this.state.directions)
         return (
-            <div style={{ height: '75vh', width: '65%' }}>
+            <div className="map" >
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: this.state.key }}
                     center={ this.state.center }

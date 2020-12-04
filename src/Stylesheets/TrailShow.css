@@ -1,17 +1,40 @@
-.button-container {
-    width: 10%;
-}
-
-button {
-    margin: 2%;
+.btn-link {
+    margin: .5%;
 }
 
 .flash-message {
-    margin-top: 5%;
     font-size: .6em;
     color: rgba(91, 87, 87, 0.544);
 }
 
-.show-container {
-    margin-top: 1%;
+.trail-show-container {
+    height: 70vh;
+    width: 100%;
 }
+
+.info-container {
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
+    padding-left: 1%;
+    padding-right: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 65vh;
+    justify-content: stretch;
+    width: 100%;
+}
+
+.info-container .trail {
+    flex: 0 1;
+}
+
+.info-container .trail img {
+    max-width: 475px;
+    height: 65vh;
+}
+
+.map {
+    flex: 1 1 300px;
+    height: 65vh;
+}
+

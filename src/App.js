@@ -51,7 +51,7 @@ const App = (props) => {
           ?
             <div className="wrapper">
               <Navigation></Navigation>
-              <header className="App-header">
+              <div className="App-header">
                 <Switch>
                   <Route path='/home'>
                     <Jumbotron className="jumbotron-mod">
@@ -93,7 +93,7 @@ const App = (props) => {
                     <Trails></Trails>
                   </Route>
                 </Switch>
-              </header>
+              </div>
               <footer className="subtext footer-copyright">
                 <p><strong>Copyright 2020 Trailblaze. All rights reserved.</strong></p>
                 <Nav className="justify-content-center footer-link" bg="dark" variant="dark">
