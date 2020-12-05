@@ -11,7 +11,7 @@ class Map extends PureComponent {
         },
         zoom: 11,
         key: "AIzaSyCv - zuuvPCrmeI3pq2ohidCLBhgnRvW3N0",
-        directions: null,
+        directions: null
     };
 
     handleDirections = (google) => {

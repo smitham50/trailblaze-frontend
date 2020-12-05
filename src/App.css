@@ -5,12 +5,13 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .App-header {
   background-color: #ffffff21;
-  margin-top: 4%;
-  padding: 2%;
+  margin-top: 6vh;
+  padding: 4vh;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
@@ -42,5 +43,6 @@
 
 .footer-link {
   font-family: 'Teko', sans-serif;
+  height: 100%;
 }
 
