@@ -8,7 +8,6 @@
 }
 
 .trail-show-container {
-    height: 70vh;
     width: 100%;
 }
 
@@ -17,22 +16,15 @@
     padding-right: 1%;
     display: flex;
     flex-wrap: wrap;
-    height: 65vh;
-    justify-content: stretch;
     width: 100%;
 }
 
 .info-container .trail {
-    flex: 0 1;
-}
-
-.info-container .trail img {
-    max-width: 475px;
-    height: 65vh;
+    flex: 0 450px;
 }
 
 .map {
-    flex: 1 1 300px;
+    flex: 1 1 450px;
     height: 65vh;
 }
 

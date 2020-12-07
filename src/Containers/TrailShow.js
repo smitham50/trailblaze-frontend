@@ -5,7 +5,7 @@ import Trail from '../Components/Trail';
 
 //  Components
 import FlashMessage from '../Components/FlashMessage';
-import { Button } from 'react-bootstrap';
+import { Button, Figure } from 'react-bootstrap';
 import Map from '../Components/Map';
 
 class TrailShow extends PureComponent {
@@ -125,15 +125,16 @@ class TrailShow extends PureComponent {
                                 <span />
                         }
                     </div>
-                    <div className="info-container"> 
-                        <Trail
-                            key={trail.id}
-                            trailName={trail.name}
-                            image={trail.imgMedium}
-                            length={trail.length}
-                            difficulty={trail.difficulty}
-                            location={trail.location}
-                        />
+                    <div className="info-container">
+                        <Figure className="trail">
+                            <Figure.Image
+                                src={trail.imgMedium}
+                            />
+                            <Figure.Caption className="headline">{trail.name}</Figure.Caption>
+                            <Figure.Caption className="subtext small">Length: {trail.length} miles</Figure.Caption>
+                            <Figure.Caption className="subtext small">Difficulty: {trail.difficulty}</Figure.Caption>
+                            <Figure.Caption className="subtext small">Location: {trail.location}</Figure.Caption>
+                        </Figure>
                         <Map></Map>
                     </div>
                 </div>
