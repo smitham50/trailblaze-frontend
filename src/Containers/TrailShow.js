@@ -108,7 +108,7 @@ class TrailShow extends PureComponent {
         return (
             trail ?
                 <div className="trail-show-container">
-                    <div className="d-flex">
+                    <div className="d-flex button-container">
                         <Button variant="link" href="/trails" className="headline">Back to search</Button>
                         {
                             inHikes

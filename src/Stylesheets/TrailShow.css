@@ -4,11 +4,20 @@
 
 .flash-message {
     font-size: .6em;
+    display: block;
     color: rgba(91, 87, 87, 0.544);
+}
+
+.alert {
+    margin: 0;
 }
 
 .trail-show-container {
     width: 100%;
+}
+
+.trail-show-container .button-container {
+    margin-bottom: 1vh;
 }
 
 .info-container {
@@ -18,10 +27,6 @@
     flex-wrap: wrap;
     width: 100%;
 }
-
-/* .info-container > * {
-    flex: 1 1 450px;
-} */
 
 .info-container .trail {
     flex: 0 450px;
