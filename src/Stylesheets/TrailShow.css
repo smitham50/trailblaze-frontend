@@ -19,12 +19,20 @@
     width: 100%;
 }
 
+/* .info-container > * {
+    flex: 1 1 450px;
+} */
+
 .info-container .trail {
     flex: 0 450px;
 }
 
+.info-container .trail img {
+    max-height: 45vh;
+}
+
 .map {
-    flex: 1 1 450px;
     height: 65vh;
+    flex: 1 1 450px;
 }
 
