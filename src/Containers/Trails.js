@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { Spinner } from 'react-bootstrap';
 import Trail from '../Components/Trail';
 import axios from 'axios';
@@ -18,7 +19,7 @@ class Trails extends PureComponent {
 
             const { trails } = resp.data;
             const { setTrails } = this.props;
-
+            
             setTrails(trails);
         }
     };
@@ -39,8 +40,10 @@ class Trails extends PureComponent {
     };
 
     render() {
-        const { trails } = this.props;
+        const { trails, setPreviousPage, location } = this.props;
         const { renderTrails } = this;
+
+        setPreviousPage(location);
 
         return (
             <Fragment>
@@ -85,8 +88,14 @@ function mdp(dispatch) {
                 type: "SET_TRAILS",
                 payload: trails
             })
+        },
+        setPreviousPage: (location) => {
+            dispatch({
+                type: "SET_PREVIOUS_PAGE",
+                payload: location
+            })
         }
     }
 }
 
-export default connect(msp, mdp)(Trails);
+export default withRouter(connect(msp, mdp)(Trails));

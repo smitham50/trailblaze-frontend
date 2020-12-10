@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Trail from '../Components/Trail';
 
 //  Components
 import FlashMessage from '../Components/FlashMessage';
 import { Button, Figure } from 'react-bootstrap';
 import Map from '../Components/Map';
+import { withRouter } from 'react-router';
 
 class TrailShow extends PureComponent {
     state = {
@@ -99,9 +100,13 @@ class TrailShow extends PureComponent {
         })
     }
 
+    backToPreviousPage = () => {
+
+    };
+
     render() {
 
-        const { trail, flashMessage } = this.props;
+        const { trail, flashMessage, fromSearchPage } = this.props;
         const { inHikes } = this.state;
         const { addTrailToHikes, removeTrailFromHikes, renderFlashMessage } = this;
 
@@ -109,7 +114,13 @@ class TrailShow extends PureComponent {
             trail ?
                 <div className="trail-show-container">
                     <div className="d-flex button-container">
-                        <Button variant="link" href="/trails" className="headline">Back to search</Button>
+                        {
+                            fromSearchPage
+                                ?
+                                <Button variant="link" className="headline"><Link to={"/trails"}>Back to search</Link></Button>
+                                :
+                                <Button variant="link" className="headline"><Link to={"/myhikes"}>Back to hikes</Link></Button>
+                        }           
                         {
                             inHikes
                                 ?
@@ -150,7 +161,8 @@ function msp(state) {
     } = state.user;
 
     const {
-        trail
+        trail,
+        fromSearchPage
     } = state.trailShow;
 
     const {
@@ -169,7 +181,8 @@ function msp(state) {
         hikes,
         messages,
         alert,
-        flashMessage
+        flashMessage,
+        fromSearchPage
     };
 };
 
@@ -204,4 +217,4 @@ function mdp(dispatch) {
     };
 };
 
-export default connect(msp, mdp)(TrailShow); 
+export default withRouter(connect(msp, mdp)(TrailShow)); 

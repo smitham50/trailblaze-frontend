@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Trail from '../Components/Trail';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 class MyHikes extends Component {
 
     async componentDidMount() {
+        const { setHikes } = this.props;
         const resp = await axios.get('http://localhost:3000/api/v1/my_hikes');
         
-        this.props.setHikes(resp.data.hikes);
+        setHikes(resp.data.hikes);
     };
 
     renderHikes = () => {
@@ -25,6 +27,10 @@ class MyHikes extends Component {
     };
 
     render() {
+        const { setPreviousPage, location } = this.props;
+
+        setPreviousPage(location);
+
         return (
             <div className="trails-container">
                 { this.renderHikes() }
@@ -50,8 +56,14 @@ function mdp(dispatch) {
                 type: "SET_HIKES",
                 payload: hikes
             })
+        },
+        setPreviousPage: (location) => {
+            dispatch({
+                type: "SET_PREVIOUS_PAGE",
+                payload: location
+            })
         }
     }
 }
 
-export default connect(msp, mdp)(MyHikes);
+export default withRouter(connect(msp, mdp)(MyHikes));

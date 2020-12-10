@@ -8,16 +8,19 @@
     color: rgba(91, 87, 87, 0.544);
 }
 
-.alert {
-    margin: 0;
-}
-
 .trail-show-container {
     width: 100%;
 }
 
 .trail-show-container .button-container {
     margin-bottom: 1vh;
+}
+
+.trail-show-container .button-container > * {
+    margin-left: .5%;
+    margin-right: .5%;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .info-container {

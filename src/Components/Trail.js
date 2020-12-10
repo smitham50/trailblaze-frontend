@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const Trail = (props) => { 
     const [spans, setSpans] = useState(0);
@@ -17,7 +18,7 @@ const Trail = (props) => {
 
     return (
         <div className="trail" style={{ gridRowEnd: `span ${spans}` }}>
-            <a href={`/trails/${encodeURIComponent(props.trailName)}`}>
+            <Link to={`/trails/${encodeURIComponent(props.trailName)}`} >
                 <img src={ props.image } ref={ imageRef } />
                 <div className="trail-info">
                     <p className="small headline"><strong>{props.trailName}</strong></p>
@@ -25,7 +26,7 @@ const Trail = (props) => {
                     <p className="small subtext">Length: { props.length } miles</p>
                     <p className="small subtext">Difficulty: { props.difficulty }</p>
                 </div>
-            </a>  
+            </Link>
         </div>
     );
 };
