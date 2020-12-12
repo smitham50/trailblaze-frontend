@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import axios from 'axios';
 
-export default function CancelAccount(props) {
+const CancelAccountModal = (props) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -12,10 +11,9 @@ export default function CancelAccount(props) {
         handleShow();
     }, []);
 
-    const handleCancelAccount = async () => {
-        const resp = await axios.delete(`http://localhost:3000/api/v1/cancel_account`);
-
-        // if ()
+    const onClick = () => {
+        props.handleCancelAccount()
+        handleClose()
     }
 
     return (
@@ -24,12 +22,12 @@ export default function CancelAccount(props) {
                 <Modal.Header closeButton>
                     <Modal.Title>Cancel Account</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure you want to cancel your account?</Modal.Body>
+                <Modal.Body className="subtext">{ props.message }</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={ handleClose }>
+                    <Button variant="secondary" className="headline" onClick={ handleClose }>
                         No
-                    </Button>
-                    <Button variant="primary" onClick={ handleCancelAccount && handleClose }>
+                        </Button>
+                    <Button variant="primary" className="headline" onClick={ onClick }>
                         Yes
                     </Button>
                 </Modal.Footer>
@@ -37,3 +35,5 @@ export default function CancelAccount(props) {
         </Fragment>
     );
 };
+
+export default CancelAccountModal;

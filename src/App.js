@@ -18,7 +18,6 @@ import './Stylesheets/TrailShow.css';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
 import UpdateAccount from './Components/UpdateAccount';
-import CancelAccount from './Components/CancelAccount';
 import ManageAccount from './Components/ManageAccount';
 import Navigation from './Components/Navigation';
 import Trails from './Containers/Trails';
@@ -75,9 +74,6 @@ const App = (props) => {
                   </Route>
                   <Route path='/update-account'>
                     <UpdateAccount></UpdateAccount>
-                  </Route>
-                  <Route path='/cancel-account'>
-                    <CancelAccount></CancelAccount>
                   </Route>
                   <Route path='/trailsearch'>
                     <TrailSearch></TrailSearch>

@@ -19,7 +19,7 @@ const Trail = (props) => {
     return (
         <div className="trail" style={{ gridRowEnd: `span ${spans}` }}>
             <Link to={`/trails/${encodeURIComponent(props.trailName)}`} >
-                <img src={ props.image } ref={ imageRef } />
+                <img src={ props.image } ref={ imageRef } alt={props.trailName} />
                 <div className="trail-info">
                     <p className="small headline"><strong>{props.trailName}</strong></p>
                     <p className="small subtext">Location: { props.location }</p>
