@@ -32,7 +32,7 @@ axios.defaults.withCredentials = true;
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router basename='/trailblaze-frontend'>
+      <Router>
           <App />
       </Router>
     </Provider>
