@@ -20,7 +20,7 @@ const Navigation = (props) => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="navbar-mod">
             <Navbar.Brand href="/">
-                <img src="/Trail-blaze-intersection.jpg" alt="brand" width="30px" height="30px" loading="lazy" /> Trailblaze
+                <img src={process.env.PUBLIC_URL + "/Trail-blaze-intersection.jpg"} alt="brand" width="30px" height="30px" loading="lazy" /> Trailblaze
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

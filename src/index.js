@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 
@@ -33,9 +33,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router basename={process.env.PUBLIC_URL}>
-        <Route path='/'>
           <App/>
-        </Route>
       </Router>
     </Provider>
   </React.StrictMode>,
