@@ -48,6 +48,8 @@ const App = (props) => {
     setCheckedLogin(true);
   }, []);
 
+  console.log(process.env.PUBLIC_URL)
+
   return (
     <div className="App">
       {
@@ -56,7 +58,7 @@ const App = (props) => {
             <div className="wrapper">
               <Navigation></Navigation>
               <div className="App-header">
-              <Router basename={process.env.PUBLIC_URL}>
+              <Router basename='/trailblaze-frontend'>
                   <Switch>
                     <Route exact path='/'>
                       <Jumbotron className="jumbotron-mod">
