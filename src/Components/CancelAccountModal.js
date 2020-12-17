@@ -12,9 +12,9 @@ const CancelAccountModal = (props) => {
     }, []);
 
     const onClick = () => {
-        props.handleCancelAccount()
-        handleClose()
-    }
+        props.handleCancelAccount();
+        handleClose();
+    };
 
     return (
         <Fragment>

@@ -11,7 +11,7 @@ class Trails extends PureComponent {
         if (!this.props.trails.length) {
             const options = {
                 method: 'post',
-                url: 'http://localhost:3000/api/v1/search_reload',
+                url: 'https://nameless-wave-57808.herokuapp.com/api/v1/search_reload',
                 data: { trail_ids: localStorage.trails?.split(',').map(id => id) }
             };
 

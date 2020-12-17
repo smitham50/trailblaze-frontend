@@ -15,14 +15,14 @@ class TrailShow extends PureComponent {
     };
 
     async componentDidMount() {
-        await axios.get('http://localhost:3000/api/v1/my_hikes')
+        await axios.get('https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes')
             .then(resp => {
                 this.props.setHikes(resp.data.hikes);
             });
 
         const { match: { params }, setTrail, hikes } = this.props;
 
-        axios.get(`http://localhost:3000/api/v1/trails/${params.slug}`)
+        axios.get(`https://nameless-wave-57808.herokuapp.com/api/v1/trails/${params.slug}`)
             .then(resp => {
                 const trail = resp.data.trail;
                 setTrail(trail);
@@ -38,7 +38,7 @@ class TrailShow extends PureComponent {
     addTrailToHikes = async () => {
         const { match: { params }, currentUserData } = this.props;
         
-        const resp = await axios.post('http://localhost:3000/api/v1/my_hikes/add_hike', {
+        const resp = await axios.post('https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes/add_hike', {
             user_id: currentUserData.user.id,
             trail_name: params.slug
         });
@@ -64,7 +64,7 @@ class TrailShow extends PureComponent {
     };
 
     removeTrailFromHikes = async () => {
-        const resp = await axios.delete(`http://localhost:3000/api/v1/my_hikes/delete_hike/${this.props.trail.id}`);
+        const resp = await axios.delete(`https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes/delete_hike/${this.props.trail.id}`);
 
         const { error } = resp.data;
         const { trail, setFlashMessage } = this.props;

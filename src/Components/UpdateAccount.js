@@ -27,7 +27,7 @@ const UpdateAccount = (props) => {
 
         const options = {
             method: 'patch',
-            url: 'http://localhost:3000/api/v1/update_account',
+            url: 'https://nameless-wave-57808.herokuapp.com/api/v1/update_account',
             data: userParams
         };
 

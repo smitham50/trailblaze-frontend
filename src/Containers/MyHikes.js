@@ -8,7 +8,7 @@ class MyHikes extends Component {
 
     async componentDidMount() {
         const { setHikes } = this.props;
-        const resp = await axios.get('http://localhost:3000/api/v1/my_hikes');
+        const resp = await axios.get('https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes');
         
         setHikes(resp.data.hikes);
     };

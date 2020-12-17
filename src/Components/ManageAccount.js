@@ -19,10 +19,10 @@ const ManageAccount = (props) => {
         localStorage.clear();
         props.clearUser();
         
-        const resp = await axios.delete(`http://localhost:3000/api/v1/cancel_account`);
+        const resp = await axios.delete('https://nameless-wave-57808.herokuapp.com/api/v1/cancel_account');
 
         if (!resp.errors) {
-            props.history.push('/home');
+            props.history.push('/');
         }
     }
 

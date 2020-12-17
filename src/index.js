@@ -33,7 +33,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Route path="/" component={ App } />
+        <Route path="/"><App/></Route>
       </Router>
     </Provider>
   </React.StrictMode>,

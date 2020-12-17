@@ -29,9 +29,10 @@ import MyHikes from './Containers/MyHikes';
 const App = (props) => {
   const [checkedLogin, setCheckedLogin] = useState(false);
 
-  useEffect(async () => {
-    if (localStorage.userId) {
-      const resp = await axios.get('http://localhost:3000/api/v1/logged_in', {withCredentials: true});
+  useEffect(() => {
+    const checkUserLogin = async () => {
+      if (localStorage.userId) {
+        const resp = await axios.get('https://nameless-wave-57808.herokuapp.com/api/v1/logged_in', { withCredentials: true });
         props.setLocation({
           coords: {
             latitude: localStorage.getItem('latitude'),
@@ -39,7 +40,11 @@ const App = (props) => {
           }
         });
         props.setUser(resp.data);
-    }
+      }
+    };
+
+    checkUserLogin();
+    
     setCheckedLogin(true);
   }, []);
 
@@ -52,17 +57,6 @@ const App = (props) => {
               <Navigation></Navigation>
               <div className="App-header">
                 <Switch>
-                  <Route path='/home'>
-                    <Jumbotron className="jumbotron-mod">
-                      <h1 className="headline">Welcome to Trailblaze</h1>
-                      <p className="subtext">
-                            If you've ever spent hours researching hikes in range of you because there were too many choices, this app is for you.
-                            Tell us how far you're willing to travel and how many miles you want to hike and we'll give you twenty options
-                            to choose from. Pick the one you like, get directions, and add it to your hiked trails.
-                            Get to the forest without a fuss.
-                      </p>
-                    </Jumbotron>
-                  </Route>
                   <Route path='/signup'>
                     <Signup></Signup>
                   </Route>
@@ -88,6 +82,17 @@ const App = (props) => {
                   <Route path='/trails'>
                     <Trails></Trails>
                   </Route>
+                <Route path='/'>
+                  <Jumbotron className="jumbotron-mod">
+                    <h1 className="headline">Welcome to Trailblaze</h1>
+                    <p className="subtext">
+                      If you've ever spent hours researching hikes in range of you because there were too many choices, this app is for you.
+                      Tell us how far you're willing to travel and how many miles you want to hike and we'll give you twenty options
+                      to choose from. Pick the one you like, get directions, and add it to your hiked trails.
+                      Get to the forest without a fuss.
+                      </p>
+                  </Jumbotron>
+                </Route>
                 </Switch>
               </div>
               <footer className="subtext footer-copyright">

@@ -8,7 +8,7 @@ const Navigation = (props) => {
     const handleLogout = async () => {
         localStorage.clear();
 
-        const resp = await axios.post('http://localhost:3000/api/v1/logout');
+        const resp = await axios.post('https://nameless-wave-57808.herokuapp.com/api/v1/logout');
 
         if (resp.errors) {
             alert(resp.errors)
@@ -19,7 +19,7 @@ const Navigation = (props) => {
 
     return (
         <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="navbar-mod">
-            <Navbar.Brand href="/home">
+            <Navbar.Brand href="/">
                 <img src="/Trail-blaze-intersection.jpg" alt="brand" width="30px" height="30px" loading="lazy" /> Trailblaze
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -32,7 +32,7 @@ const Navigation = (props) => {
                                     <Nav.Link href="/trailsearch">Find a Trail</Nav.Link>
                                     <Nav.Link href="/myhikes">My Hiked Trails</Nav.Link>
                                     <Nav.Link href="/account">Account</Nav.Link>
-                                    <Nav.Link href="/home" onClick={handleLogout}>Logout {props.currentUserData.user.username}</Nav.Link>
+                                    <Nav.Link href="/" onClick={handleLogout}>Logout {props.currentUserData.user.username}</Nav.Link>
                                 </Fragment>
                             :
                                 <Fragment>

@@ -39,7 +39,7 @@ const Signup = (props) => {
 
         const options = {
             method: 'post',
-            url: 'http://localhost:3000/api/v1/signup',
+            url: 'https://nameless-wave-57808.herokuapp.com/api/v1/signup',
             data: userParams
         };
 
