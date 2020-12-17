@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -56,44 +56,46 @@ const App = (props) => {
             <div className="wrapper">
               <Navigation></Navigation>
               <div className="App-header">
-                <Switch>
-                  <Route path='/signup'>
-                    <Signup></Signup>
-                  </Route>
-                  <Route path='/login'>
-                    <Login></Login>
-                  </Route>
-                  <Route path='/account'>
-                    <ManageAccount></ManageAccount>
-                  </Route>
-                  <Route path='/update-account'>
-                    <UpdateAccount></UpdateAccount>
-                  </Route>
-                  <Route path='/trailsearch'>
-                    <TrailSearch></TrailSearch>
-                  </Route>
-                  <Route
-                    path='/trails/:slug'
-                    component={TrailShow}
-                  />
-                  <Route path='/myhikes'>
-                    <MyHikes></MyHikes>
-                  </Route>
-                  <Route path='/trails'>
-                    <Trails></Trails>
-                  </Route>
-                  <Route path='/'>
-                    <Jumbotron className="jumbotron-mod">
-                      <h1 className="headline">Welcome to Trailblaze</h1>
-                      <p className="subtext">
-                        If you've ever spent hours researching hikes in range of you because there were too many choices, this app is for you.
-                        Tell us how far you're willing to travel and how many miles you want to hike and we'll give you twenty options
-                        to choose from. Pick the one you like, get directions, and add it to your hiked trails.
-                        Get to the forest without a fuss.
-                      </p>
-                    </Jumbotron>
-                  </Route>
-                </Switch>
+              <Router basename={process.env.PUBLIC_URL}>
+                  <Switch>
+                    <Route exact path='/'>
+                      <Jumbotron className="jumbotron-mod">
+                        <h1 className="headline">Welcome to Trailblaze</h1>
+                        <p className="subtext">
+                          If you've ever spent hours researching hikes in range of you because there were too many choices, this app is for you.
+                          Tell us how far you're willing to travel and how many miles you want to hike and we'll give you twenty options
+                          to choose from. Pick the one you like, get directions, and add it to your hiked trails.
+                          Get to the forest without a fuss.
+                        </p>
+                      </Jumbotron>
+                    </Route>
+                    <Route path='/signup'>
+                      <Signup></Signup>
+                    </Route>
+                    <Route path='/login'>
+                      <Login></Login>
+                    </Route>
+                    <Route path='/account'>
+                      <ManageAccount></ManageAccount>
+                    </Route>
+                    <Route path='/update-account'>
+                      <UpdateAccount></UpdateAccount>
+                    </Route>
+                    <Route path='/trailsearch'>
+                      <TrailSearch></TrailSearch>
+                    </Route>
+                    <Route
+                      path='/trails/:slug'
+                      component={TrailShow}
+                    />
+                    <Route path='/myhikes'>
+                      <MyHikes></MyHikes>
+                    </Route>
+                    <Route path='/trails'>
+                      <Trails></Trails>
+                    </Route>
+                  </Switch>
+                </Router>
               </div>
               <footer className="subtext footer-copyright">
                 <p><strong>Copyright 2020 Trailblaze. All rights reserved.</strong></p>

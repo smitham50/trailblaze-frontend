@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 
@@ -32,9 +31,7 @@ axios.defaults.withCredentials = true;
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router basename={process.env.PUBLIC_URL}>
-          <App />
-      </Router>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
