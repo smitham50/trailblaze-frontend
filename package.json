@@ -2,7 +2,7 @@
   "name": "trailblaze-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://smitham50.github.io/",
+  "homepage": "https://smitham50.github.io/trailblaze-frontend",
   "dependencies": {
     "@hookform/error-message": "^0.0.5",
     "@testing-library/jest-dom": "^4.2.4",
