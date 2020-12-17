@@ -33,7 +33,12 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Route path="/"><App/></Route>
+        <Route 
+          exact path="https://smitham50.github.io/trailblaze-frontend/" 
+          render={() => <Redirect to="/" />}
+        >
+          <App/>
+        </Route>
       </Router>
     </Provider>
   </React.StrictMode>,
