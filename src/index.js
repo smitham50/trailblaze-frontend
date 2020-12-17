@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 
