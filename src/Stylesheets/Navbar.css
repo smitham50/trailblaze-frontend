@@ -1,4 +1,8 @@
 .navbar-mod {
-    font-family: 'Teko', sans-serif;
     font-size: 1.3em;
+}
+
+.navbar-link {
+    text-decoration: none;
+    font-family: 'Teko', sans-serif;
 }

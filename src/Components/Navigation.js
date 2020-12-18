@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -18,10 +19,12 @@ const Navigation = (props) => {
     };
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="navbar-mod">
-            <Navbar.Brand href="/">
-                <img src={process.env.PUBLIC_URL + "/Trail-blaze-intersection.jpg"} alt="brand" width="30px" height="30px" loading="lazy" /> Trailblaze
+        <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="navbar-mod" >
+            <Link className="nav-link navbar-link" to="/">
+            <Navbar.Brand>
+                    <img src={process.env.PUBLIC_URL + "/Trail-blaze-intersection.jpg"} alt="brand" width="30px" height="30px" loading="lazy" /> Trailblaze
             </Navbar.Brand>
+            </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
@@ -29,15 +32,15 @@ const Navigation = (props) => {
                         props.currentUserData.logged_in
                             ?
                                 <Fragment>
-                                    <Nav.Link href="/trailsearch">Find a Trail</Nav.Link>
-                                    <Nav.Link href="/myhikes">My Hiked Trails</Nav.Link>
-                                    <Nav.Link href="/account">Account</Nav.Link>
-                                    <Nav.Link href="/" onClick={handleLogout}>Logout {props.currentUserData.user.username}</Nav.Link>
+                                    <Link className="nav-link navbar-link" to="/trailsearch">Find a Trail</Link>
+                                    <Link className="nav-link navbar-link" to="/myhikes">My Hiked Trails</Link>
+                                    <Link className="nav-link navbar-link" to="/account">Account</Link>
+                                    <Link className="nav-link navbar-link" to="/" onClick={handleLogout}>Logout {props.currentUserData.user.username}</Link>
                                 </Fragment>
                             :
                                 <Fragment>
-                                    <Nav.Link href="/signup">Signup</Nav.Link>
-                                    <Nav.Link href="/login">Login</Nav.Link>
+                                    <Link className="nav-link navbar-link" to="/signup">Signup</Link>
+                                    <Link className="nav-link navbar-link" to="/login">Login</Link>
                                 </Fragment>
                     }
                 </Nav>
