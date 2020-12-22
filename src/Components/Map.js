@@ -19,7 +19,7 @@ class Map extends PureComponent {
         const resp = await axios('https://nameless-wave-57808.herokuapp.com/api/v1/map_auth');
 
         this.setState({
-            key: resp.key
+            key: resp.data.key.replace(/\s/g, "")
         });
     };
 

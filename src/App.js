@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -54,7 +54,8 @@ const App = (props) => {
         checkedLogin
           ?
             <div className="wrapper">
-              <Router basename='/trailblaze-frontend'>
+              {/* <Router basename='/trailblaze-frontend'> */}
+              <Router>
                 <Navigation></Navigation>
                 <div className="App-header">
                     <Switch>
