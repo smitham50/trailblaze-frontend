@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class Map extends PureComponent {
 
@@ -10,8 +11,16 @@ class Map extends PureComponent {
             lng: parseFloat(this.props.trail.longitude)
         },
         zoom: 11,
-        key: "AIzaSyCv - zuuvPCrmeI3pq2ohidCLBhgnRvW3N0",
+        key: "",
         directions: null
+    };
+
+    async componentDidMount() {
+        const resp = await axios('https://nameless-wave-57808.herokuapp.com/api/v1/map_auth');
+
+        this.setState({
+            key: resp.key
+        });
     };
 
     handleDirections = (google) => {
