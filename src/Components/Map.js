@@ -48,14 +48,20 @@ class Map extends PureComponent {
     render() {
         return (
             <div className="map" >
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: this.state.key }}
-                    center={ this.state.center }
-                    defaultZoom={ this.state.zoom }
-                    onGoogleApiLoaded={this.handleDirections}
-                    yesIWantToUseGoogleMapApiInternals
-                >
-                </GoogleMapReact>
+                {
+                    this.state.key
+                    ?
+                    <GoogleMapReact
+                        bootstrapURLKeys={{ key: this.state.key }}
+                        center={this.state.center}
+                        defaultZoom={this.state.zoom}
+                        onGoogleApiLoaded={this.handleDirections}
+                        yesIWantToUseGoogleMapApiInternals
+                    >
+                    </GoogleMapReact>
+                    :
+                    null
+                }
             </div>
         );
     };
