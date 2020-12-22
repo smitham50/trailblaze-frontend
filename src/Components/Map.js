@@ -43,10 +43,7 @@ class Map extends PureComponent {
                 }
             }
         )
-    }
-        
-
-    
+    };
 
     render() {
         return (
