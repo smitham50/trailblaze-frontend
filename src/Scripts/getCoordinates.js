@@ -3,7 +3,7 @@ const getCoordinates = (setLocation) => {
 };
 
 const showError = (error) => {
-    alert(error);
+    alert(error.message);
 };
 
 export default getCoordinates;
