@@ -11,11 +11,9 @@ const Trail = (props) => {
     }, []);
 
     const setRowSpans = () => {
-        setTimeout(() => {
-            const height = imageRef.current.clientHeight;
-            const rowSpan = Math.ceil(height / 10);
-            setSpans(rowSpan);
-        }, 1000);  
+        const height = imageRef.current.clientHeight;
+        const rowSpan = Math.ceil(height / 10);
+        setSpans(rowSpan); 
     };
 
     return (
