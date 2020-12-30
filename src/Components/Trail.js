@@ -7,14 +7,16 @@ const Trail = (props) => {
     const imageRef = useRef(null);
 
     useEffect(() => {
-        imageRef.current.addEventListener("load", setTimeout(setRowSpans, 1000));
+        imageRef.current.addEventListener("load", setRowSpans);
     }, []);
 
     const setRowSpans = () => {
-        const height = imageRef.current.clientHeight;
-        const rowSpan = Math.ceil(height / 10);
-        setSpans(rowSpan);
-    }
+        setTimeout(() => {
+            const height = imageRef.current.clientHeight;
+            const rowSpan = Math.ceil(height / 10);
+            setSpans(rowSpan);
+        }, 1000);  
+    };
 
     return (
         <div className="trail" style={{ gridRowEnd: `span ${spans}` }}>
