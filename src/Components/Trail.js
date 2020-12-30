@@ -7,7 +7,7 @@ const Trail = (props) => {
     const imageRef = useRef(null);
 
     useEffect(() => {
-        imageRef.current.addEventListener("load", setRowSpans);
+        imageRef.current.addEventListener("load", setTimeout(setRowSpans, 1000));
     }, []);
 
     const setRowSpans = () => {
