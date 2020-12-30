@@ -54,7 +54,7 @@ const App = (props) => {
         checkedLogin
           ?
             <div className="wrapper">
-              <Router basename='/trailblaze-frontend'>
+              <Router>
                 <Navigation></Navigation>
                 <div className="App-header">
                     <Switch>
