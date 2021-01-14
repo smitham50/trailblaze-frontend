@@ -124,9 +124,9 @@ class TrailShow extends PureComponent {
                         {
                             inHikes
                                 ?
-                                <Button variant="link" onClick={removeTrailFromHikes} className="headline">Remove from hikes</Button>
+                                <Button variant="link" onClick={removeTrailFromHikes} className="headline">Remove from favorite hikes</Button>
                                 :
-                                <Button variant="link" onClick={addTrailToHikes} className="headline">Add to my hikes</Button>
+                                <Button variant="link" onClick={addTrailToHikes} className="headline">Add to favorite hikes</Button>
                         }
                         {
                             flashMessage

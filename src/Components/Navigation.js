@@ -33,7 +33,7 @@ const Navigation = (props) => {
                             ?
                                 <Fragment>
                                     <Link className="nav-link navbar-link" to="/trailsearch">Find a Trail</Link>
-                                    <Link className="nav-link navbar-link" to="/myhikes">My Hiked Trails</Link>
+                                    <Link className="nav-link navbar-link" to="/myhikes">My Favorite Hikes</Link>
                                     <Link className="nav-link navbar-link" to="/account">Account</Link>
                                     <Link className="nav-link navbar-link" to="/" onClick={handleLogout}>Logout {props.currentUserData.user.username}</Link>
                                 </Fragment>

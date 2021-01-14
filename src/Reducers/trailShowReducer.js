@@ -12,7 +12,6 @@ function trailSearchReducer(prevState = defaultState, action) {
             }
         case "SET_PREVIOUS_PAGE":
             const fromSearchPage = action.payload.pathname.slice(1,7) === "trails" ? true : false;
-            console.log("...", fromSearchPage);
             return {
                 ...prevState,
                 fromSearchPage: fromSearchPage
