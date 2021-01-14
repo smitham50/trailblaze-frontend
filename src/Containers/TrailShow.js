@@ -11,7 +11,8 @@ import { withRouter } from 'react-router';
 
 class TrailShow extends PureComponent {
     state = {
-        inHikes: false
+        inHikes: false,
+        trailSet: false
     };
 
     async componentDidMount() {
@@ -26,6 +27,10 @@ class TrailShow extends PureComponent {
             .then(resp => {
                 const trail = resp.data.trail;
                 setTrail(trail);
+
+                this.setState({
+                    trailSet: true
+                });
 
                 if (!!hikes.find(hike => hike.id === trail.id)) {
                     this.setState({
@@ -48,7 +53,7 @@ class TrailShow extends PureComponent {
         
         if (status === 'success') {
             const alert = "alert-success";
-            const message = `${trail} added to hikes`;
+            const message = `${trail} added to favorites`;
             
             setFlashMessage([message], alert);
             
@@ -107,7 +112,7 @@ class TrailShow extends PureComponent {
     render() {
 
         const { trail, flashMessage, fromSearchPage } = this.props;
-        const { inHikes } = this.state;
+        const { inHikes, trailSet } = this.state;
         const { addTrailToHikes, removeTrailFromHikes, renderFlashMessage } = this;
 
         return (
@@ -146,7 +151,14 @@ class TrailShow extends PureComponent {
                             <Figure.Caption className="subtext small">Difficulty: {trail.difficulty}</Figure.Caption>
                             <Figure.Caption className="subtext small">Location: {trail.location}</Figure.Caption>
                         </Figure>
-                        <Map></Map>
+                        {
+                            trailSet
+                            ?
+                                <Map></Map>
+                            :
+                                null
+                        }
+                        
                     </div>
                 </div>
             :

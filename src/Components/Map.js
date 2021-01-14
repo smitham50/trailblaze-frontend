@@ -46,15 +46,22 @@ class Map extends PureComponent {
     };
 
     render() {
+
+        const { 
+            key, 
+            center,
+            zoom
+        } = this.state;
+
         return (
             <div className="map" >
                 {
-                    this.state.key
+                    key
                     ?
                     <GoogleMapReact
-                        bootstrapURLKeys={{ key: this.state.key }}
-                        center={this.state.center}
-                        defaultZoom={this.state.zoom}
+                        bootstrapURLKeys={{ key: key }}
+                        center={ center }
+                        defaultZoom={ zoom }
                         onGoogleApiLoaded={this.handleDirections}
                         yesIWantToUseGoogleMapApiInternals
                     >
