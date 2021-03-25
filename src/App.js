@@ -55,8 +55,10 @@ const App = (props) => {
           ?
             <div className="wrapper">
               <Router>
-                <Navigation></Navigation>
-                <div className="App-header">
+                <header>
+                  <Navigation></Navigation>
+                </header>
+                <div className="App-body">
                     <Switch>
                       <Route exact path='/'>
                         <Jumbotron className="jumbotron-mod">

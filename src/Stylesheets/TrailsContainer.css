@@ -12,12 +12,23 @@
 
 .trail {
     position: relative;
+    display: inline-block;
+}
+
+.trail img {
+    vertical-align: top;
 }
 
 .trail-info {
     position: absolute;
-    bottom: 5%;
-    left: 10%;
+    top: 2em;
+    left: 0;
+    right: 0;
+    bottom: 0;
     color: white;
-    font-size: calc(4px + 2vmin);
+    font-size: .8em;
+}
+
+.trail-info p:first-of-type {
+    font-size: 1.2em;
 }

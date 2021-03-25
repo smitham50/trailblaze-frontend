@@ -13,7 +13,7 @@
   justify-content: space-between;
 }
 
-.App-header {
+.App-body {
   background-color: #ffffff21;
   margin-top: 15vh;
   padding: 4vh;
@@ -22,7 +22,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 1.5rem;
   color: black;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .subtext {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .marginal {
