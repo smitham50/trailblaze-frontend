@@ -22,7 +22,7 @@ const Navigation = (props) => {
         <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="navbar-mod" >
             <Link className="nav-link navbar-link" to="/">
             <Navbar.Brand>
-                    <img src={process.env.PUBLIC_URL + "/Trail-blaze-intersection.jpg"} alt="brand" width="30px" height="30px" loading="lazy" /> Trailblaze
+                    <img src={process.env.PUBLIC_URL + "/noun_Trail_2056927.svg"} alt="brand" width="30px" height="30px" loading="lazy" />   Trailblaze
             </Navbar.Brand>
             </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

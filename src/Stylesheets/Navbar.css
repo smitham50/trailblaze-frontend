@@ -1,8 +1,27 @@
 .navbar-mod {
-    font-size: 1.3em;
+    font-size: 1em;
 }
 
 .navbar-link {
     text-decoration: none;
-    font-family: 'Teko', sans-serif;
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+
+nav img {
+    height: 50px;
+    width: 50px;
+}
+
+.navbar-brand {
+    font-size: 1.5em;
+}
+
+.mr-auto a {
+    margin: 0 1em;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+    transition: .3s;
 }
