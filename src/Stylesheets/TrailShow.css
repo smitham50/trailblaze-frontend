@@ -8,6 +8,10 @@
     color: rgba(91, 87, 87, 0.544);
 }
 
+.flash-message p {
+    margin: 0;
+}
+
 .trail-show-container {
     width: 100%;
 }
