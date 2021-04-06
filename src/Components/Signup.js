@@ -50,7 +50,12 @@ const Signup = (props) => {
 
         if (!errors) {
             setUser(data);
-            getCoordinates(setLocation);
+            try {
+                getCoordinates(setLocation);
+            } catch (err) {
+                alert("Location must be enabled for this application: ", err);
+            }
+            
             localStorage.userId = user.id;
         } else {
             setFlashMessage(errors);
