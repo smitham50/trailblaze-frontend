@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Fragment } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Card } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
 import { Link, Redirect } from 'react-router-dom';
@@ -76,52 +76,55 @@ const Login = (props) => {
                             <div className="form-flash"></div>
                 }
             </div>
-            <Form onSubmit={ handleSubmit(handleLogin) }>
-                <Form.Group controlId="username">
-                    <Form.Label className="headline">Username</Form.Label>
-                    <Form.Control 
-                        type="text" 
-                        placeholder="Enter username" 
-                        onChange={ handleChange }
-                        name="username"
-                        defaultValue={ username }
-                        className="subtext"
-                        ref={register({
-                            required: "Username cannot be blank"
-                        })}
-                    />
-                    <ErrorMessage
-                        errors={ errors }
-                        name="username"
-                        render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
-                    />
-                </Form.Group>
-                <Form.Group controlId="formGroupPassword">
-                    <Form.Label className="headline">Password</Form.Label>
-                    <Form.Control 
-                        type="password" 
-                        placeholder="Password"
-                        onChange={ handleChange }
-                        name="password"
-                        defaultValue={ password }
-                        className="subtext"
-                        ref={register({
-                            required: "Password cannot be blank"
-                        })}
-                    />
-                    <ErrorMessage
-                        errors={ errors }
-                        name="password"
-                        render={ ({ message }) => <p className="alert-danger flash-message subtext">{message}</p> }
-                    />
-                </Form.Group>
-                <Form.Group controlId="formGroupSubmit" className="small headline">
-                    <Button type="submit">Submit</Button>
-                </Form.Group>
-                <Form.Group className="small subtext">
-                    Don't have an account?  <Link to="/signup">Signup</Link>
-                </Form.Group>
-            </Form>
+            <Card className="form-card">
+                <Form onSubmit={handleSubmit(handleLogin)}>
+                    <Form.Group controlId="username">
+                        <Form.Label className="headline">Username</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter username"
+                            onChange={handleChange}
+                            name="username"
+                            defaultValue={username}
+                            className="subtext"
+                            ref={register({
+                                required: "Username cannot be blank"
+                            })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="username"
+                            render={({ message }) => <p className="alert-danger flash-message subtext">{message}</p>}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="formGroupPassword">
+                        <Form.Label className="headline">Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Password"
+                            onChange={handleChange}
+                            name="password"
+                            defaultValue={password}
+                            className="subtext"
+                            ref={register({
+                                required: "Password cannot be blank"
+                            })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="password"
+                            render={({ message }) => <p className="alert-danger flash-message subtext">{message}</p>}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="formGroupSubmit" className="small headline">
+                        <Button variant="success" type="submit" block>Submit</Button>
+                    </Form.Group>
+                    <Form.Group className="small subtext">
+                        Don't have an account?  <Link to="/signup">Signup</Link>
+                    </Form.Group>
+                </Form>
+            </Card>
+            
             {
                 currentUserData && currentUserData.logged_in
                     ?

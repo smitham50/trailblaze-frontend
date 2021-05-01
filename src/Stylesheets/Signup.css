@@ -1,11 +1,10 @@
-form {
-    width: 25%;
+.form-card {
+    width: 25rem;
+    padding: 1rem;
 }
 
-@media only screen and (max-width: 600px) {
-    form {
-        width: 50%;
-    }
+form {
+    width: 100%;
 }
 
 .flash-container {
