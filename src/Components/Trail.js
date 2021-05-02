@@ -5,16 +5,15 @@ const Trail = (props) => {
     const [spans, setSpans] = useState(0);
     const [loaded, setLoaded] = useState(false);
 
-    const imageRef = useRef(null);
-
     useEffect(() => {
-        imageRef.current.addEventListener("load", setRowSpans);
-
-        setTimeout(() => {
-            setLoaded(true);
-        }, 4000);
-        
+        try {
+            imageRef.current.addEventListener("load", setRowSpans);
+        } catch (e) {
+            console.log("No image loaded: ", e);
+        }
     }, []);
+        
+    
 
     const setRowSpans = () => {
         const height = imageRef.current.clientHeight;
