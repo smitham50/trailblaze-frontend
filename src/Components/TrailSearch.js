@@ -26,23 +26,25 @@ class TrailSearch extends PureComponent {
             longitude,
         } = this.props;
 
-        // Make proxy request to Hiking Project API through server to avoid CORS issue. 
-        const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=${distance}&maxResults=200&key=200492212-d7400571b0620563169df18724f8dc46`;
+        try {
+            // Make proxy request to Hiking Project API through server to avoid CORS issue. 
+            const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=${distance}&maxResults=300&key=200492212-d7400571b0620563169df18724f8dc46`;
 
-        const options = {
-            method: 'post',
-            url: 'https://nameless-wave-57808.herokuapp.com/api/v1/trails/associate_trails',
-            data: { url: queryURL }
-        };
+            const options = {
+                method: 'post',
+                url: 'https://nameless-wave-57808.herokuapp.com/api/v1/trails/associate_trails',
+                data: { url: queryURL }
+            };
 
-        this.setState({ loading: true })
+            this.setState({ loading: true })
 
-        const resp = await axios(options);
+            const resp = await axios(options);
 
-        if (resp.data.status === "Success") {
-            this.setState({ loading: false })
-        } else {
-            //handle error
+            if (resp.data.status === "Success") {
+                this.setState({ loading: false })
+            }
+        } catch (e) {
+            console.log(e);
         }
     };
 

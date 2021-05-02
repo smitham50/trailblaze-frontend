@@ -10,11 +10,9 @@ const Trail = (props) => {
         try {
             imageRef.current.addEventListener("load", setRowSpans);
         } catch (e) {
-            console.log("No image loaded: ", e);
+            console.log(e);
         }
     }, []);
-        
-    
 
     const setRowSpans = () => {
         const height = imageRef.current.clientHeight;
