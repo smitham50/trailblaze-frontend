@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const Trail = (props) => { 
     const [spans, setSpans] = useState(0);
-    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         try {
@@ -24,16 +23,12 @@ const Trail = (props) => {
     return (
         <Link to={`/trails/${encodeURIComponent(props.trailName)}`} style={{ gridRowEnd: `span ${spans}` }} >
             <div className="trail" >
-                <img src={ props.image } ref={ imageRef } alt={props.trailName} />
+                <img src={ props.image } ref={ imageRef } alt={ props.trailName } />
                 {
-                    loaded
-                    ?
-                        <div className="trail-info">
-                            <p className="headline"><strong>{props.trailName}</strong></p>
-                            <p className="subtext">{props.location}</p>
-                        </div>
-                    :
-                        null
+                    <div className="trail-info">
+                        <p className="headline"><strong>{ props.trailName }</strong></p>
+                        <p className="subtext">{ props.location }</p>
+                    </div>
                 }
                     
                 
