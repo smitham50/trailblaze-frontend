@@ -20,7 +20,7 @@ const Navigation = (props) => {
 
     return (
         <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="navbar-mod" collapseOnSelect>
-            <Nav.Link eventKey="1" className="nav-link navbar-link" to="/">
+            <Nav.Link as={Link} eventKey="1" to="/">
                 <Navbar.Brand>
                         <img src={process.env.PUBLIC_URL + "/noun_Trail_2056927.svg"} alt="brand" width="30px" height="30px" loading="lazy" />   Trailblaze
                 </Navbar.Brand>
@@ -32,15 +32,15 @@ const Navigation = (props) => {
                         props.currentUserData.logged_in
                             ?
                                 <Fragment>
-                                    <Nav.Link eventKey="2" className="nav-link navbar-link" to="/trailsearch">Find a Trail</Nav.Link>
-                                    <Nav.Link eventKey="3" className="nav-link navbar-link" to="/myhikes">My Favorite Hikes</Nav.Link>
-                                    <Nav.Link eventKey="4" className="nav-link navbar-link" to="/account">Account</Nav.Link>
-                                    <Nav.Link eventKey="5" className="nav-link navbar-link" to="/" onClick={handleLogout}>Logout {props.currentUserData.user.username}</Nav.Link>
+                                    <Nav.Link as={Link} eventKey="2" to="/trailsearch">Find a Trail</Nav.Link>
+                                    <Nav.Link as={Link} eventKey="3" to="/myhikes">My Favorite Hikes</Nav.Link>
+                                    <Nav.Link as={Link} eventKey="4" to="/account">Account</Nav.Link>
+                                    <Nav.Link as={Link} eventKey="5" to="/" onClick={handleLogout}>Logout {props.currentUserData.user.username}</Nav.Link>
                                 </Fragment>
                             :
                                 <Fragment>
-                                    <Nav.Link eventKey="6" className="nav-link navbar-link" to="/signup">Signup</Nav.Link>
-                                    <Nav.Link eventKey="7" className="nav-link navbar-link" to="/login">Login</Nav.Link>
+                                    <Nav.Link as={Link} eventKey="6" to="/signup">Signup</Nav.Link>
+                                    <Nav.Link as={Link} eventKey="7" to="/login">Login</Nav.Link>
                                 </Fragment>
                     }
                 </Nav>
