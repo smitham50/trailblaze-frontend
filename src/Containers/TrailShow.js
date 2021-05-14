@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../Stylesheets/TrailShow.css';
 
 //  Components
 import FlashMessage from '../Components/FlashMessage';

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import CancelAccountModal from './CancelAccountModal';
 import axios from 'axios';
+import '../Stylesheets/ManageAccount.css';
 
 const ManageAccount = (props) => {
     const [showModal, setShowModal] = useState(false);

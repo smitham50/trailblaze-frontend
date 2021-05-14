@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { Spinner } from 'react-bootstrap';
 import Trail from '../Components/Trail';
 import axios from 'axios';
+import '../Stylesheets/TrailsContainer.css';
 
 class Trails extends PureComponent {
 

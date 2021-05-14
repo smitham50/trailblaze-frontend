@@ -7,6 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 import getCoordinates from '../Scripts/getCoordinates';
 import FlashMessage from '../Components/FlashMessage';
 import axios from 'axios';
+import '../Stylesheets/Signup.css';
 
 const Signup = (props) => {
     const {

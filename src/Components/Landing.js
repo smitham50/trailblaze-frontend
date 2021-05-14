@@ -1,5 +1,6 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
+import '../Stylesheets/Landing.css';
 
 
 const Landing = (props) => {

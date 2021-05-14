@@ -2,17 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
-
-// Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav } from 'react-bootstrap';
 import './App.css';
-import './Stylesheets/Navbar.css';
-import './Stylesheets/ManageAccount.css';
-import './Stylesheets/Landing.css';
-import './Stylesheets/Signup.css';
-import './Stylesheets/TrailsContainer.css';
-import './Stylesheets/TrailShow.css';
 
 // Components
 import Signup from './Components/Signup';
@@ -29,10 +21,8 @@ import Landing from './Components/Landing';
 
 const App = (props) => {
   const [checkedLogin, setCheckedLogin] = useState(false);
-  console.log('outside effect', props);
 
   useEffect(() => {
-    console.log("props: ", props)
     const checkUserLogin = async () => {
       if (localStorage.userId) {
         const resp = await axios.get('https://nameless-wave-57808.herokuapp.com/api/v1/logged_in', { withCredentials: true });
