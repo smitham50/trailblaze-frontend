@@ -7,6 +7,12 @@
   box-shadow: none;
 }
 
+.btn-success {
+  background-color: #98afb1;
+  color: white;
+  border-color: #848484;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -42,12 +48,8 @@
   font-size: 1.2em;
 }
 
-.footer-copyright {
-  font-size: 1.1em;
-}
-
 .footer-link {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   height: 100%;
 }
 
