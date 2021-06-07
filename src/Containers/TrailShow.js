@@ -2,13 +2,50 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../Stylesheets/TrailShow.css';
+import styled from 'styled-components';
 
 //  Components
 import FlashMessage from '../Components/FlashMessage';
 import { Button, Figure } from 'react-bootstrap';
 import Map from '../Components/Map';
 import { withRouter } from 'react-router';
+
+const TrailShowContainer = styled.div`
+    width: 100%;
+`;
+
+const ButtonContainer = styled.div`
+    margin-bottom: 1vh;
+    & > * {
+        margin: 0 .5%;
+    }
+    & .flash-message {
+        font-size: .6em;
+        display: block;
+        color: rgba(91, 87, 87, 0.544);
+    }
+    & .btn-link {
+        margin: .5%;
+    }
+`;
+
+const InfoContainer = styled.div`
+    padding-left: 1%;
+    padding-right: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    & .trail {
+        flex: 0 450px;
+    }
+    & .trail img {
+        max-height: 45vh;
+    }
+    & .map {
+        height: 65vh;
+        flex: 1 1 450px;
+    }
+`;
 
 class TrailShow extends PureComponent {
     state = {
@@ -117,32 +154,27 @@ class TrailShow extends PureComponent {
         const { addTrailToHikes, removeTrailFromHikes, renderFlashMessage } = this;
 
         return (
-            trail ?
-                <div className="trail-show-container">
-                    <div className="d-flex button-container">
+            trail 
+                ?
+                <TrailShowContainer>
+                    <ButtonContainer className="d-flex">
                         {
                             fromSearchPage
-                                ?
-                                <Button variant="link" className="headline"><Link to={"/trails"}>Back to search</Link></Button>
-                                :
-                                <Button variant="link" className="headline"><Link to={"/myhikes"}>Back to hikes</Link></Button>
+                                ? <Button variant="link" className="headline"><Link to={"/trails"}>Back to search</Link></Button>
+                                : <Button variant="link" className="headline"><Link to={"/myhikes"}>Back to hikes</Link></Button>
                         }           
                         {
                             inHikes
-                                ?
-                                <Button variant="link" onClick={removeTrailFromHikes} className="headline">Remove from favorite hikes</Button>
-                                :
-                                <Button variant="link" onClick={addTrailToHikes} className="headline">Add to favorite hikes</Button>
+                                ? <Button variant="link" onClick={removeTrailFromHikes} className="headline">Remove from favorite hikes</Button>
+                                : <Button variant="link" onClick={addTrailToHikes} className="headline">Add to favorite hikes</Button>
                         }
                         {
                             flashMessage
-                                ?
-                                renderFlashMessage()
-                                :
-                                <span />
+                                ? renderFlashMessage()
+                                : <span />
                         }
-                    </div>
-                    <div className="info-container">
+                    </ButtonContainer>
+                    <InfoContainer>
                         <Figure className="trail">
                             <Figure.Image
                                 src={trail.imgMedium}
@@ -154,16 +186,13 @@ class TrailShow extends PureComponent {
                         </Figure>
                         {
                             trailSet
-                            ?
-                                <Map></Map>
-                            :
-                                null
+                                ? <Map></Map>
+                                : null
                         }
                         
-                    </div>
-                </div>
-            :
-                null
+                    </InfoContainer>
+                </TrailShowContainer>
+                : null
         );
     };
 };

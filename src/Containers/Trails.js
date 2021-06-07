@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { Spinner } from 'react-bootstrap';
 import Trail from '../Components/Trail';
 import axios from 'axios';
-import '../Stylesheets/TrailsContainer.css';
+import { TrailsContainer } from '../StyledComponents/TrailsContainer';
 
 class Trails extends PureComponent {
 
@@ -51,9 +51,9 @@ class Trails extends PureComponent {
                 {
                     trails.length
                         ?
-                            <div className="trails-container">
+                            <TrailsContainer>
                                 { renderTrails() }
-                            </div>
+                            </TrailsContainer>
                         :
                             <Spinner animation="border" role="status">
                                 <span className="sr-only">Searching for trails</span>

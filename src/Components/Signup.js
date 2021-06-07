@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
-import React, { Fragment } from "react";
+import React from "react";
 import { Form, Button, Card } from 'react-bootstrap';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { Link, Redirect } from 'react-router-dom';
 import getCoordinates from '../Scripts/getCoordinates';
 import FlashMessage from '../Components/FlashMessage';
 import axios from 'axios';
-import '../Stylesheets/Signup.css';
+import { FormWrapper } from '../StyledComponents/FormWrapper';
 
 const Signup = (props) => {
     const {
@@ -71,14 +71,12 @@ const Signup = (props) => {
     }
 
     return (
-        <Fragment>
+        <FormWrapper>
             <div className="flash-container">
                 {
                     flashMessage
-                        ?
-                            renderFlashMessages()
-                        :
-                            <div className="form-flash"></div>
+                        ? renderFlashMessages()
+                        : <div className="form-flash"></div>
                 }
             </div>
             <Card className="form-card">
@@ -178,12 +176,10 @@ const Signup = (props) => {
             </Card>
             {
                 currentUserData && currentUserData.logged_in
-                    ?
-                        <Redirect to='/trailsearch' />
-                    :
-                        null
+                    ? <Redirect to='/trailsearch' />
+                    : null
             }
-        </Fragment>
+        </FormWrapper>
     );
 };
 

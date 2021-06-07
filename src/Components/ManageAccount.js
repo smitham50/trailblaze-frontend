@@ -1,11 +1,29 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import CancelAccountModal from './CancelAccountModal';
 import axios from 'axios';
-import '../Stylesheets/ManageAccount.css';
+import styled from 'styled-components';
+
+const StyledRow = styled(Row)`
+    & a:link, a:visited {
+        color:  #1c1b1be1;
+    }
+    & a:hover {
+        color:  #7d7a7ae1;
+    }
+    & .headline {
+        font-family: 'Amatic SC', cursive;
+    }
+    & .marginal {
+        margin: 2%;
+    }
+    & .button-sized {
+        font-size: 1.2em;
+    }
+`;
 
 const ManageAccount = (props) => {
     const [showModal, setShowModal] = useState(false);
@@ -28,32 +46,30 @@ const ManageAccount = (props) => {
     }
 
     return (
-        <Fragment>
+        <>
             {
                 showModal
-                    ?
-                    <CancelAccountModal 
-                        handleCancelAccount={ handleCancelAccount }
-                        message={ message }
-                    />
-                    :
-                    null
+                    ?   <CancelAccountModal 
+                            handleCancelAccount={ handleCancelAccount }
+                            message={ message }
+                        />
+                    :   null
             }
-            <Row className="container-fluid manage-account">
+            <StyledRow className="container-fluid">
                 <Col xs={6}>
-                    <Link to="/update-account" className="headline link-icon">
+                    <Link to="/update-account" className="headline">
                         <i className="fas fa-edit fa-3x marginal"></i>
                         <p className="button-sized">Update Account</p>
                     </Link>
                 </Col>
                 <Col xs={6}>
-                    <Link to="#" onClick={ renderCancelModel } className="headline link-icon">
+                    <Link to="#" onClick={ renderCancelModel } className="headline">
                         <i className="fas fa-ban fa-3x marginal"></i>
                         <p className="button-sized">Cancel Account</p>
                     </Link>
                 </Col>
-            </Row>
-        </Fragment>
+            </StyledRow>
+        </>
     );
 };
 

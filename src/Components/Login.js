@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
@@ -7,6 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import getCoordinates from '../Scripts/getCoordinates';
 import FlashMessage from '../Components/FlashMessage';
+import { FormWrapper } from '../StyledComponents/FormWrapper';
 
 const Login = (props) => {
     const {
@@ -66,14 +67,12 @@ const Login = (props) => {
     }
 
     return (
-        <Fragment>
+        <FormWrapper>
             <div className="flash-container">
                 {
                     flashMessage
-                        ?
-                            renderFlashMessages()
-                        :
-                            <div className="form-flash"></div>
+                        ? renderFlashMessages()
+                        : <div className="form-flash"></div>
                 }
             </div>
             <Card className="form-card">
@@ -127,12 +126,10 @@ const Login = (props) => {
             
             {
                 currentUserData && currentUserData.logged_in
-                    ?
-                        <Redirect to='/trailsearch' />
-                    :
-                        null
+                    ? <Redirect to='/trailsearch' />
+                    : null
             }
-        </Fragment>
+        </FormWrapper>
     );
 };
 
@@ -197,4 +194,4 @@ function mdp(dispatch) {
     };
 };
 
-export default connect(msp, mdp)(Login)
+export default connect(msp, mdp)(Login);

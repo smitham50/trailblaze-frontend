@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav } from 'react-bootstrap';
-import './App.css';
+import styled from 'styled-components';
 
 // Components
 import Signup from './Components/Signup';
@@ -18,6 +18,42 @@ import TrailSearch from './Components/TrailSearch';
 import MyHikes from './Containers/MyHikes';
 import Landing from './Components/Landing';
 
+const AppContainer = styled.div`
+  text-align: center;
+  & .btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  & .headline {
+    font-family: 'Amatic SC', cursive;
+  }
+  & .subtext {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+`;
+
+const RouterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const AppBody = styled.div`
+  background-color: #ffffff21;
+  margin-top: 15vh;
+  padding: 4vh;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: black;
+`;
+
+const Footer = styled.footer`
+  font-size: 1.1em;
+`;
 
 const App = (props) => {
   const [checkedLogin, setCheckedLogin] = useState(false);
@@ -42,16 +78,16 @@ const App = (props) => {
   }, []);
 
   return (
-    <div className="App">
+    <AppContainer>
       {
         checkedLogin
           ?
-            <div className="wrapper">
+            <RouterWrapper>
               <Router>
                 <header>
                   <Navigation></Navigation>
                 </header>
-                <div className="App-body">
+                <AppBody>
                     <Switch>
                       <Route exact path='/'>
                         <Landing></Landing>
@@ -82,20 +118,20 @@ const App = (props) => {
                         <Trails></Trails>
                       </Route>
                     </Switch>
-                </div>
-                <footer className="subtext footer-copyright">
+                </AppBody>
+                <Footer className="subtext">
                   <p><strong>Copyright 2020 Trailblaze. All rights reserved.</strong></p>
-                  <Nav className="justify-content-center footer-link" bg="dark" variant="dark">
+                  <Nav className="justify-content-center" >
                     <Link className="nav-link navbar-link" to="#">About</Link>
                     <Link className="nav-link navbar-link" to="#">Contact</Link>
                   </Nav>
-                </footer>
+                </Footer>
               </Router>
-            </div>
+            </RouterWrapper>
           :
             null
       }
-    </div>
+    </AppContainer>
   );
 };
 

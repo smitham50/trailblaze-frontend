@@ -3,6 +3,7 @@ import axios from 'axios';
 import Trail from '../Components/Trail';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { TrailsContainer } from '../StyledComponents/TrailsContainer';
 
 class MyHikes extends Component {
 
@@ -32,9 +33,9 @@ class MyHikes extends Component {
         setPreviousPage(location);
 
         return (
-            <div className="trails-container">
+            <TrailsContainer>
                 { this.renderHikes() }
-            </div>
+            </TrailsContainer>
         );
     };
 };

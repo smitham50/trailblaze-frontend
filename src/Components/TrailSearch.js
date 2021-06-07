@@ -1,8 +1,9 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button, Spinner, Card } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { FormWrapper } from '../StyledComponents/FormWrapper';
 
 class TrailSearch extends PureComponent {
 
@@ -88,59 +89,59 @@ class TrailSearch extends PureComponent {
         } = this.props;
 
         return (
-            <Fragment>
+            <FormWrapper>
                 {
                     latitude && longitude && !this.state.loading
                         ?
-                            <Card className="form-card">
-                                <Form onSubmit={this.handleSearch}>
-                                    <Form.Label className="headline">How many miles are you willing to travel from your current location?</Form.Label>
-                                    <Form.Group controlId="distance">
-                                        <Form.Control
-                                            as="select"
-                                            name="distance"
-                                            value={distance}
-                                            onChange={handleChange}
-                                            className="subtext"
-                                        >
-                                            <option>60</option>
-                                            <option>100</option>
-                                            <option>150</option>
-                                        </Form.Control>
-                                    </Form.Group>
-                                    <Form.Label className="headline">How many miles do you want to hike?</Form.Label>
-                                    <Form.Group controlId="mileage">
-                                        <Form.Control
-                                            as="select"
-                                            name="mileage"
-                                            value={mileage}
-                                            onChange={handleChange}
-                                            className="subtext"
-                                        >
-                                            <option>Less than 3</option>
-                                            <option>3 to 5</option>
-                                            <option>6 to 9</option>
-                                        </Form.Control>
-                                    </Form.Group>
-                                    <Form.Group controlId="formGroupSubmit" className="headline">
-                                        <Button variant="success" type="submit" block>Find Trails</Button>
-                                    </Form.Group>
-                                    {
-                                        this.state.loaded
-                                            ?
-                                            <Redirect to='/trails' />
-                                            :
-                                            null
-                                    }
-                                </Form>
-                            </Card>
+                        <Card className="form-card">
+                            <Form onSubmit={this.handleSearch}>
+                                <Form.Label className="headline">How many miles are you willing to travel from your current location?</Form.Label>
+                                <Form.Group controlId="distance">
+                                    <Form.Control
+                                        as="select"
+                                        name="distance"
+                                        value={distance}
+                                        onChange={handleChange}
+                                        className="subtext"
+                                    >
+                                        <option>60</option>
+                                        <option>100</option>
+                                        <option>150</option>
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Label className="headline">How many miles do you want to hike?</Form.Label>
+                                <Form.Group controlId="mileage">
+                                    <Form.Control
+                                        as="select"
+                                        name="mileage"
+                                        value={mileage}
+                                        onChange={handleChange}
+                                        className="subtext"
+                                    >
+                                        <option>Less than 3</option>
+                                        <option>3 to 5</option>
+                                        <option>6 to 9</option>
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group controlId="formGroupSubmit" className="headline">
+                                    <Button variant="success" type="submit" block>Find Trails</Button>
+                                </Form.Group>
+                                {
+                                    this.state.loaded
+                                        ?
+                                        <Redirect to='/trails' />
+                                        :
+                                        null
+                                }
+                            </Form>
+                        </Card>
                         :
-                            <Fragment>
-                                <Spinner animation="border" role="status"></Spinner>
-                                <p className="headline">Processing location. If this is your first login it may take a minute...</p>
-                            </Fragment>
+                        <>
+                            <Spinner animation="border" role="status"></Spinner>
+                            <p className="headline">Processing location. If this is your first login it may take a minute...</p>
+                        </>
                 }
-            </Fragment>
+            </FormWrapper>
         );
     }
 };

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -13,7 +13,7 @@ const NavWrapper = styled.div`
         color: white;
         transition: .3s;
     }
-    & .mr-auto a {
+    & a {
         margin: 0 1em;
     }
 `;
@@ -28,7 +28,6 @@ const BrandImage = styled.img`
     height: 50px;
     width: 50px;
 `;
-
 
 const Navigation = (props) => {
     const handleLogout = async () => {
