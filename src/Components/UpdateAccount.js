@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import FlashMessage from './FlashMessage';
 import { FormWrapper } from '../StyledComponents/FormWrapper';
-import { useForm } from 'react-hook-form'
 
 const UpdateAccount = (props) => {
     const { user } = props.currentUserData;
@@ -60,47 +59,47 @@ const UpdateAccount = (props) => {
 
     return (
         <FormWrapper>
-            <Form onSubmit={handleUpdate} >
-                <Form.Group>
-                    {
-                        flashMessage
-                            ?
-                            <FlashMessage
-                                unmount={unmountFlashMessage}
-                                message={message}
-                                alert={alert}
-                                className="subtext"
-                            />
-                            :
-                            <span />
-                    }
-                </Form.Group>
-                <Form.Group controlId="username">
-                    <Form.Label className="headline">Update username</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder={`${user?.username}`}
-                        onChange={handleOnChange}
-                        name="Username"
-                        className="subtext"
-                        value={username}
-                    />
-                </Form.Group>
-                <Form.Group controlId="formGroupEmail">
-                    <Form.Label className="headline">Update email address</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder={`${user?.email}`}
-                        onChange={handleOnChange}
-                        name="Email"
-                        className="subtext"
-                        value={email}
-                    />
-                </Form.Group>
-                <Form.Group controlId="formGroupSubmit" className="small headline">
-                    <Button type="submit">Submit</Button>
-                </Form.Group>
-            </Form>
+            <Card className="form-card">
+                <Form onSubmit={handleUpdate} >
+                    <Form.Group>
+                        {
+                            flashMessage
+                                ?   <FlashMessage
+                                        unmount={unmountFlashMessage}
+                                        message={message}
+                                        alert={alert}
+                                        className="subtext"
+                                    />
+                                :   <span />
+                        }
+                    </Form.Group>
+                    <Form.Group controlId="username">
+                        <Form.Label className="headline">Update username</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder={`${user?.username}`}
+                            onChange={handleOnChange}
+                            name="Username"
+                            className="subtext"
+                            value={username}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="formGroupEmail">
+                        <Form.Label className="headline">Update email address</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder={`${user?.email}`}
+                            onChange={handleOnChange}
+                            name="Email"
+                            className="subtext"
+                            value={email}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="formGroupSubmit" className="small headline">
+                        <Button variant="success" type="submit" block>Submit</Button>
+                    </Form.Group>
+                </Form>
+            </Card>
         </FormWrapper>
     )
 };
