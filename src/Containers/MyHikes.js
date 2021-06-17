@@ -1,43 +1,56 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import Trail from '../Components/Trail';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { TrailsContainer } from '../StyledComponents/TrailsContainer';
 
-class MyHikes extends Component {
+const MyHikes = (props) => {
+    const { 
+        setHikes, 
+        setPreviousPage, 
+        location 
+    } = props;
 
-    async componentDidMount() {
-        const { setHikes } = this.props;
-        const resp = await axios.get('https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes');
-        
+    setPreviousPage(location);
+
+    const getMyHikes = async () => {
+        const resp = await axios.get(
+            "https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes"
+        );
         setHikes(resp.data.hikes);
-    };
+    }
+
+    useEffect(() => {
+        getMyHikes();
+    }, []);
 
     renderHikes = () => {
         return this.props.hikes?.map(hike => {
+            const {
+                id,
+                name,
+                length,
+                difficulty,
+                location
+            } = hike;
+
             return <Trail
-                        key={ hike.id }
-                        trailName={ hike.name }
-                        image={ hike.imgMedium }
-                        length={ hike.length }
-                        difficulty={ hike.difficulty }
-                        location={ hike.location }
+                        key={ id }
+                        trailName={ name }
+                        image={ imgMedium }
+                        length={ length }
+                        difficulty={ difficulty }
+                        location={ location }
                     />;
         });
     };
 
-    render() {
-        const { setPreviousPage, location } = this.props;
-
-        setPreviousPage(location);
-
-        return (
-            <TrailsContainer>
-                { this.renderHikes() }
-            </TrailsContainer>
-        );
-    };
+    return (
+        <TrailsContainer>
+            { this.renderHikes() }
+        </TrailsContainer>
+    );
 };
 
 function msp(state) {
