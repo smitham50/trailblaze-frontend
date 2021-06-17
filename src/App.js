@@ -81,7 +81,7 @@ const App = (props) => {
     <AppContainer>
       {
         checkedLogin
-          ?
+          &&
             <RouterWrapper>
               <Router>
                 <header>
@@ -120,7 +120,7 @@ const App = (props) => {
                     </Switch>
                 </AppBody>
                 <Footer className="subtext">
-                  <p><strong>Copyright 2020 Trailblaze. All rights reserved.</strong></p>
+                  <p><strong>Trailblaze 2021</strong></p>
                   <Nav className="justify-content-center" >
                     <Link className="nav-link navbar-link" to="#">About</Link>
                     <Link className="nav-link navbar-link" to="#">Contact</Link>
@@ -128,8 +128,6 @@ const App = (props) => {
                 </Footer>
               </Router>
             </RouterWrapper>
-          :
-            null
       }
     </AppContainer>
   );
