@@ -32,7 +32,8 @@ const MyHikes = (props) => {
                 name,
                 length,
                 difficulty,
-                location
+                location,
+                imgMedium
             } = hike;
 
             return <Trail
