@@ -5,8 +5,9 @@ import styled from 'styled-components';
 const JumbotronMod = styled(Jumbotron)`
     background-color: #758ea9;
     color: white;
-    background-image: url(${process.env.PUBLIC_URL + '/trail.jpeg'});
-    background-position-y: -25rem;
+    background-image: url(${process.env.PUBLIC_URL + '/jan-huber-6-MVRkr4TmA-unsplash.jpg'});
+    background-position-y: -162rem;
+    background-position-x: -136rem;
     height: 70vh;
     padding-top: 13rem;
     margin-bottom: 1rem;
