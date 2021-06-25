@@ -9,6 +9,7 @@ const JumbotronMod = styled(Jumbotron)`
     background-position-y: -25rem;
     height: 70vh;
     padding-top: 13rem;
+    margin-bottom: 1rem;
 `;
 
 const Header = styled.h1`

@@ -41,7 +41,6 @@ const RouterWrapper = styled.div`
 const AppBody = styled.div`
   background-color: #ffffff21;
   margin-top: 14vh;
-  
   min-height: 70vh;
   display: flex;
   flex-direction: column;
@@ -53,6 +52,18 @@ const AppBody = styled.div`
 
 const Footer = styled.footer`
   font-size: 1.1em;
+  background: #f5f5f5;
+  color: #635d5d;
+  padding: 1rem 0;
+  p {
+    margin: 0;
+  }
+  a {
+    color: #909090;
+  }
+  a:hover {
+    color: #5a5858;
+  }
 `;
 
 const App = (props) => {

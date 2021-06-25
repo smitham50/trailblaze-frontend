@@ -6,14 +6,14 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 const NavWrapper = styled.div`
-    & .navbar-link {
+    .navbar-link {
         text-decoration: none;
     }
-    & .navbar-dark .navbar-nav .nav-link {
+    .navbar-dark .navbar-nav .nav-link {
         color: white;
         transition: .3s;
     }
-    & a {
+    a {
         margin: 0 1em;
     }
 `;
