@@ -41,7 +41,7 @@ const RouterWrapper = styled.div`
 const AppBody = styled.div`
   background-color: #ffffff21;
   margin-top: 14vh;
-  min-height: 70vh;
+  min-height: 72vh;
   display: flex;
   flex-direction: column;
   align-items: center;

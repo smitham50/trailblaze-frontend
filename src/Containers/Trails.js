@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Spinner } from 'react-bootstrap';
@@ -47,7 +47,7 @@ class Trails extends PureComponent {
         setPreviousPage(location);
 
         return (
-            <Fragment>
+            <>
                 {
                     trails.length
                         ?
@@ -59,7 +59,7 @@ class Trails extends PureComponent {
                                 <span className="sr-only">Searching for trails</span>
                             </Spinner>
                 }
-            </Fragment>
+            </>
         );
     };
 };

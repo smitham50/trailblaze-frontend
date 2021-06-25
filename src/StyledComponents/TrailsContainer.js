@@ -6,4 +6,5 @@ export const TrailsContainer = styled.div`
     grid-gap: 0 10px;
     grid-auto-rows: 10.1px;
     width: 100%;
+    margin-bottom: 1rem;
 `;

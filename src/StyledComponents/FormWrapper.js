@@ -1,23 +1,30 @@
 import styled from 'styled-components';
 
 export const FormWrapper = styled.div`
-    & .form-card {
+    .form-card {
         width: 25rem;
         padding: 1rem;
     }
-    & form {
+    form {
         width: 100%;
     }
-    & .flash-container {
+    .flash-container {
         position: relative;
     }
-    & .form-flash {
+    .form-flash {
         position: absolute;
     }
-    & .subtext {
-      font-family: Source Sans Pro, sans-serif;
+    .subtext {
+        font-family: Source Sans Pro, sans-serif;
     }
-    & .headline {
-      font-family: Amatic SC, cursive;
+    .headline {
+        font-family: Amatic SC, cursive;
+    }
+    .btn-success {
+        background: #a7a7a7;
+        border-color: #8c8c8c;
+        &:hover {
+            background: #848383;
+        }
     }
 `;
