@@ -40,8 +40,8 @@ const RouterWrapper = styled.div`
 
 const AppBody = styled.div`
   background-color: #ffffff21;
-  margin-top: 15vh;
-  padding: 4vh;
+  margin-top: 14vh;
+  
   min-height: 70vh;
   display: flex;
   flex-direction: column;

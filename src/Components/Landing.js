@@ -2,32 +2,29 @@ import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import styled from 'styled-components';
 
-const Header = styled.h1`
-    font-family: Amatic SC, cursive;
-`;
-
-const Paragraph = styled.p`
-    font-size: .7em;
-    font-family: Source Sans Pro, sans-serif;
-`;
-
 const JumbotronMod = styled(Jumbotron)`
     background-color: #758ea9;
     color: white;
+    background-image: url(${process.env.PUBLIC_URL + '/trail.jpeg'});
+    background-position-y: -25rem;
+    height: 70vh;
+    padding-top: 13rem;
 `;
 
+const Header = styled.h1`
+    font-family: Amatic SC, cursive;
+    font-size: 3.5rem;
+    width: 100vw;
+    letter-spacing: .7rem;
+`;
 
-const Landing = (props) => {
+const Landing = () => {
     return (
-            <JumbotronMod>
-                <Header>Welcome to Trailblaze</Header>
-                <Paragraph>
-                    If you've ever spent hours researching hikes in range of you because there were too many choices, this app is for you.
-                    Tell us how far you're willing to travel and how many miles you want to hike and we'll give you twenty options
-                    to choose from. Pick the one you like, get directions, and add it to your hiked trails.
-                    Get to the forest without a fuss.
-                </Paragraph>
-            </JumbotronMod>
+        <JumbotronMod>
+            <Header>
+                Welcome to Trailblaze
+            </Header>
+        </JumbotronMod>
     )
 }
 
