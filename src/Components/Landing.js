@@ -1,9 +1,22 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeInBottom = keyframes`
+    0% {
+        opacity: 0;
+        transform: translateY(4rem);
+    }
+    80% {
+        opacity: .80;
+        transform: translateY(-1rem);
+    }
+    100% {
+        opacity: 1;
+    }
+`;
 
 const JumbotronMod = styled(Jumbotron)`
-    background-color: #758ea9;
     color: white;
     background-image: url(${process.env.PUBLIC_URL + '/jan-huber-6-MVRkr4TmA-unsplash.jpg'});
     background-position-y: -162rem;
@@ -18,6 +31,7 @@ const Header = styled.h1`
     font-size: 3.5rem;
     width: 100vw;
     letter-spacing: .7rem;
+    animation: 1s ${fadeInBottom} ease-in;
 `;
 
 const Landing = () => {
