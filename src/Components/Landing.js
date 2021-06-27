@@ -19,8 +19,8 @@ const fadeInBottom = keyframes`
 const JumbotronMod = styled(Jumbotron)`
     color: white;
     background-image: url(${process.env.PUBLIC_URL + '/trail.jpeg'});
-    background-position-y: -162rem;
-    background-position-x: -136rem;
+    background-position-y: -172rem;
+    background-position-x: -119rem;
     height: 70vh;
     padding-top: 13rem;
     margin-bottom: 1rem;
