@@ -18,7 +18,7 @@ const fadeInBottom = keyframes`
 
 const JumbotronMod = styled(Jumbotron)`
     color: white;
-    background-image: url(${process.env.PUBLIC_URL + '/jan-huber-6-MVRkr4TmA-unsplash.jpg'});
+    background-image: url(${process.env.PUBLIC_URL + '/trail.jpeg'});
     background-position-y: -162rem;
     background-position-x: -136rem;
     height: 70vh;
