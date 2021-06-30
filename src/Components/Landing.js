@@ -24,6 +24,10 @@ const JumbotronMod = styled(Jumbotron)`
     height: 70vh;
     padding-top: 13rem;
     margin-bottom: 1rem;
+    @media screen and (max-width: 768px) {
+        background-position-y: -22rem;
+        background-position-x: -40rem;
+    }
 `;
 
 const Header = styled.h1`
