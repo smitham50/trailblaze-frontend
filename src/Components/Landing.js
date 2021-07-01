@@ -36,6 +36,9 @@ const Header = styled.h1`
     width: 100vw;
     letter-spacing: .7rem;
     animation: 1s ${fadeInBottom} ease-in;
+    @media screen and (max-width: 768px) {
+        font-size: 2.2rem;
+    }
 `;
 
 const Landing = () => {
