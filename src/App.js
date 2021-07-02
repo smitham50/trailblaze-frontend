@@ -134,7 +134,12 @@ const App = (props) => {
                   <p><strong>Trailblaze 2021</strong></p>
                   <Nav className="justify-content-center" >
                     <Link className="nav-link navbar-link" to="#">About</Link>
-                    <Link className="nav-link navbar-link" to="#">Contact</Link>
+                    <a 
+                      href="mailto: smitham50@gmail.com" 
+                      className="nav-link navbar-link"
+                    >
+                      Contact
+                    </a>
                   </Nav>
                 </Footer>
               </Router>
