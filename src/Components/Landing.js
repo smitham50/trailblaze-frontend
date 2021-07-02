@@ -26,7 +26,11 @@ const JumbotronMod = styled(Jumbotron)`
     margin-bottom: 1rem;
     @media screen and (max-width: 768px) {
         background-position-y: -22rem;
-        background-position-x: -40rem;
+        background-position-x: -41rem;
+    }
+    @media screen and (min-width: 769px) and (max-width: 1000px) {
+        background-position-y: -22rem;
+        background-position-x: -26rem;
     }
 `;
 
@@ -37,7 +41,7 @@ const Header = styled.h1`
     letter-spacing: .7rem;
     animation: 1s ${fadeInBottom} ease-in;
     @media screen and (max-width: 768px) {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
 `;
 
