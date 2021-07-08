@@ -17,6 +17,7 @@ import TrailShow from './Containers/TrailShow';
 import TrailSearch from './Components/TrailSearch';
 import MyHikes from './Containers/MyHikes';
 import Landing from './Components/Landing';
+import About from './Components/About';
 
 const AppContainer = styled.div`
   text-align: center;
@@ -90,61 +91,63 @@ const App = (props) => {
 
   return (
     <AppContainer>
-      {
-        checkedLogin
-          &&
-            <RouterWrapper>
-              <Router>
-                <header>
-                  <Navigation></Navigation>
-                </header>
-                <AppBody>
-                    <Switch>
-                      <Route exact path='/'>
-                        <Landing></Landing>
-                      </Route>
-                      <Route exact path='/signup'>
-                        <Signup></Signup>
-                      </Route>
-                      <Route exact path='/login'>
-                        <Login></Login>
-                      </Route>
-                      <Route exact path='/account'>
-                        <ManageAccount></ManageAccount>
-                      </Route>
-                      <Route exact path='/update-account'>
-                        <UpdateAccount></UpdateAccount>
-                      </Route>
-                      <Route exact path='/trailsearch'>
-                        <TrailSearch></TrailSearch>
-                      </Route>
-                      <Route
-                        exact path='/trails/:slug'
-                        component={TrailShow}
-                      />
-                      <Route exact path='/myhikes'>
-                        <MyHikes></MyHikes>
-                      </Route>
-                      <Route exact path='/trails'>
-                        <Trails></Trails>
-                      </Route>
-                    </Switch>
-                </AppBody>
-                <Footer className="subtext">
-                  <p><strong>Trailblaze 2021</strong></p>
-                  <Nav className="justify-content-center" >
-                    <Link className="nav-link navbar-link" to="#">About</Link>
-                    <a 
-                      href="mailto: smitham50@gmail.com" 
-                      className="nav-link navbar-link"
-                    >
-                      Contact
-                    </a>
-                  </Nav>
-                </Footer>
-              </Router>
-            </RouterWrapper>
-      }
+      {checkedLogin && (
+        <RouterWrapper>
+          <Router>
+            <header>
+              <Navigation></Navigation>
+            </header>
+            <AppBody>
+              <Switch>
+                <Route exact path="/">
+                  <Landing></Landing>
+                </Route>
+                <Route exact path="/signup">
+                  <Signup></Signup>
+                </Route>
+                <Route exact path="/login">
+                  <Login></Login>
+                </Route>
+                <Route exact path="/account">
+                  <ManageAccount></ManageAccount>
+                </Route>
+                <Route exact path="/update-account">
+                  <UpdateAccount></UpdateAccount>
+                </Route>
+                <Route exact path="/trailsearch">
+                  <TrailSearch></TrailSearch>
+                </Route>
+                <Route exact path="/trails/:slug" component={TrailShow} />
+                <Route exact path="/myhikes">
+                  <MyHikes></MyHikes>
+                </Route>
+                <Route exact path="/trails">
+                  <Trails></Trails>
+                </Route>
+                <Route exact path="/about">
+                  <About></About>
+                </Route>
+              </Switch>
+            </AppBody>
+            <Footer className="subtext">
+              <p>
+                <strong>Trailblaze 2021</strong>
+              </p>
+              <Nav className="justify-content-center">
+                <Link className="nav-link navbar-link" to="/about">
+                  About
+                </Link>
+                <a
+                  href="mailto: smitham50@gmail.com"
+                  className="nav-link navbar-link"
+                >
+                  Contact
+                </a>
+              </Nav>
+            </Footer>
+          </Router>
+        </RouterWrapper>
+      )}
     </AppContainer>
   );
 };
