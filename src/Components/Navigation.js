@@ -58,7 +58,7 @@ const Navigation = (props) => {
                                 ?
                                 <>
                                     <Nav.Link as={Link} eventKey="2" to="/trailsearch">Find a Trail</Nav.Link>
-                                    <Nav.Link as={Link} eventKey="3" to="/myhikes">My Favorite Hikes</Nav.Link>
+                                    <Nav.Link as={Link} eventKey="3" to="/myhikes">My Hikes</Nav.Link>
                                     <Nav.Link as={Link} eventKey="4" to="/account">Account</Nav.Link>
                                     <Nav.Link as={Link} eventKey="5" to="/" onClick={handleLogout}>Logout {props.currentUserData.user.username}</Nav.Link>
                                 </>
