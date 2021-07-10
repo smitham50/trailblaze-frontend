@@ -1,27 +1,35 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import CancelAccountModal from './CancelAccountModal';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const StyledRow = styled(Row)`
-    & a:link, a:visited {
+const IconRow = styled.div`
+    display: flex;
+    a:link, a:visited {
         color:  #1c1b1be1;
     }
-    & a:hover {
+    a:hover {
         color:  #7d7a7ae1;
     }
-    & .headline {
+    .headline {
         font-family: 'Amatic SC', cursive;
     }
-    & .marginal {
+    .marginal {
         margin: 2%;
     }
-    & .button-sized {
+    .button-sized {
         font-size: 1.2em;
+    }
+`;
+
+const IconContainer = styled.div`
+    margin: 0 8rem;
+
+    @media screen and (max-width: 1000px) {
+        margin 0 2rem;
     }
 `;
 
@@ -55,20 +63,20 @@ const ManageAccount = (props) => {
                         />
                     :   null
             }
-            <StyledRow className="container-fluid">
-                <Col xs={6}>
+            <IconRow>
+                <IconContainer>
                     <Link to="/update-account" className="headline">
                         <i className="fas fa-edit fa-3x marginal"></i>
                         <p className="button-sized">Update Account</p>
                     </Link>
-                </Col>
-                <Col xs={6}>
+                </IconContainer>
+                <IconContainer>
                     <Link to="#" onClick={ renderCancelModel } className="headline">
                         <i className="fas fa-ban fa-3x marginal"></i>
                         <p className="button-sized">Cancel Account</p>
                     </Link>
-                </Col>
-            </StyledRow>
+                </IconContainer>
+            </IconRow>
         </>
     );
 };
