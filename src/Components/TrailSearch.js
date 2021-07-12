@@ -29,7 +29,7 @@ class TrailSearch extends PureComponent {
 
         try {
             // Make proxy request to Hiking Project API through server to avoid CORS issue. 
-            const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=${distance}&maxResults=300&key=200492212-d7400571b0620563169df18724f8dc46`;
+            const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=${distance}&maxResults=300&key=${process.env.HIKING_PROJECT_KEY}`;
 
             const options = {
                 method: 'post',

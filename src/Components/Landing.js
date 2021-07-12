@@ -39,7 +39,7 @@ const Header = styled.h1`
     font-size: 3.5rem;
     width: 100vw;
     letter-spacing: .7rem;
-    animation: 1s ${fadeInBottom} ease-in;
+    animation: 1.5s ${fadeInBottom} ease-out;
     @media screen and (max-width: 768px) {
         font-size: 2rem;
     }
