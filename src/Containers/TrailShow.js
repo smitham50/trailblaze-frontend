@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 //  Components
 import FlashMessage from '../Components/FlashMessage';
-import { Button, Figure } from 'react-bootstrap';
+import { Figure } from 'react-bootstrap';
 import Map from '../Components/Map';
 import { withRouter } from 'react-router';
 
@@ -19,13 +19,35 @@ const ButtonContainer = styled.div`
     & > * {
         margin: 0 .5%;
     }
-    & .flash-message {
+    .flash-message {
         font-size: .6em;
         display: block;
         color: rgba(91, 87, 87, 0.544);
     }
-    & .btn-link {
+    .btn-link, 
+    .btn-link:active,
+    .btn-link:visited {
         margin: .5%;
+        color: #635d5d
+    }
+`;
+
+const Button = styled.button`
+    margin: .5%;
+    color: #635d5d;
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+
+    &:active,
+    &:visited,
+    a {
+        color: #635d5d;
+        text-decoration: none;
+    }
+
+    &:hover {
+        text-decoration: underline;
     }
 `;
 
@@ -35,13 +57,24 @@ const InfoContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    & .trail {
+
+    .trail {
         flex: 0 450px;
     }
-    & .trail img {
+
+    .trail img {
         max-height: 45vh;
     }
-    & .map {
+
+    .headline {
+        font-size: 2rem;
+    }
+
+    .subtext {
+        font-size: 1rem;
+    }
+
+    .map {
         height: 65vh;
         flex: 1 1 450px;
     }
@@ -155,18 +188,18 @@ class TrailShow extends PureComponent {
 
         return (
             trail 
-                ?
+                &&
                 <TrailShowContainer>
                     <ButtonContainer className="d-flex">
                         {
                             fromSearchPage
-                                ? <Button variant="link" className="headline"><Link to={"/trails"}>Back to search</Link></Button>
-                                : <Button variant="link" className="headline"><Link to={"/myhikes"}>Back to hikes</Link></Button>
+                                ? <Button className="headline"><Link to={"/trails"}>Back to search</Link></Button>
+                                : <Button className="headline"><Link to={"/myhikes"}>Back to hikes</Link></Button>
                         }           
                         {
                             inHikes
-                                ? <Button variant="link" onClick={removeTrailFromHikes} className="headline">Remove from favorite hikes</Button>
-                                : <Button variant="link" onClick={addTrailToHikes} className="headline">Add to favorite hikes</Button>
+                                ? <Button onClick={removeTrailFromHikes} className="headline">Remove from favorite hikes</Button>
+                                : <Button onClick={addTrailToHikes} className="headline">Add to favorite hikes</Button>
                         }
                         {
                             flashMessage
@@ -184,15 +217,10 @@ class TrailShow extends PureComponent {
                             <Figure.Caption className="subtext small">Difficulty: {trail.difficulty}</Figure.Caption>
                             <Figure.Caption className="subtext small">Location: {trail.location}</Figure.Caption>
                         </Figure>
-                        {
-                            trailSet
-                                ? <Map></Map>
-                                : null
-                        }
+                        { trailSet && <Map></Map> }
                         
                     </InfoContainer>
                 </TrailShowContainer>
-                : null
         );
     };
 };
