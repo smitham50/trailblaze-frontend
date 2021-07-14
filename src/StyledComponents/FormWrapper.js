@@ -15,10 +15,10 @@ export const FormWrapper = styled.div`
         position: absolute;
     }
     .subtext {
-        font-family: Source Sans Pro, sans-serif;
+        font-size: .9rem;
     }
     .headline {
-        font-family: Amatic SC, cursive;
+        font-size: 1.1rem;
     }
     .btn-success {
         background: #a7a7a7;
