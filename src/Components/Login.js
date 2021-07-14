@@ -1,4 +1,4 @@
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import React from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
@@ -10,11 +10,18 @@ import FlashMessage from '../Components/FlashMessage';
 import { FormWrapper } from '../StyledComponents/FormWrapper';
 import { getFormData, getUserData } from '../Selectors/selectors';
 import useHandleChange from '../Utilities/useHandleChange';
+import useSetUser from '../Utilities/useSetUser';
+import useSetLocation from '../Utilities/useSetLocation';
+import useSetFlashMessage from '../Utilities/useSetFlashMessage';
+import useUnmountFlashMessage from '../Utilities/useUnmountFlashMessage';
 
-const Login = (props) => {
-    const dispatch = useDispatch();
+const Login = () => {
     const handleChange = useHandleChange();
-    const currentUserData = useSelector(getUserData);
+    const setUser = useSetUser();
+    const setLocation = useSetLocation();
+    const setFlashMessage = useSetFlashMessage();
+    const unmountFlashMessage = useUnmountFlashMessage();
+    const { currentUserData } = useSelector(getUserData);
     const {
         username,
         password,
@@ -22,13 +29,6 @@ const Login = (props) => {
         alert,
         flashMessage
     } = useSelector(getFormData);
-
-    const {
-        setUser,
-        setLocation,
-        setFlashMessage,
-        unmountFlashMessage
-    } = props;
 
     const { 
         handleSubmit, 
@@ -60,7 +60,7 @@ const Login = (props) => {
             getCoordinates(setLocation);
             localStorage.userId = user.id;
         } else {
-            setFlashMessage(errors);
+            setFlashMessage('alert-danger', errors);
         }
     };
 
@@ -136,42 +136,10 @@ const Login = (props) => {
             
             {
                 currentUserData && currentUserData.logged_in
-                    ? <Redirect to='/trailsearch' />
-                    : null
+                    && <Redirect to='/trailsearch' />
             }
         </FormWrapper>
     );
 };
 
-function mdp(dispatch) {
-    return {
-        setUser: (user) => {
-            dispatch({ 
-                type: "SET_USER", 
-                payload: user 
-            })
-        },
-        setLocation: (coords) => {
-            dispatch({
-                type: "SET_LOCATION",
-                payload: coords
-            })
-        },
-        setFlashMessage: (messages) => {
-            dispatch({
-                type: "SET_FLASH_MESSAGE",
-                payload: {
-                    alert: "alert-danger",
-                    messages: messages
-                }
-            })
-        },
-        unmountFlashMessage: () => {
-            dispatch({
-                type: "UNMOUNT_FLASH_MESSAGE"
-            })
-        }
-    };
-};
-
-export default connect(null, mdp)(Login);
+export default Login;

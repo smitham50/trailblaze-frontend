@@ -1,4 +1,4 @@
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import React from "react";
 import { Form, Button, Card } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
@@ -10,11 +10,18 @@ import axios from 'axios';
 import { FormWrapper } from '../StyledComponents/FormWrapper';
 import { getUserData, getFormData } from '../Selectors/selectors';
 import useHandleChange from '../Utilities/useHandleChange';
+import useSetUser from '../Utilities/useSetUser';
+import useSetLocation from '../Utilities/useSetLocation';
+import useSetFlashMessage from '../Utilities/useSetFlashMessage';
+import useUnmountFlashMessage from '../Utilities/useUnmountFlashMessage';
 
-const Signup = (props) => {
-    const dispatch = useDispatch();
+const Signup = () => {
     const { currentUserData } = useSelector(getUserData);
     const handleChange = useHandleChange();
+    const setUser = useSetUser();
+    const setLocation = useSetLocation();
+    const setFlashMessage = useSetFlashMessage();
+    const unmountFlashMessage = useUnmountFlashMessage();
     const {
         username,
         password,
@@ -25,12 +32,6 @@ const Signup = (props) => {
         flashMessage
     } = useSelector(getFormData);
 
-    const {
-        setUser,
-        setLocation,
-        unmountFlashMessage
-    } = props;
-
     const { 
         handleSubmit, 
         register, 
@@ -39,7 +40,7 @@ const Signup = (props) => {
 
     const handleSignup = async () => {
         const userParams = {
-            "user": {
+            'user': {
                 username: username,
                 password: password,
                 password_confirmation: passwordConfirmation,
@@ -63,13 +64,7 @@ const Signup = (props) => {
             getCoordinates(setLocation);
             localStorage.userId = user.id;
         } else {
-            dispatch({
-                type: 'SET_FLASH_MESSAGE',
-                payload: {
-                    alert: "alert-danger",
-                    messages: errors
-                }
-            });
+            setFlashMessage('alert-danger', errors);
         }
     };
 
@@ -197,26 +192,4 @@ const Signup = (props) => {
     );
 };
 
-function mdp(dispatch) {
-    return {
-        setUser: (user) => {
-            dispatch({
-                type: "SET_USER",
-                payload: user
-            })
-        },
-        setLocation: (coords) => {
-            dispatch({
-                type: "SET_LOCATION",
-                payload: coords
-            })
-        },
-        unmountFlashMessage: () => {
-            dispatch({
-                type: "UNMOUNT_FLASH_MESSAGE"
-            })
-        }
-    };
-};
-
-export default connect(null, mdp)(Signup);
+export default Signup;
