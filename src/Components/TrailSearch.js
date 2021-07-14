@@ -5,13 +5,15 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { FormWrapper } from '../StyledComponents/FormWrapper';
 import { getUserData, getTrailSearchData } from '../Selectors/selectors';
+import useHandleChange from '../Utilities/useHandleChange';
 
 const TrailSearch = () => {
+    const dispatch = useDispatch();
     const [loaded, setLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch();
     const {latitude, longitude} = useSelector(getUserData);
     const {distance, mileage} = useSelector(getTrailSearchData);
+    const handleChange = useHandleChange();
 
     useEffect(() => {
         associateUserTrails();
@@ -55,24 +57,12 @@ const TrailSearch = () => {
             }
         };
 
-        console.log('options', options);
-
         const resp = await axios(options);
         const { trails } = resp.data;
 
-        console.log(trails);
-
         dispatch({type: "SET_TRAILS", payload: trails});
-
         setLoaded(true);
     };
-
-    const handleChange = (e) => {
-        dispatch({
-            type: "HANDLE_CHANGE",
-            payload: { [e.target.name]: e.target.value },
-        });
-    }
 
     return (
         <FormWrapper>
