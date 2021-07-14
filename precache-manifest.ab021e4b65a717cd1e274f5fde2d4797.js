@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1a06af0b98a4ab6a71a1a9a41b62baec",
+    "revision": "734cbc09860b89d01ab3a3bb853dd8b2",
     "url": "/trailblaze-frontend/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/trailblaze-frontend/static/css/2.9233ae65.chunk.css"
   },
   {
-    "revision": "21a407eb0e3389847cb9",
+    "revision": "6b319f313b321c8fb8ec",
     "url": "/trailblaze-frontend/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/trailblaze-frontend/static/js/2.0722cd97.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "21a407eb0e3389847cb9",
-    "url": "/trailblaze-frontend/static/js/main.921e991f.chunk.js"
+    "revision": "6b319f313b321c8fb8ec",
+    "url": "/trailblaze-frontend/static/js/main.3949a47d.chunk.js"
   },
   {
     "revision": "77cb0e57efbc9c472fba",
