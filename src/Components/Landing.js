@@ -1,36 +1,53 @@
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
 import styled, { keyframes } from 'styled-components';
 
-const fadeInBottom = keyframes`
+const fadeInLeft = keyframes`
     0% {
         opacity: 0;
-        transform: translateY(4rem);
+        transform: translateX(-4rem);
     }
     80% {
         opacity: .80;
-        transform: translateY(-1rem);
+        transform: translateX(1rem);
     }
     100% {
         opacity: 1;
     }
 `;
 
-const JumbotronMod = styled(Jumbotron)`
-    color: white;
-    background-image: url(${process.env.PUBLIC_URL + '/trail.jpeg'});
-    background-position-y: -172rem;
-    background-position-x: -119rem;
-    height: 70vh;
-    padding-top: 13rem;
-    margin-bottom: 1rem;
-    @media screen and (max-width: 768px) {
-        background-position-y: -22rem;
-        background-position-x: -41rem;
+const fadeInRight = keyframes`
+    0% {
+        opacity: 0;
+        transform: translateX(4rem);
     }
-    @media screen and (min-width: 769px) and (max-width: 1000px) {
-        background-position-y: -22rem;
-        background-position-x: -26rem;
+    80% {
+        opacity: .80;
+        transform: translateX(-1rem);
+    }
+    100% {
+        opacity: 1;
+    }
+`;
+
+const LandingContainer = styled.div`
+    display: flex;
+    padding: 1rem 2rem;
+    color: #635d5d;
+
+    @media screen and (max-width: 1000px) {
+        flex-direction: column;
+        padding: 0 1rem;
+    }
+`;
+
+const TextContainer = styled.div`
+    padding-left: 8rem;
+    font-family: "Lato", sans-serif;
+    font-weight: 200;
+    animation: 1.5s ${fadeInLeft} ease-out;
+
+    @media screen and (max-width: 1000px) {
+        padding-left: 0;
     }
 `;
 
@@ -38,21 +55,51 @@ const Header = styled.h1`
     font-family: 'Quicksand', sans-serif;
     font-weight: 700;
     font-size: 3.5rem;
-    width: 100vw;
-    letter-spacing: .7rem;
-    animation: 1.5s ${fadeInBottom} ease-out;
+    text-align: left;
+    letter-spacing: .6rem;
+    padding-top: 5rem;
+
     @media screen and (max-width: 768px) {
         font-size: 2rem;
+        text-align: center;
+        padding-top: 0;
+    }
+`;
+
+const WelcomeText = styled.div`
+    text-align: left;
+    font-size: 1rem;
+    padding-left: .8rem;
+    letter-spacing: 1rem;
+
+    @media screen and (max-width: 1000px) {
+        text-align: center;
+    }
+`;
+
+const LandingImage = styled.img`
+    width: 50%;
+    border-radius: 2px;
+    animation: 1.5s ${fadeInRight} ease-out;
+
+    @media screen and (max-width: 1000px) {
+        width: 100%;
     }
 `;
 
 const Landing = () => {
     return (
-        <JumbotronMod>
-            <Header>
+        <LandingContainer>
+            <TextContainer>
+                <Header>
                 Welcome to Trailblaze
             </Header>
-        </JumbotronMod>
+            <WelcomeText>
+                The woods await
+            </WelcomeText>
+            </TextContainer>
+            <LandingImage src={process.env.PUBLIC_URL + '/trail.jpeg'} alt=""/>
+        </LandingContainer>
     )
 }
 
