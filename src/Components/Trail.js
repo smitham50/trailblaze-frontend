@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 const TrailDiv = styled.div`
     position: relative;
-    display: inline-block;
 `;
 
 const TrailImage = styled.img`
@@ -14,18 +13,17 @@ const TrailImage = styled.img`
 
 const TrailInfo = styled.div`
     position: absolute;
-    top: 2em;
+    top: 3rem;
     left: 0;
     right: 0;
     bottom: 0;
     color: white;
-    & .headline {
-        font-size: .9em;
-        font-family: Amatic SC, cursive;
+    .headline {
+        font-size: 1rem;
+        font-weight: 700;
     }
-    & .subtext {
-        font-family: 'Source Sans Pro', sans-serif;
-        font-size: .6em;
+    .subtext {
+        font-size: .8rem;
     }
 `;
 

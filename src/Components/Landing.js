@@ -53,7 +53,7 @@ const TextContainer = styled.div`
 
 const Header = styled.h1`
     font-family: 'Quicksand', sans-serif;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 3.5rem;
     text-align: left;
     letter-spacing: .6rem;
