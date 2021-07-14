@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 const fadeInLeft = keyframes`
     0% {
         opacity: 0;
-        transform: translateX(-4rem);
+        transform: translateX(-6rem);
     }
     80% {
         opacity: .80;
@@ -18,7 +18,7 @@ const fadeInLeft = keyframes`
 const fadeInRight = keyframes`
     0% {
         opacity: 0;
-        transform: translateX(4rem);
+        transform: translateX(6rem);
     }
     80% {
         opacity: .80;
