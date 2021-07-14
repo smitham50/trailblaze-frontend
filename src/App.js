@@ -21,15 +21,16 @@ import About from './Components/About';
 
 const AppContainer = styled.div`
   text-align: center;
-  & .btn:focus {
+
+  .btn:focus {
     outline: none;
     box-shadow: none;
   }
-  & .headline {
-    font-family: 'Amatic SC', cursive;
+  .headline {
+    font-family: "Quicksand", sans-serif;
   }
-  & .subtext {
-    font-family: 'Source Sans Pro', sans-serif;
+  .subtext {
+    font-family: "Lato", sans-serif;
   }
 `;
 
@@ -52,16 +53,23 @@ const AppBody = styled.div`
 `;
 
 const Footer = styled.footer`
-  font-size: 1.1em;
-  background: #f5f5f5;
+  background: #d8d8d829;
   color: #635d5d;
-  padding: 1rem 0;
+  padding: 1.3rem 0;
+
   p {
     margin: 0;
+    font-size: 1.1em;
   }
+
+  .navbar-link {
+    font-size: 0.8rem;
+  }
+
   a {
     color: #909090;
   }
+
   a:hover {
     color: #5a5858;
   }
@@ -135,7 +143,7 @@ const App = () => {
             </AppBody>
             <Footer className="subtext">
               <p>
-                <strong>Trailblaze 2021</strong>
+                Trailblaze 2021
               </p>
               <Nav className="justify-content-center">
                 <Link className="nav-link navbar-link" to="/about">

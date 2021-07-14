@@ -21,7 +21,8 @@ const NavWrapper = styled.div`
 const NavbarBrand = styled(Navbar.Brand)`
     font-size: 1.7em;
     font-weight: 700;
-    font-family: Balsamiq Sans, cursive;
+    font-family: 'Quicksand', sans-serif;
+    letter-spacing: .4rem;
 `;
 
 const BrandImage = styled.img`

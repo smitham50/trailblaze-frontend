@@ -35,7 +35,8 @@ const JumbotronMod = styled(Jumbotron)`
 `;
 
 const Header = styled.h1`
-    font-family: Amatic SC, cursive;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
     font-size: 3.5rem;
     width: 100vw;
     letter-spacing: .7rem;
