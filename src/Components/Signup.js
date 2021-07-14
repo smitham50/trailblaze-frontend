@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import React from "react";
 import { Form, Button, Card } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
@@ -8,20 +8,24 @@ import getCoordinates from '../Scripts/getCoordinates';
 import FlashMessage from '../Components/FlashMessage';
 import axios from 'axios';
 import { FormWrapper } from '../StyledComponents/FormWrapper';
+import { getUserData, getFormData } from '../Selectors/selectors';
 
 const Signup = (props) => {
+    const dispatch = useDispatch();
+    const { currentUserData } = useSelector(getUserData);
     const {
-        currentUserData,
         username,
         password,
         passwordConfirmation,
         email,
         messages,
         alert,
-        flashMessage,
+        flashMessage
+    } = useSelector(getFormData);
+
+    const {
         setUser,
         setLocation,
-        setFlashMessage,
         unmountFlashMessage,
         handleChange
     } = props;
@@ -54,7 +58,13 @@ const Signup = (props) => {
             getCoordinates(setLocation);
             localStorage.userId = user.id;
         } else {
-            setFlashMessage(errors);
+            dispatch({
+                type: 'SET_FLASH_MESSAGE',
+                payload: {
+                    alert: "alert-danger",
+                    messages: errors
+                }
+            });
         }
     };
 
@@ -182,34 +192,6 @@ const Signup = (props) => {
     );
 };
 
-
-function msp(state) {
-    const { 
-        currentUserData
-    } = state.user;
-
-    const {
-        username,
-        password,
-        passwordConfirmation,
-        email,
-        messages,
-        alert,
-        flashMessage
-    } = state.form;
-
-    return {
-        currentUserData,
-        username,
-        password,
-        passwordConfirmation,
-        email,
-        messages,
-        alert,
-        flashMessage
-    };
-};
-
 function mdp(dispatch) {
     return {
         setUser: (user) => {
@@ -222,15 +204,6 @@ function mdp(dispatch) {
             dispatch({
                 type: "SET_LOCATION",
                 payload: coords
-            })
-        },
-        setFlashMessage: (messages) => {
-            dispatch({
-                type: "SET_FLASH_MESSAGE",
-                payload: {
-                    alert: "alert-danger",
-                    messages: messages
-                }
             })
         },
         unmountFlashMessage: () => {
@@ -247,4 +220,4 @@ function mdp(dispatch) {
     };
 };
 
-export default connect(msp, mdp)(Signup);
+export default connect(null, mdp)(Signup);
