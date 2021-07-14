@@ -40,7 +40,7 @@ const Signup = (props) => {
 
         const options = {
             method: 'post',
-            url: 'https://nameless-wave-57808.herokuapp.com/api/v1/signup',
+            url: 'http://localhost:3000/api/v1/signup',
             data: userParams
         };
 
@@ -176,8 +176,7 @@ const Signup = (props) => {
             </Card>
             {
                 currentUserData && currentUserData.logged_in
-                    ? <Redirect to='/trailsearch' />
-                    : null
+                    && <Redirect to='/trailsearch' />
             }
         </FormWrapper>
     );

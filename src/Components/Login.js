@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import React from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
@@ -8,15 +8,19 @@ import axios from 'axios';
 import getCoordinates from '../Scripts/getCoordinates';
 import FlashMessage from '../Components/FlashMessage';
 import { FormWrapper } from '../StyledComponents/FormWrapper';
+import { getFormData } from '../Selectors/selectors';
 
 const Login = (props) => {
     const {
-        currentUserData,
         username,
         password,
         messages,
         alert,
-        flashMessage,
+        flashMessage
+    } = useSelector(getFormData);
+
+    const {
+        currentUserData,
         setUser,
         setLocation,
         setFlashMessage,
@@ -36,7 +40,7 @@ const Login = (props) => {
 
         const options = {
             method: 'post',
-            url: 'https://nameless-wave-57808.herokuapp.com/api/v1/login',
+            url: 'http://localhost:3000/api/v1/login',
             data: userParams
         };
 
@@ -139,21 +143,9 @@ function msp(state) {
         currentUserData
     } = state.user;
 
-    const {
-        username,
-        password,
-        messages,
-        alert,
-        flashMessage
-    } = state.form;
 
     return {
-        currentUserData,
-        username,
-        password,
-        messages,
-        alert,
-        flashMessage
+        currentUserData
     };
 };
 

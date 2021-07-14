@@ -29,11 +29,12 @@ const BrandImage = styled.img`
     width: 50px;
 `;
 
+
 const Navigation = (props) => {
     const handleLogout = async () => {
         localStorage.clear();
 
-        const resp = await axios.post('https://nameless-wave-57808.herokuapp.com/api/v1/logout');
+        const resp = await axios.post('http://localhost:3000/api/v1/logout');
 
         if (resp.errors) {
             alert(resp.errors)
@@ -48,11 +49,11 @@ const Navigation = (props) => {
                 <Nav.Link as={Link} eventKey="1" to="/">
                     <NavbarBrand>
                         <BrandImage src={process.env.PUBLIC_URL + "/noun_Trail_2056927.svg"} alt="brand" loading="lazy" />   Trailblaze
-                </NavbarBrand>
+                    </NavbarBrand>
                 </Nav.Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto">
+                    <Nav className="ml-auto">
                         {
                             props.currentUserData.logged_in
                                 ?

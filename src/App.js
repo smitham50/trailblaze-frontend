@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav } from 'react-bootstrap';
@@ -67,20 +67,24 @@ const Footer = styled.footer`
   }
 `;
 
-const App = (props) => {
+const App = () => {
   const [checkedLogin, setCheckedLogin] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const checkUserLogin = async () => {
       if (localStorage.userId) {
-        const resp = await axios.get('https://nameless-wave-57808.herokuapp.com/api/v1/logged_in', { withCredentials: true });
-        props.setLocation({
-          coords: {
-            latitude: localStorage.getItem('latitude'),
-            longitude: localStorage.getItem('longitude')
-          }
+        const resp = await axios.get('http://localhost:3000/api/v1/logged_in', { withCredentials: true });
+        dispatch({
+          type: "SET_LOCATION",
+          payload: {
+            coords: {
+              latitude: localStorage.getItem("latitude"),
+              longitude: localStorage.getItem("longitude")
+            },
+          },
         });
-        props.setUser(resp.data);
+        dispatch({type: "SET_USER", payload: resp.data});
       }
     };
 
@@ -152,31 +156,4 @@ const App = (props) => {
   );
 };
 
-function msp(state) {
-  const {
-    currentUserData
-  } = state.user;
-
-  return {
-    currentUserData
-  };
-};
-
-function mdp(dispatch) {
-  return {
-    setUser: (user) => {
-      dispatch({
-        type: "SET_USER",
-        payload: user
-      })
-    },
-    setLocation: (coords) => {
-      dispatch({
-        type: "SET_LOCATION",
-        payload: coords
-      })
-    }
-  };
-};
-
-export default connect(msp, mdp)(App);
+export default App;

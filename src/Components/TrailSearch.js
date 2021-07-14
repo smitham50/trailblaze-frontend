@@ -1,68 +1,52 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Spinner, Card } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { FormWrapper } from '../StyledComponents/FormWrapper';
+import { getUserData, getTrailSearchData } from '../Selectors/selectors';
 
-class TrailSearch extends PureComponent {
+const TrailSearch = () => {
+    const [loaded, setLoaded] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const {latitude, longitude} = useSelector(getUserData);
+    const {distance, mileage} = useSelector(getTrailSearchData);
 
-    state = {
-        loaded: false,
-        loading: false
-    };
+    useEffect(() => {
+        associateUserTrails();
+    }, [latitude]);
 
-    componentDidUpdate(prevProps) {
-        const { latitude } = this.props;
-
-        if (latitude !== prevProps.latitude) {
-            this.associateUserTrails();
-        }
-    };
-
-    associateUserTrails = async () => {
-        const {
-            distance,
-            latitude,
-            longitude,
-        } = this.props;
-
+    const associateUserTrails = async () => {
         try {
             // Make proxy request to Hiking Project API through server to avoid CORS issue. 
-            const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=${distance}&maxResults=300&key=${process.env.HIKING_PROJECT_KEY}`;
+            const queryURL = `http://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=${distance}&maxResults=300&key=200492212-d7400571b0620563169df18724f8dc46`;
 
             const options = {
                 method: 'post',
-                url: 'https://nameless-wave-57808.herokuapp.com/api/v1/trails/associate_trails',
+                url: 'http://localhost:3000/api/v1/trails/associate_trails',
                 data: { url: queryURL }
             };
 
-            this.setState({ loading: true })
+            setLoading(true);
 
             const resp = await axios(options);
+            const { status } = resp.data;
 
-            if (resp.data.status === "Success") {
-                this.setState({ loading: false })
+            if (status === "Success") {
+                setLoading(false);
             }
         } catch (e) {
             console.log(e);
         }
     };
 
-    handleSearch = async (e) => {
+    const handleSearch = async (e) => {
         e.preventDefault();
-
-        const {
-            distance,
-            latitude,
-            longitude,
-            mileage,
-            setTrails
-        } = this.props;
 
         const options = {
             method: 'post',
-            url: 'https://nameless-wave-57808.herokuapp.com/api/v1/trails/search',
+            url: 'http://localhost:3000/api/v1/trails/search',
             data: {
                 distance: distance,
                 mileage: mileage,
@@ -71,30 +55,31 @@ class TrailSearch extends PureComponent {
             }
         };
 
+        console.log('options', options);
+
         const resp = await axios(options);
+        const { trails } = resp.data;
 
-        setTrails(resp.data.trails);
+        console.log(trails);
 
-        this.setState({ loaded: true });
+        dispatch({type: "SET_TRAILS", payload: trails});
+
+        setLoaded(true);
     };
 
-    render() {
+    const handleChange = (e) => {
+        dispatch({
+            type: "HANDLE_CHANGE",
+            payload: { [e.target.name]: e.target.value },
+        });
+    }
 
-        const {
-            latitude,
-            longitude,
-            distance,
-            handleChange,
-            mileage
-        } = this.props;
-
-        return (
-            <FormWrapper>
-                {
-                    latitude && longitude && !this.state.loading
-                        ?
-                        <Card className="form-card">
-                            <Form onSubmit={this.handleSearch}>
+    return (
+        <FormWrapper>
+            {
+                latitude && longitude && !loading
+                    ?   <Card className="form-card">
+                            <Form onSubmit={handleSearch}>
                                 <Form.Label className="headline">How many miles are you willing to travel from your current location?</Form.Label>
                                 <Form.Group controlId="distance">
                                     <Form.Control
@@ -126,65 +111,17 @@ class TrailSearch extends PureComponent {
                                 <Form.Group controlId="formGroupSubmit" className="headline">
                                     <Button variant="success" type="submit" block>Find Trails</Button>
                                 </Form.Group>
-                                {
-                                    this.state.loaded
-                                        ?
-                                        <Redirect to='/trails' />
-                                        :
-                                        null
-                                }
+                                { loaded && <Redirect to='/trails' /> }
                             </Form>
                         </Card>
-                        :
-                        <>
+                    :   <>
                             <Spinner animation="border" role="status"></Spinner>
                             <p className="headline">Processing location. If this is your first login it may take a minute...</p>
                         </>
-                }
-            </FormWrapper>
-        );
-    }
+            }
+        </FormWrapper>
+    );
 };
 
-function msp(state) {
-    const {
-        currentUserData,
-        latitude,
-        longitude
-    } = state.user;
-
-    const {
-        distance,
-        mileage,
-        trails
-    } = state.trailSearch;
-
-    return {
-        currentUserData,
-        latitude,
-        longitude,
-        distance,
-        mileage,
-        trails
-    };
-};
-
-function mdp(dispatch) {
-    return {
-        handleChange: (e) => {
-            dispatch({
-                type: "HANDLE_CHANGE",
-                payload: {[e.target.name]: e.target.value}
-            })
-        },
-        setTrails: (trails) => {
-            dispatch({
-                type: "SET_TRAILS",
-                payload: trails
-            })
-        }
-    };
-};
-
-export default connect(msp, mdp)(TrailSearch);
+export default TrailSearch;
 
