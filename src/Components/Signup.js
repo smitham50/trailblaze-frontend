@@ -9,10 +9,12 @@ import FlashMessage from '../Components/FlashMessage';
 import axios from 'axios';
 import { FormWrapper } from '../StyledComponents/FormWrapper';
 import { getUserData, getFormData } from '../Selectors/selectors';
+import useHandleChange from '../Utilities/useHandleChange';
 
 const Signup = (props) => {
     const dispatch = useDispatch();
     const { currentUserData } = useSelector(getUserData);
+    const handleChange = useHandleChange();
     const {
         username,
         password,
@@ -26,11 +28,14 @@ const Signup = (props) => {
     const {
         setUser,
         setLocation,
-        unmountFlashMessage,
-        handleChange
+        unmountFlashMessage
     } = props;
 
-    const { handleSubmit, register, errors } = useForm();
+    const { 
+        handleSubmit, 
+        register, 
+        errors 
+    } = useForm();
 
     const handleSignup = async () => {
         const userParams = {
@@ -209,12 +214,6 @@ function mdp(dispatch) {
         unmountFlashMessage: () => {
             dispatch({
                 type: "UNMOUNT_FLASH_MESSAGE"
-            })
-        },
-        handleChange: (e) => {
-            dispatch({
-                type: "HANDLE_CHANGE",
-                payload: { [e.target.name]: e.target.value }
             })
         }
     };

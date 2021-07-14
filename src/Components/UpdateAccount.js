@@ -20,7 +20,7 @@ const UpdateAccount = (props) => {
         event.preventDefault();
 
         const userParams = {
-            "user": {
+            'user': {
                 username: username || user.username,
                 email: email || user.email
             }

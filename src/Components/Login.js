@@ -1,4 +1,4 @@
-import { connect, useSelector } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import React from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
@@ -8,9 +8,13 @@ import axios from 'axios';
 import getCoordinates from '../Scripts/getCoordinates';
 import FlashMessage from '../Components/FlashMessage';
 import { FormWrapper } from '../StyledComponents/FormWrapper';
-import { getFormData } from '../Selectors/selectors';
+import { getFormData, getUserData } from '../Selectors/selectors';
+import useHandleChange from '../Utilities/useHandleChange';
 
 const Login = (props) => {
+    const dispatch = useDispatch();
+    const handleChange = useHandleChange();
+    const currentUserData = useSelector(getUserData);
     const {
         username,
         password,
@@ -20,15 +24,17 @@ const Login = (props) => {
     } = useSelector(getFormData);
 
     const {
-        currentUserData,
         setUser,
         setLocation,
         setFlashMessage,
-        unmountFlashMessage,
-        handleChange
+        unmountFlashMessage
     } = props;
 
-    const { handleSubmit, register, errors } = useForm();
+    const { 
+        handleSubmit, 
+        register, 
+        errors 
+    } = useForm();
 
     const handleLogin = async () => {
         const userParams = {
@@ -137,18 +143,6 @@ const Login = (props) => {
     );
 };
 
-
-function msp(state) {
-    const { 
-        currentUserData
-    } = state.user;
-
-
-    return {
-        currentUserData
-    };
-};
-
 function mdp(dispatch) {
     return {
         setUser: (user) => {
@@ -176,14 +170,8 @@ function mdp(dispatch) {
             dispatch({
                 type: "UNMOUNT_FLASH_MESSAGE"
             })
-        },
-        handleChange: (e) => {
-            dispatch({
-                type: "HANDLE_CHANGE",
-                payload: { [e.target.name]: e.target.value }
-            })
         }
     };
 };
 
-export default connect(msp, mdp)(Login);
+export default connect(null, mdp)(Login);
