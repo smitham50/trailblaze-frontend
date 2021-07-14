@@ -24,7 +24,7 @@ const TrailSearch = () => {
 
             const options = {
                 method: 'post',
-                url: 'http://localhost:3000/api/v1/trails/associate_trails',
+                url: 'https://nameless-wave-57808.herokuapp.com/api/v1/trails/associate_trails',
                 data: { url: queryURL }
             };
 
@@ -46,7 +46,7 @@ const TrailSearch = () => {
 
         const options = {
             method: 'post',
-            url: 'http://localhost:3000/api/v1/trails/search',
+            url: 'https://nameless-wave-57808.herokuapp.com/api/v1/trails/search',
             data: {
                 distance: distance,
                 mileage: mileage,

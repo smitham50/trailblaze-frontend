@@ -74,7 +74,7 @@ const App = () => {
   useEffect(() => {
     const checkUserLogin = async () => {
       if (localStorage.userId) {
-        const resp = await axios.get('http://localhost:3000/api/v1/logged_in', { withCredentials: true });
+        const resp = await axios.get('https://nameless-wave-57808.herokuapp.com/api/v1/logged_in', { withCredentials: true });
         dispatch({
           type: "SET_LOCATION",
           payload: {

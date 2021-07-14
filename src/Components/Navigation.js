@@ -34,7 +34,7 @@ const Navigation = (props) => {
     const handleLogout = async () => {
         localStorage.clear();
 
-        const resp = await axios.post('http://localhost:3000/api/v1/logout');
+        const resp = await axios.post('https://nameless-wave-57808.herokuapp.com/api/v1/logout');
 
         if (resp.errors) {
             alert(resp.errors)
