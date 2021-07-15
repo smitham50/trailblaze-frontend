@@ -9,10 +9,12 @@ const NavWrapper = styled.div`
     .navbar-link {
         text-decoration: none;
     }
+
     .navbar-dark .navbar-nav .nav-link {
         color: white;
         transition: .3s;
     }
+    
     a {
         margin: 0 1em;
     }
@@ -23,6 +25,11 @@ const NavbarBrand = styled(Navbar.Brand)`
     font-weight: 700;
     font-family: 'Quicksand', sans-serif;
     letter-spacing: .4rem;
+
+    @media screen and (max-width: 1000px) {
+        font-size: 1.3rem;
+        letter-spacing: .2rem;
+    }
 `;
 
 const BrandImage = styled.img`

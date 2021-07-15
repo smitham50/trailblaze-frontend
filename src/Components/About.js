@@ -9,7 +9,8 @@ const AboutContainer = styled.div`
 
   @media screen and (max-width: 1000px) {
     flex-direction: column-reverse;
-    margin: 1rem 0;
+    padding: 0 1rem;
+    margin-top: 15rem;
   }
 `;
 
@@ -17,11 +18,21 @@ const TextContainer = styled.div`
   margin: 0 3rem;
   width: auto;
   padding: 3rem;
+
+  @media screen and (max-width: 1000px) {
+    padding: 0;
+    margin: 0 1rem;
+  }
 `;
 
 const Heading = styled.h1`
   text-align: left;
   letter-spacing: .3rem;
+  
+  @media screen and (max-width: 1000px) {
+    margin-bottom: 0;
+    text-align: center;
+  }
 `;
 
 const Description = styled.p`
@@ -32,6 +43,7 @@ const Description = styled.p`
 
   @media screen and (max-width: 1000px) {
     padding: 1.5rem 0;
+    text-align: center;
   }
 `;
 

@@ -42,20 +42,23 @@ const RouterWrapper = styled.div`
 
 const AppBody = styled.div`
   background-color: #ffffff21;
-  margin-top: 14vh;
-  min-height: 72vh;
+  margin-top: 7rem;
+  min-height: calc(90vh - 8.5rem);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: 1.5rem;
   color: black;
+
+  
 `;
 
 const Footer = styled.footer`
   background: #d8d8d829;
   color: #635d5d;
-  padding: 1.3rem 0;
+  padding: 1.1rem 0;
+  width: 100%;
 
   p {
     margin: 0;
