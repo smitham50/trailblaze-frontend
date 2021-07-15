@@ -10,7 +10,6 @@ const AboutContainer = styled.div`
   @media screen and (max-width: 1000px) {
     flex-direction: column-reverse;
     padding: 0 1rem;
-    margin-top: 15rem;
   }
 `;
 
