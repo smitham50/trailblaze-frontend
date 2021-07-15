@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const AboutContainer = styled.div`
-  background: #f5f5f5;
   color: #635d5d;
   padding: 2rem 3rem;
   display: flex;
