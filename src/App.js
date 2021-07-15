@@ -43,7 +43,7 @@ const RouterWrapper = styled.div`
 const AppBody = styled.div`
   background-color: #ffffff21;
   margin-top: 7rem;
-  min-height: calc(90vh - 8.5rem);
+  min-height: 71vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,6 +54,11 @@ const AppBody = styled.div`
   @media screen and (max-width: 1000px) {
     margin-top: 2rem;
     padding: 0 2rem;
+    min-height: calc(90vh - 1.5rem);
+  }
+
+  @media screen and (max-width: 600px) {
+    min-height: 73vh;
   }
 `;
 
