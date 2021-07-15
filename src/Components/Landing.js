@@ -37,6 +37,7 @@ const LandingContainer = styled.div`
     @media screen and (max-width: 1000px) {
         flex-direction: column;
         padding: 0 1rem;
+        margin: auto 0;
     }
 `;
 

@@ -9,6 +9,7 @@ const AboutContainer = styled.div`
   @media screen and (max-width: 1000px) {
     flex-direction: column-reverse;
     padding: 0 1rem;
+    margin-top: 5rem;
   }
 `;
 
@@ -18,8 +19,8 @@ const TextContainer = styled.div`
   padding: 3rem;
 
   @media screen and (max-width: 1000px) {
-    padding: 0;
-    margin: 0 1rem;
+    padding: 0 .3rem;
+    margin: 1rem 1rem 0 1rem;
   }
 `;
 
@@ -40,7 +41,7 @@ const Description = styled.p`
   line-height: 1.5rem;
 
   @media screen and (max-width: 1000px) {
-    padding: 1.5rem 0;
+    padding: .5rem 0;
     text-align: center;
   }
 `;

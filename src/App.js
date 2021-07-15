@@ -51,7 +51,10 @@ const AppBody = styled.div`
   font-size: 1.5rem;
   color: black;
 
-  
+  @media screen and (max-width: 1000px) {
+    margin-top: 2rem;
+    padding: 0 2rem;
+  }
 `;
 
 const Footer = styled.footer`
