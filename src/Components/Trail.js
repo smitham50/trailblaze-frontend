@@ -11,6 +11,15 @@ const TrailImage = styled.img`
     vertical-align: top;
 `;
 
+const ImageOverlay = styled.div`
+    position: absolute;
+    background-color: #3e3d3d2e;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+`;
+
 const TrailInfo = styled.div`
     position: absolute;
     top: 3rem;
@@ -50,6 +59,7 @@ const Trail = (props) => {
         <Link to={`/trails/${encodeURIComponent(props.trailName)}`} style={{ gridRowEnd: `span ${spans}` }} >
             <TrailDiv className="trail" >
                 <TrailImage src={ props.image } ref={ imageRef } alt={ props.trailName } />
+                <ImageOverlay />
                 {
                     <TrailInfo>
                         <p className="headline"><strong>{ props.trailName }</strong></p>
