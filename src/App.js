@@ -5,6 +5,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav } from 'react-bootstrap';
 import styled from 'styled-components';
+import useSetLocation from './Utilities/useSetLocation';
 
 // Components
 import Signup from './Components/Signup';
@@ -89,21 +90,19 @@ const Footer = styled.footer`
 const App = () => {
   const [checkedLogin, setCheckedLogin] = useState(false);
   const dispatch = useDispatch();
+  const setLocation = useSetLocation();
 
   useEffect(() => {
     const checkUserLogin = async () => {
-      if (localStorage.userId) {
+      if (localStorage.getItem('userId')) {
         const resp = await axios.get('https://nameless-wave-57808.herokuapp.com/api/v1/logged_in', { withCredentials: true });
-        dispatch({
-          type: "SET_LOCATION",
-          payload: {
-            coords: {
-              latitude: localStorage.getItem("latitude"),
-              longitude: localStorage.getItem("longitude")
-            },
+        setLocation({
+          coords: {
+            latitude: localStorage.getItem("latitude"),
+            longitude: localStorage.getItem("longitude"),
           },
         });
-        dispatch({type: "SET_USER", payload: resp.data});
+        dispatch({type: 'SET_USER', payload: resp.data});
       }
     };
 

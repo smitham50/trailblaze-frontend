@@ -58,7 +58,7 @@ const Login = () => {
         if (!errors) {
             setUser(data);
             getCoordinates(setLocation);
-            localStorage.userId = user.id;
+            localStorage.setItem('userId', user.id);
         } else {
             setFlashMessage('alert-danger', errors);
         }
