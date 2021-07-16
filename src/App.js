@@ -52,10 +52,10 @@ const AppBody = styled.div`
   font-size: 1.5rem;
   color: black;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1024px) {
     margin-top: 2rem;
     padding: 0 2rem;
-    min-height: calc(90vh - 1.5rem);
+    min-height: calc(82vh);
   }
 
   @media screen and (max-width: 600px) {
