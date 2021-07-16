@@ -60,7 +60,7 @@ const Header = styled.h1`
     letter-spacing: .6rem;
     padding-top: 5rem;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1024px) {
         font-size: 2rem;
         text-align: center;
         padding-top: 0;
@@ -73,7 +73,7 @@ const WelcomeText = styled.div`
     padding-left: .8rem;
     letter-spacing: 1rem;
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1024px) {
         text-align: center;
         margin-bottom: 1rem;
         padding: 0;
@@ -85,7 +85,7 @@ const LandingImage = styled.img`
     border-radius: 2px;
     animation: 1.5s ${fadeInRight} ease-out;
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1024px) {
         width: 100%;
     }
 `;
