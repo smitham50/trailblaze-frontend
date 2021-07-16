@@ -56,11 +56,7 @@ const InfoContainer = styled.div`
     padding-right: 1%;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-
-    .trail {
-        flex: 0 450px;
-    }
+    justify-content: center;
 
     .trail img {
         max-height: 45vh;
