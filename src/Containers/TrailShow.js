@@ -12,6 +12,10 @@ import { withRouter } from 'react-router';
 
 const TrailShowContainer = styled.div`
     width: 100%;
+
+    @media screen and (max-width: 1024px) {
+        margin-top: 4.5rem;
+    }
 `;
 
 const ButtonContainer = styled.div`

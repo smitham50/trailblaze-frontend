@@ -7,4 +7,8 @@ export const TrailsContainer = styled.div`
     grid-auto-rows: 10.1px;
     width: 100%;
     margin-bottom: 1rem;
+
+    @media screen and (max-width: 1024px) {
+        margin-top: 4.5rem;
+    }
 `;

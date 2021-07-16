@@ -55,7 +55,7 @@ const AppBody = styled.div`
   @media screen and (max-width: 1024px) {
     margin-top: 2rem;
     padding: 0 2rem;
-    min-height: calc(82vh);
+    min-height: 82vh;
   }
 
   @media screen and (max-width: 600px) {
