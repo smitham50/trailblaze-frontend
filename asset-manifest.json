@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/trailblaze-frontend/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/trailblaze-frontend/static/js/main.bf30927e.chunk.js",
-    "main.js.map": "/trailblaze-frontend/static/js/main.bf30927e.chunk.js.map",
+    "main.js": "/trailblaze-frontend/static/js/main.a7b29e31.chunk.js",
+    "main.js.map": "/trailblaze-frontend/static/js/main.a7b29e31.chunk.js.map",
     "runtime-main.js": "/trailblaze-frontend/static/js/runtime-main.ca7923c5.js",
     "runtime-main.js.map": "/trailblaze-frontend/static/js/runtime-main.ca7923c5.js.map",
     "static/css/2.9233ae65.chunk.css": "/trailblaze-frontend/static/css/2.9233ae65.chunk.css",
     "static/js/2.29e26365.chunk.js": "/trailblaze-frontend/static/js/2.29e26365.chunk.js",
     "static/js/2.29e26365.chunk.js.map": "/trailblaze-frontend/static/js/2.29e26365.chunk.js.map",
     "index.html": "/trailblaze-frontend/index.html",
-    "precache-manifest.fcd896b00b801208b655e59830865c2f.js": "/trailblaze-frontend/precache-manifest.fcd896b00b801208b655e59830865c2f.js",
+    "precache-manifest.0a814463f4b7778f3f8286be9966eaf1.js": "/trailblaze-frontend/precache-manifest.0a814463f4b7778f3f8286be9966eaf1.js",
     "service-worker.js": "/trailblaze-frontend/service-worker.js",
     "static/css/2.9233ae65.chunk.css.map": "/trailblaze-frontend/static/css/2.9233ae65.chunk.css.map",
     "static/css/main.5ecd60fb.chunk.css.map": "/trailblaze-frontend/static/css/main.5ecd60fb.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.9233ae65.chunk.css",
     "static/js/2.29e26365.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.bf30927e.chunk.js"
+    "static/js/main.a7b29e31.chunk.js"
   ]
 }

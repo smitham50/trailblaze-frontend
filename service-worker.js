@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/trailblaze-frontend/precache-manifest.fcd896b00b801208b655e59830865c2f.js"
+  "/trailblaze-frontend/precache-manifest.0a814463f4b7778f3f8286be9966eaf1.js"
 );
 
 self.addEventListener('message', (event) => {
