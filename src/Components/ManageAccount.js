@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import CancelAccountModal from './CancelAccountModal';
 import axios from 'axios';
 import styled from 'styled-components';
+import useClearUser from '../Utilities/useClearUser';
 
 const IconRow = styled.div`
     display: flex;
@@ -48,16 +48,17 @@ const IconContainer = styled.div`
 
 const ManageAccount = (props) => {
     const [showModal, setShowModal] = useState(false);
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState('');
+    const clearUser = useClearUser();
 
     const renderCancelModel = () => {
-        setMessage("Are you sure you want to cancel your account?")
+        setMessage('Are you sure you want to cancel your account?');
         setShowModal(true);
     }
 
     const handleCancelAccount = async () => {
         localStorage.clear();
-        props.clearUser();
+        clearUser();
         
         const resp = await axios.delete('https://nameless-wave-57808.herokuapp.com/api/v1/cancel_account');
 
@@ -70,11 +71,10 @@ const ManageAccount = (props) => {
         <>
             {
                 showModal
-                    ?   <CancelAccountModal 
+                    &&   <CancelAccountModal 
                             handleCancelAccount={ handleCancelAccount }
                             message={ message }
                         />
-                    :   null
             }
             <IconRow>
                 <IconContainer>
@@ -94,14 +94,4 @@ const ManageAccount = (props) => {
     );
 };
 
-function mdp(dispatch) {
-    return {
-        clearUser: () => {
-            dispatch({
-                type: "CLEAR_USER"
-            })
-        }
-    };
-};
-
-export default withRouter(connect(null, mdp)(ManageAccount));
+export default withRouter(ManageAccount);
