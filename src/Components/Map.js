@@ -1,36 +1,36 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { getTrailShowData } from '../Selectors/selectors';
 
-class Map extends PureComponent {
-
-    state = {
-        center: {
-            lat: parseFloat(this.props.trail.latitude),
-            lng: parseFloat(this.props.trail.longitude)
-        },
-        zoom: 11,
-        key: "",
-        directions: null
+const Map = () => {
+    const { trail } = useSelector(getTrailShowData);
+    const center = {
+        lat: parseFloat(trail.latitude),
+        lng: parseFloat(trail.longitude)
     };
+    const zoom = 11;
+    const [key, setKey] = useState('');
 
-    async componentDidMount() {
+    const authenticateMap = async () => {
         const resp = await axios('https://nameless-wave-57808.herokuapp.com/api/v1/map_auth');
+        const key = resp.data;
+        setKey(key.replace(/\s/g, ""));
+    }
 
-        this.setState({
-            key: resp.data.key.replace(/\s/g, "")
-        });
-    };
+    useEffect(() => {
+        authenticateMap();
+    }, []);
 
-    handleDirections = (google) => {
-        const origin = { lat: parseFloat(localStorage.latitude), lng: parseFloat(localStorage.longitude) };
-        const destination = { lat: this.state.center.lat, lng: this.state.center.lng };
-
-        let directionsService = new google.maps.DirectionsService();
-        let directionsDisplay = new google.maps.DirectionsRenderer();
+    const handleDirections = (google) => {
+        const { latitude, longitude } = localStorage;
+        const origin = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+        const destination = { lat: center.lat, lng: center.lng };
+        const directionsService = new google.maps.DirectionsService();
+        const directionsDisplay = new google.maps.DirectionsRenderer();
+        
         directionsDisplay.setMap(google.map);
-
         directionsService.route(
             {
                 travelMode: 'DRIVING',
@@ -45,43 +45,20 @@ class Map extends PureComponent {
         )
     };
 
-    render() {
-
-        const { 
-            key, 
-            center,
-            zoom
-        } = this.state;
-
-        return (
-            <div className="map" >
-                {
-                    key
-                    ?
-                    <GoogleMapReact
+    return (
+        <div className="map" >
+            {
+                key
+                &&  <GoogleMapReact
                         bootstrapURLKeys={{ key: key }}
                         center={ center }
                         defaultZoom={ zoom }
-                        onGoogleApiLoaded={this.handleDirections}
+                        onGoogleApiLoaded={handleDirections}
                         yesIWantToUseGoogleMapApiInternals
-                    >
-                    </GoogleMapReact>
-                    :
-                    null
-                }
-            </div>
-        );
-    };
+                    />
+            }
+        </div>
+    );
 };
 
-function msp(state) {
-    const {
-        trail
-    } = state.trailShow;
-
-    return {
-        trail
-    };
-};
-
-export default connect(msp, null)(Map);
+export default Map;

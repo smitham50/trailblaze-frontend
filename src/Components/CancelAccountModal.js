@@ -3,16 +3,16 @@ import { Modal, Button } from 'react-bootstrap';
 
 const CancelAccountModal = (props) => {
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const { handleCancelAccount } = props;
 
     useEffect(() => {
         handleShow();
     }, []);
 
     const onClick = () => {
-        props.handleCancelAccount();
+        handleCancelAccount();
         handleClose();
     };
 
