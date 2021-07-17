@@ -1,14 +1,22 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-
-//  Components
 import FlashMessage from '../Components/FlashMessage';
 import { Figure } from 'react-bootstrap';
 import Map from '../Components/Map';
 import { withRouter } from 'react-router';
+import useSetFlashMessage from '../Utilities/useSetFlashMessage';
+import useUnmountFlashMessage from '../Utilities/useUnmountFlashMessage';
+import useSetTrail from '../Utilities/useSetTrail';
+import useSetHikes from '../Utilities/useSetHikes';
+import {
+    getTrailShowData,
+    getMyHikesData,
+    getFormData,
+    getUserData
+} from '../Selectors/selectors';
 
 const TrailShowContainer = styled.div`
     width: 100%;
@@ -80,39 +88,44 @@ const InfoContainer = styled.div`
     }
 `;
 
-class TrailShow extends PureComponent {
-    state = {
-        inHikes: false,
-        trailSet: false
-    };
+const TrailShow = (props) => {
+    const [inHikes, setInHikes] = useState(false);
+    const [trailSet, setTrailSet] = useState(false);
+    const { trail, fromSearchPage } = useSelector(getTrailShowData);
+    const { hikes } = useSelector(getMyHikesData);
+    const { currentUserData } = useSelector(getUserData);
+    const { messages, alert, flashMessage } = useSelector(getFormData);
+    const setFlashMessage = useSetFlashMessage();
+    const unmountFlashMessage = useUnmountFlashMessage();
+    const setTrail = useSetTrail();
+    const setHikes = useSetHikes();
 
-    async componentDidMount() {
-        await axios.get('https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes')
-            .then(resp => {
-                this.props.setHikes(resp.data.hikes);
-            });
+    const fetchHikes = async () => {
+        const resp = await axios.get('https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes');
+        setHikes(resp.data.hikes);
+    }
 
-        const { match: { params }, setTrail, hikes } = this.props;
+    const loadTrail = async () => {
+        const { match: { params } } = props;
 
-        axios.get(`https://nameless-wave-57808.herokuapp.com/api/v1/trails/${params.slug}`)
-            .then(resp => {
-                const trail = resp.data.trail;
-                setTrail(trail);
+        const resp = await axios.get(`https://nameless-wave-57808.herokuapp.com/api/v1/trails/${params.slug}`);
+        const { trail } = resp.data;
 
-                this.setState({
-                    trailSet: true
-                });
+        setTrail(trail);
+        setTrailSet(true);
 
-                if (!!hikes.find(hike => hike.id === trail.id)) {
-                    this.setState({
-                        inHikes: true
-                    });
-                }
-            });
-    };
+        if (!!hikes.find(hike => hike.id === trail.id)) {
+            setInHikes(true);
+        }
+    }
 
-    addTrailToHikes = async () => {
-        const { match: { params }, currentUserData } = this.props;
+    useEffect(() => {
+        fetchHikes();
+        loadTrail();
+    }, []);
+
+    const addTrailToHikes = async () => {
+        const { match: { params } } = props;
         
         const resp = await axios.post('https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes/add_hike', {
             user_id: currentUserData.user.id,
@@ -120,51 +133,40 @@ class TrailShow extends PureComponent {
         });
 
         const { trail, error, status } = resp.data;
-        const { setFlashMessage } = this.props;
         
         if (status === 'success') {
             const alert = "alert-success";
             const message = `${trail} added to favorites`;
             
-            setFlashMessage([message], alert);
-            
-            this.setState({
-                inHikes: true
-            });
+            setFlashMessage(alert, [message]);
+            setInHikes(true);
         } else {
             const alert = "alert-danger";
             const message = `${error}`;
             
-            setFlashMessage([message], alert);
+            setFlashMessage(alert, [message]);
         }
     };
 
-    removeTrailFromHikes = async () => {
-        const resp = await axios.delete(`https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes/delete_hike/${this.props.trail.id}`);
-
+    const removeTrailFromHikes = async () => {
+        const resp = await axios.delete(`https://nameless-wave-57808.herokuapp.com/api/v1/my_hikes/delete_hike/${trail.id}`);
         const { error } = resp.data;
-        const { trail, setFlashMessage } = this.props;
         
         if (!error) {
             const alert = "alert-success";
             const message = `${trail.name} removed from your hikes`;
 
-            setFlashMessage([message], alert);
-
-            this.setState({
-                inHikes: false
-            })
+            setFlashMessage(alert, [message]);
+            setInHikes(false);
         } else {
             const alert = "alert-danger";
             const message = `${error}`;
 
-            setFlashMessage([message], alert);
+            setFlashMessage(alert, [message]);
         }
     };
 
-    renderFlashMessage = () => {
-        const { messages, alert, unmountFlashMessage } = this.props;
-
+    const renderFlashMessage = () => {
         return messages.map((message) => {
             return <FlashMessage
                         key={message[0]}
@@ -173,118 +175,40 @@ class TrailShow extends PureComponent {
                         alert={alert}
                         className="subtext form-flash"
                     />
-        })
+        });
     }
 
-    backToPreviousPage = () => {
-
-    };
-
-    render() {
-
-        const { trail, flashMessage, fromSearchPage } = this.props;
-        const { inHikes, trailSet } = this.state;
-        const { addTrailToHikes, removeTrailFromHikes, renderFlashMessage } = this;
-
-        return (
-            trail 
-                &&
-                <TrailShowContainer>
-                    <ButtonContainer className="d-flex">
-                        {
-                            fromSearchPage
-                                ? <Button className="headline"><Link to={"/trails"}>Back to search</Link></Button>
-                                : <Button className="headline"><Link to={"/myhikes"}>Back to hikes</Link></Button>
-                        }           
-                        {
-                            inHikes
-                                ? <Button onClick={removeTrailFromHikes} className="headline">Remove from favorite hikes</Button>
-                                : <Button onClick={addTrailToHikes} className="headline">Add to favorite hikes</Button>
-                        }
-                        {
-                            flashMessage
-                                ? renderFlashMessage()
-                                : <span />
-                        }
-                    </ButtonContainer>
-                    <InfoContainer>
-                        <Figure className="trail">
-                            <Figure.Image
-                                src={trail.imgMedium}
-                            />
-                            <Figure.Caption className="headline">{trail.name}</Figure.Caption>
-                            <Figure.Caption className="subtext small">Length: {trail.length} miles</Figure.Caption>
-                            <Figure.Caption className="subtext small">Difficulty: {trail.difficulty}</Figure.Caption>
-                            <Figure.Caption className="subtext small">Location: {trail.location}</Figure.Caption>
-                        </Figure>
-                        { trailSet && <Map></Map> }
-                        
-                    </InfoContainer>
-                </TrailShowContainer>
-        );
-    };
+    return (
+        trail 
+            &&
+            <TrailShowContainer>
+                <ButtonContainer className="d-flex">
+                    {
+                        fromSearchPage
+                            ? <Button className="headline"><Link to={"/trails"}>Back to search</Link></Button>
+                            : <Button className="headline"><Link to={"/myhikes"}>Back to hikes</Link></Button>
+                    }           
+                    {
+                        inHikes
+                            ? <Button onClick={removeTrailFromHikes} className="headline">Remove from favorite hikes</Button>
+                            : <Button onClick={addTrailToHikes} className="headline">Add to favorite hikes</Button>
+                    }
+                    { flashMessage && renderFlashMessage() }
+                </ButtonContainer>
+                <InfoContainer>
+                    <Figure className="trail">
+                        <Figure.Image
+                            src={trail.imgMedium}
+                        />
+                        <Figure.Caption className="headline">{trail.name}</Figure.Caption>
+                        <Figure.Caption className="subtext">Length: {trail.length} miles</Figure.Caption>
+                        <Figure.Caption className="subtext">Difficulty: {trail.difficulty}</Figure.Caption>
+                        <Figure.Caption className="subtext">Location: {trail.location}</Figure.Caption>
+                    </Figure>
+                    { trailSet && <Map></Map> }
+                </InfoContainer>
+            </TrailShowContainer>
+    );
 };
 
-function msp(state) {
-    const {
-        currentUserData
-    } = state.user;
-
-    const {
-        trail,
-        fromSearchPage
-    } = state.trailShow;
-
-    const {
-        hikes
-    } = state.myHikes;
-
-    const {
-        messages,
-        alert,
-        flashMessage
-    } = state.form;
-
-    return {
-        currentUserData,
-        trail,
-        hikes,
-        messages,
-        alert,
-        flashMessage,
-        fromSearchPage
-    };
-};
-
-function mdp(dispatch) {
-    return {
-        setTrail: (trail) => {
-            dispatch({
-                type: "SET_TRAIL",
-                payload: trail
-            })
-        },
-        setHikes: (hikes) => {
-            dispatch({
-                type: "SET_HIKES",
-                payload: hikes
-            })
-        },
-        setFlashMessage: (messages, alert) => {
-            dispatch({
-                type: "SET_FLASH_MESSAGE",
-                payload: {
-                    alert: alert,
-                    messages: messages
-                }
-            })
-        },
-        unmountFlashMessage: () => {
-            dispatch({
-                type: "UNMOUNT_FLASH_MESSAGE"
-            })
-        }
-    };
-};
-
-export default withRouter(connect(msp, mdp)(TrailShow)); 
+export default withRouter(TrailShow); 
