@@ -8,6 +8,9 @@ import styled from 'styled-components';
 
 const IconRow = styled.div`
     display: flex;
+    margin: auto 0;
+    font-size: 1.4rem;
+
     a:link, a:visited {
         color:  #1c1b1be1;
     }
@@ -23,12 +26,22 @@ const IconRow = styled.div`
     .button-sized {
         font-size: 1.2em;
     }
+
+    @media screen and (max-width: 1024px) {
+        margin: 23.5rem 0;
+        font-size: 1.5rem;
+    }
+
+    @media screen and (max-width: 600px) {
+        margin: 12rem 0;
+        font-size: 1.3rem;
+    }
 `;
 
 const IconContainer = styled.div`
     margin: 0 8rem;
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1024px) {
         margin 0 2rem;
     }
 `;
