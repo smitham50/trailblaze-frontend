@@ -1,9 +1,11 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
+import { getUserData } from '../Selectors/selectors';
+import useClearUser from '../Utilities/useClearUser';
 
 const NavWrapper = styled.div`
     .navbar-link {
@@ -38,7 +40,10 @@ const BrandImage = styled.img`
 `;
 
 
-const Navigation = (props) => {
+const Navigation = () => {
+    const { currentUserData } = useSelector(getUserData);
+    const clearUser = useClearUser();
+
     const handleLogout = async () => {
         localStorage.clear();
 
@@ -47,7 +52,7 @@ const Navigation = (props) => {
         if (resp.errors) {
             alert(resp.errors)
         } else {
-            props.clearUser();
+            clearUser();
         }
     };
 
@@ -63,13 +68,13 @@ const Navigation = (props) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto subtext">
                         {
-                            props.currentUserData.logged_in
+                            currentUserData.logged_in
                                 ?
                                 <>
                                     <Nav.Link as={Link} eventKey="2" to="/trailsearch">Find a Trail</Nav.Link>
                                     <Nav.Link as={Link} eventKey="3" to="/myhikes">My Hikes</Nav.Link>
                                     <Nav.Link as={Link} eventKey="4" to="/account">Account</Nav.Link>
-                                    <Nav.Link as={Link} eventKey="5" to="/" onClick={handleLogout}>Logout {props.currentUserData.user.username}</Nav.Link>
+                                    <Nav.Link as={Link} eventKey="5" to="/" onClick={handleLogout}>Logout {currentUserData.user.username}</Nav.Link>
                                 </>
                                 :
                                 <>
@@ -85,28 +90,4 @@ const Navigation = (props) => {
     );
 };
 
-function msp(state) {
-    const { 
-        currentUserData,
-        latitude,
-        longitude
-    } = state.user;
-
-    return {
-        currentUserData,
-        latitude,
-        longitude
-    };
-};
-
-function mdp(dispatch) {
-    return {
-        clearUser: () => {
-            dispatch({
-                type: "CLEAR_USER"
-            })
-        }
-    };
-};
-
-export default connect(msp, mdp)(Navigation);
+export default Navigation;
