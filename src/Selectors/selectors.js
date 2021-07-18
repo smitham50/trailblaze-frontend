@@ -1,19 +1,9 @@
-export const getFormData = (state) => {
-  return state.form;
-}
+export const getFormData = state => state.form;
 
-export const getUserData = (state) => {
-  return state.user;
-}
+export const getUserData = state => state.user;
 
-export const getTrailSearchData = (state) => {
-  return state.trailSearch;
-}
+export const getTrailSearchData = state => state.trailSearch;
 
-export const getTrailShowData = (state) => {
-  return state.trailShow;
-}
+export const getTrailShowData = state => state.trailShow;
 
-export const getMyHikesData = (state) => {
-  return state.myHikes;
-}
+export const getMyHikesData = state => state.myHikes;
