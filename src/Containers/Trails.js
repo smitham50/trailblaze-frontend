@@ -1,34 +1,41 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Spinner } from 'react-bootstrap';
 import Trail from '../Components/Trail';
 import axios from 'axios';
 import { TrailsContainer } from '../StyledComponents/TrailsContainer';
+import { getTrailSearchData } from '../Selectors/selectors';
+import useSetPreviousPage from '../Utilities/useSetPreviousPage';
+import useSetTrails from '../Utilities/useSetTrails';
 
-class Trails extends PureComponent {
+const Trails = (props) => {
+  const { searchResults } = useSelector(getTrailSearchData);
+  const setPreviousPage = useSetPreviousPage();
+  const setTrails = useSetTrails();
+  const { location } = props;
+  setPreviousPage(location);
 
-  async componentDidMount() {
-    if (!this.props.trails.length) {
-      const options = {
+  const searchReload = async () => {
+    const options = {
         method: 'post',
         url: 'https://nameless-wave-57808.herokuapp.com/api/v1/search_reload',
         data: { trail_ids: localStorage.trails?.split(',').map(id => id) }
       };
 
       const resp = await axios(options);
-
       const { trails } = resp.data;
-      const { setTrails } = this.props;
-      
       setTrails(trails);
+  }
+  
+  useEffect(() => {
+    if (!searchResults.length) {
+      searchReload();
     }
-  };
+  }, []);
 
-  renderTrails = () => {
-    const { trails } = this.props;
-    
-    return trails.map(trail => {
+  const renderTrails = () => {
+    return searchResults.map(trail => {
       return <Trail 
             key = { trail.id }
             trailName = { trail.name }
@@ -40,63 +47,21 @@ class Trails extends PureComponent {
     });
   };
 
-  render() {
-    const { trails, setPreviousPage, location } = this.props;
-    const { renderTrails } = this;
-
-    setPreviousPage(location);
-
-    return (
-      <>
-        {
-          trails.length
-            ?
-              <TrailsContainer>
-                { renderTrails() }
-              </TrailsContainer>
-            :
-              <Spinner animation="border" role="status">
-                <span className="sr-only">Searching for trails</span>
-              </Spinner>
-        }
-      </>
-    );
-  };
+  return (
+    <>
+      {
+        searchResults.length
+          ?
+            <TrailsContainer>
+              { renderTrails() }
+            </TrailsContainer>
+          :
+            <Spinner animation="border" role="status">
+              <span className="sr-only">Searching for trails</span>
+            </Spinner>
+      }
+    </>
+  );
 };
 
-function msp(state) {
-
-  const {
-    latitude,
-    longitude
-  } = state.user;
-
-  const {
-    trails
-  } = state.trailSearch;
-
-  return {
-    latitude,
-    longitude,
-    trails
-  };
-};
-
-function mdp(dispatch) {
-  return {
-    setTrails: (trails) => {
-      dispatch({
-        type: "SET_TRAILS",
-        payload: trails
-      })
-    },
-    setPreviousPage: (location) => {
-      dispatch({
-        type: "SET_PREVIOUS_PAGE",
-        payload: location
-      })
-    }
-  }
-}
-
-export default withRouter(connect(msp, mdp)(Trails));
+export default withRouter(Trails);
