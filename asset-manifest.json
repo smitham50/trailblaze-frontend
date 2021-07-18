@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/trailblaze-frontend/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/trailblaze-frontend/static/js/main.bea28e19.chunk.js",
-    "main.js.map": "/trailblaze-frontend/static/js/main.bea28e19.chunk.js.map",
+    "main.js": "/trailblaze-frontend/static/js/main.a3546981.chunk.js",
+    "main.js.map": "/trailblaze-frontend/static/js/main.a3546981.chunk.js.map",
     "runtime-main.js": "/trailblaze-frontend/static/js/runtime-main.ca7923c5.js",
     "runtime-main.js.map": "/trailblaze-frontend/static/js/runtime-main.ca7923c5.js.map",
     "static/css/2.9233ae65.chunk.css": "/trailblaze-frontend/static/css/2.9233ae65.chunk.css",
-    "static/js/2.df534313.chunk.js": "/trailblaze-frontend/static/js/2.df534313.chunk.js",
-    "static/js/2.df534313.chunk.js.map": "/trailblaze-frontend/static/js/2.df534313.chunk.js.map",
+    "static/js/2.360bf8aa.chunk.js": "/trailblaze-frontend/static/js/2.360bf8aa.chunk.js",
+    "static/js/2.360bf8aa.chunk.js.map": "/trailblaze-frontend/static/js/2.360bf8aa.chunk.js.map",
     "index.html": "/trailblaze-frontend/index.html",
-    "precache-manifest.5a843274be34667941bae4d1ce7b8714.js": "/trailblaze-frontend/precache-manifest.5a843274be34667941bae4d1ce7b8714.js",
+    "precache-manifest.8afdf348b8c8ec795dbc6c9a7df1492c.js": "/trailblaze-frontend/precache-manifest.8afdf348b8c8ec795dbc6c9a7df1492c.js",
     "service-worker.js": "/trailblaze-frontend/service-worker.js",
     "static/css/2.9233ae65.chunk.css.map": "/trailblaze-frontend/static/css/2.9233ae65.chunk.css.map",
     "static/css/main.5ecd60fb.chunk.css.map": "/trailblaze-frontend/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.df534313.chunk.js.LICENSE.txt": "/trailblaze-frontend/static/js/2.df534313.chunk.js.LICENSE.txt"
+    "static/js/2.360bf8aa.chunk.js.LICENSE.txt": "/trailblaze-frontend/static/js/2.360bf8aa.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ca7923c5.js",
     "static/css/2.9233ae65.chunk.css",
-    "static/js/2.df534313.chunk.js",
+    "static/js/2.360bf8aa.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.bea28e19.chunk.js"
+    "static/js/main.a3546981.chunk.js"
   ]
 }
