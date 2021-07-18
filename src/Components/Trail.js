@@ -1,40 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
-const TrailDiv = styled.div`
-    position: relative;
-`;
-
-const TrailImage = styled.img`
-    width: 100%;
-    vertical-align: top;
-`;
-
-const ImageOverlay = styled.div`
-    position: absolute;
-    background-color: #3e3d3d2e;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-`;
-
-const TrailInfo = styled.div`
-    position: absolute;
-    top: 3rem;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    color: white;
-    .headline {
-        font-size: 1rem;
-        font-weight: 700;
-    }
-    .subtext {
-        font-size: .8rem;
-    }
-`;
+import {
+    TrailDiv,
+    TrailImage,
+    ImageOverlay,
+    TrailInfo
+} from '../StyledComponents/StyledTrail';
 
 const Trail = (props) => { 
     const [spans, setSpans] = useState(0);

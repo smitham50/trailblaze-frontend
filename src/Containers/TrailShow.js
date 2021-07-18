@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import styled from 'styled-components';
 import FlashMessage from '../Components/FlashMessage';
 import { Figure } from 'react-bootstrap';
 import Map from '../Components/Map';
@@ -17,76 +16,12 @@ import {
     getFormData,
     getUserData
 } from '../Selectors/selectors';
-
-const TrailShowContainer = styled.div`
-    width: 100%;
-
-    @media screen and (max-width: 1024px) {
-        margin-top: 4.5rem;
-    }
-`;
-
-const ButtonContainer = styled.div`
-    margin-bottom: 1vh;
-    & > * {
-        margin: 0 .5%;
-    }
-    .flash-message {
-        font-size: .6em;
-        display: block;
-        color: rgba(91, 87, 87, 0.544);
-    }
-    .btn-link, 
-    .btn-link:active,
-    .btn-link:visited {
-        margin: .5%;
-        color: #635d5d
-    }
-`;
-
-const Button = styled.button`
-    margin: .5%;
-    color: #635d5d;
-    background: transparent;
-    border: none;
-    font-size: 1rem;
-
-    &:active,
-    &:visited,
-    a {
-        color: #635d5d;
-        text-decoration: none;
-    }
-
-    &:hover {
-        text-decoration: underline;
-    }
-`;
-
-const InfoContainer = styled.div`
-    padding-left: 1%;
-    padding-right: 1%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    .trail img {
-        max-height: 45vh;
-    }
-
-    .headline {
-        font-size: 2rem;
-    }
-
-    .subtext {
-        font-size: 1rem;
-    }
-
-    .map {
-        height: 65vh;
-        flex: 1 1 450px;
-    }
-`;
+import {
+    TrailShowContainer,
+    ButtonContainer,
+    Button,
+    InfoContainer
+} from '../StyledComponents/StyledTrailShow';
 
 const TrailShow = (props) => {
     const [inHikes, setInHikes] = useState(false);

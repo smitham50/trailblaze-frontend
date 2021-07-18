@@ -3,42 +3,9 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import styled from 'styled-components';
 import { getUserData } from '../Selectors/selectors';
 import useClearUser from '../Utilities/useClearUser';
-
-const NavWrapper = styled.div`
-    .navbar-link {
-        text-decoration: none;
-    }
-
-    .navbar-dark .navbar-nav .nav-link {
-        color: white;
-        transition: .3s;
-    }
-    
-    a {
-        margin: 0 1em;
-    }
-`;
-
-const NavbarBrand = styled(Navbar.Brand)`
-    font-size: 1.7em;
-    font-weight: 700;
-    font-family: 'Quicksand', sans-serif;
-    letter-spacing: .4rem;
-
-    @media screen and (max-width: 1000px) {
-        font-size: 1.3rem;
-        letter-spacing: .2rem;
-    }
-`;
-
-const BrandImage = styled.img`
-    height: 50px;
-    width: 50px;
-`;
-
+import { NavWrapper, NavbarBrand, BrandImage } from '../StyledComponents/StyledNavigation';
 
 const Navigation = () => {
     const { currentUserData } = useSelector(getUserData);
