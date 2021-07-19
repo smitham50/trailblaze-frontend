@@ -2,7 +2,7 @@ const defaultState = {
   distance: 60,
   mileage: "Less than 3",
   difficulty: "",
-  trails: []
+  searchResults: []
 }
 
 function trailSearchReducer(prevState = defaultState, action) {
@@ -20,7 +20,7 @@ function trailSearchReducer(prevState = defaultState, action) {
       });
       return {
         ...prevState,
-        trails: action.payload
+        searchResults: action.payload
       }
     default:
       return prevState;
