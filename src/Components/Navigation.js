@@ -44,11 +44,11 @@ const Navigation = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto subtext">
-              <Nav.Link as={Link} eventKey="2" to="/trailsearch">
-                Find a Trail
-              </Nav.Link>
               {currentUserData.logged_in ? (
                 <>
+                  <Nav.Link as={Link} eventKey="2" to="/trailsearch">
+                    Find a Trail
+                  </Nav.Link>
                   <Nav.Link as={Link} eventKey="3" to="/myhikes">
                     My Hikes
                   </Nav.Link>
