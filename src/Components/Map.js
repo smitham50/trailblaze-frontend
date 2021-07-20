@@ -15,7 +15,8 @@ const Map = () => {
 
   const authenticateMap = async () => {
     const resp = await axios('https://nameless-wave-57808.herokuapp.com/api/v1/map_auth');
-    const key = resp.data;
+    console.log(resp.data);
+    const { key } = resp.data;
     setKey(key.replace(/\s/g, ""));
   }
 
