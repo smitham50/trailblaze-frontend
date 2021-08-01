@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const FormWrapper = styled.div`
   margin: auto 0;
+  box-shadow: 0 0.5rem 1rem rgba(10, 10, 10, .15);
 
   .form-card {
     width: 25rem;
