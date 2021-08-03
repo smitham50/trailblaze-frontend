@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const IconRow = styled.div`
   display: flex;
   margin: auto 0;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 
   a:link,
   a:visited {
