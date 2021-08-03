@@ -22,7 +22,7 @@ export const FormWrapper = styled.div`
     font-size: .9rem;
   }
   .headline {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   .btn-success, .btn-success:active {
     background: #a7a7a7;
